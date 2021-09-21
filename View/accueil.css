@@ -1,0 +1,21 @@
+body{
+	background-color: skyblue;
+}
+img{
+	max-height: 200px;
+	width:  auto;
+	display:  block;
+	margin:  auto;
+}
+
+.champ{
+	text-align: center;
+}
+.form-outline .form-control {
+    min-height: auto;
+    padding: .33em .75em;
+    border: 1;
+    background: white;
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+}
