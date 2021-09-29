@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste ingrediants</title>
+    <script src="../js/Ingrediant.js" defer></script>
+</head>
+<body>
+
+    <div id="recherche">
+        <input name="barre_recherche_ingredient" id="barre_recherche_ingredient">
+
+    </div>
+    <div id="btnajouter">
+
+    </div>
+    <div id="divTri">
+        <label>Trier par</label>
+        <select id="tri" name="tri">
+            <option value="id_ingrediant ASC" selected>Ordre d'ajout(du plus ancien au plus récent)</option>
+            <option value="id_ingrediant DESC">Ordre d'ajout(du plus récent au plus ancien)</option>
+            <option value="nom_ingrediant ASC">Ordre alphabétique(A-Z)</option>
+            <option value="nom_ingrediant DESC">Ordre alphabétique(Z-A)</option>
+            <option value="nom_categorie ASC">Par catégorie(A-Z)</option>
+            <option value="nom_categorie DESC">Par catégorie(Z-A)</option>
+        </select>
+    </div>
+    <div id="listIngrediant">
+
+    </div>
+
+
+</body>
+</html>
