@@ -66,6 +66,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
 
     }
 
+    //copie colle de la fonction du dessus a adapter
     /*public static function modifierIngrediant($nom_ingrediant,$id_unite,$prix_ingrediant,$est_allergene,$id_categorie,$id_tva){
         try {
             $sql = "INSERT INTO `Ingrediant` (nom_ingrediant,id_unite,prix_ingrediant,est_allergene,id_categorie,id_tva) VALUES (:name, :id_unite, :prix_ingrediant, :est_allergene, :id_categorie, :id_tva)";
