@@ -66,6 +66,29 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
 
     }
 
+    public static function modifierIngrediant($id_ingrediant,$nom_ingrediant,$id_unite,$prix_ingrediant,$id_categorie_allergene,$id_categorie,$id_tva){
+        try {
+            $sql = "UPDATE `Ingrediant` 
+                    SET nom_ingrediant= :name,id_unite= :id_unite,prix_ingrediant=:prix_ingrediant,id_categorie_allergene=:categorie_allergene,id_categorie=:id_categorie,id_tva=:id_tva
+                    WHERE id_ingrediant = :id";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $values = array("id" => $id_ingrediant,
+                "name" => $nom_ingrediant,
+                "id_unite" => $id_unite,
+                "prix_ingrediant" => $prix_ingrediant,
+                "categorie_allergene" => $id_categorie_allergene,
+                "id_categorie" => $id_categorie,
+                "id_tva" => $id_tva);
+
+            $req_prep->execute($values);
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+
+    }
+
     //copie colle de la fonction du dessus a adapter
     /*public static function modifierIngrediant($nom_ingrediant,$id_unite,$prix_ingrediant,$est_allergene,$id_categorie,$id_tva){
         try {
@@ -102,6 +125,63 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
 
     }
+
+    public static function getAllUnite(){
+        try {
+            $sql = "SELECT * FROM `Unite`";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $req_prep->execute();
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            return $req_prep->fetchAll();
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function getAllCategorie_Allergene(){
+        try {
+            $sql = "SELECT * FROM `categorie_allergene`";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $req_prep->execute();
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            return $req_prep->fetchAll();
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function getAllCategorie(){
+        try {
+            $sql = "SELECT * FROM `categorie`";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $req_prep->execute();
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            return $req_prep->fetchAll();
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function getAllTVA(){
+        try {
+            $sql = "SELECT * FROM `tva`";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $req_prep->execute();
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            return $req_prep->fetchAll();
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
 
     /* logiquement fonction inutile
     public static function getUnitebyId($id){
