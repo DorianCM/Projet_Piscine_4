@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche recette</title>
+    <link rel="stylesheet" href="../css/recette.css" />
+    <script src="../js/Ingredient.js" defer></script>
+    <script src="../js/Etape.js" defer></script>
+    <script src="../js/Cout.js" defer></script>
+    <script src="../js/FicheRecette.js" defer></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            //Quand ça sera possible, récup les infos de la recette qui a été cliquée sur la liste des recettes et l'envoyer comme paramètre:
+            
+            //Si pas d'infos récupérées, c'est qu'on a cliqué sur Créer une nouvelle recette (donc par défaut) :
+            var recette = new FicheRecette();
+        }
+      </script>
+</head>
+<body>
+    <section>
+        <div id="content">
+            <table id="tabInfos">
+                <tr>
+                    <td>Nom Recette</td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>nbPortions</td>
+                            </tr>
+                            <tr>
+                                <td>Nom Auteur</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table id="tabEtapes">
+                <tr>
+                    <th>Etapes</th>
+                    <th colspan="4">Ingrédients</th>
+                    <th>Coûts</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Nom</td>
+                    <td>Quantité</td>
+                    <td>Unité</td>
+                    <td>Catégorie</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+      </section>
+</body>
+</html>
