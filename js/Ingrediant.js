@@ -10,6 +10,7 @@ let clone_categorie_allergene;
 let clone_categorie;
 let clone_tva;
 
+let modifyingState = null;
 
 
 let input_name = document.createElement("input");
@@ -268,6 +269,14 @@ function getAllIngrediant(name) {
             btnmodif.innerText = "Modifier";
             btnmodif.addEventListener("click", function(){
                 if(btnmodif.innerText === "Modifier"){
+                    if(modifyingState !== null){
+                        getAllIngrediant("1");
+                        modifyingState = null;
+                    }
+                    else{
+                        modifyingState = "modifying";
+                    }
+
                     nom_ingrediant_input = document.createElement("input");
                     nom_ingrediant_input.value = td_nom_ingrediant.innerText;
                     td_nom_ingrediant.innerText="";
@@ -335,6 +344,7 @@ function getAllIngrediant(name) {
                     requete.send(null);
 
                     btnmodif.innerText = "Modifier";
+                    modifyingState = null;
                 }
                 /*let valeur_tva_input = document.createElement("input");
                 valeur_tva_input.value=td_valeur_tva.innerText;
