@@ -15,6 +15,9 @@
         case "index.php":
             require_once "Controller/Controller.php";
             break;
+        case "recette":
+            require_once "Controller/Recette.php";
+            break;
         default:
             echo $url[0];
             break;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche recette</title>
+    <link rel="stylesheet" href="../css/recette.css" />
+    <script src="../js/Ingredient.js" defer></script>
+    <script src="../js/Etape.js" defer></script>
+    <script src="../js/Cout.js" defer></script>
+    <script src="../js/FicheRecette.js" defer></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            //Quand ça sera possible, récup les infos de la recette qui a été cliquée sur la liste des recettes et l'envoyer comme paramètre:
+            
+            //Si pas d'infos récupérées, c'est qu'on a cliqué sur Créer une nouvelle recette (donc par défaut) :
+            var recette = new FicheRecette();
+        }
+      </script>
+</head>
+<body>
+    <section>
+        <div id="content">
+            <table id="tabInfos">
+                <tr>
+                    <td id = "infosNom"><input id="recette_nom"></input></td>
+                    <td id = "infosPortionsAuteur">
+                        <table>
+                            <tr>
+                                <td>Nb Portions : <input id="recette_nbportions"></input></td>
+                            </tr>
+                            <tr>
+                                <td>Auteur : <input id="recette_auteur"></input></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tbody id="tabEtapes">
+                <tr id = "ligneTh">
+                    <th>Etapes</th>
+                    <th colspan="4">Ingrédients</th>
+                    <th>Coûts</th>
+                </tr>
+                <tr id ="ligneTd">
+                    <td></td>
+                    <td id ="colonneLibelle">Libellé</td>
+                    <td id ="colonneQuantite">Quantité</td>
+                    <td id ="colonneUnite">Unité</td>
+                    <td id ="colonneCategorie">Catégorie</td>
+                    <td id ="colonneCout">Prix x Quantité</td>
+                </tr>
+                <tr id="addEtape"><td><button id="addEtapeButton">Ajouter une étape</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+      </section>
+</body>
+</html>
