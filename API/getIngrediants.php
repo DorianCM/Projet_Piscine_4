@@ -1,6 +1,6 @@
 <?php
 
-require_once ("Model.php");
+require_once("models/ModelIngredient.php");
 
 $order = $_GET['order'];
 if ($_GET["name"]=="1"){

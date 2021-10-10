@@ -1,6 +1,6 @@
 <?php
 
-require_once('Model.php');
+require_once('models/ModelIngredient.php');
 
 $id = $_GET["id"];
 $name = $_GET["name"];
