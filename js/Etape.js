@@ -38,13 +38,12 @@ class Etape {
         name.id = "etape_"+this.getID()+"_name";
         let descript = document.createElement("textarea");
         descript.id = "etape_"+this.getID()+"_description";
-        descript.addEventListener("keydown",function(){
-            this.style.height = 'auto';
-            this.style.height = this.scrollHeight+'px';
-        });
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "Retirer cette étape";
 
         infosEtape.appendChild(name);
         infosEtape.appendChild(descript);
+        infosEtape.appendChild(removeButton);
 
         let tdTableIngredient = document.createElement("td");
         tdTableIngredient.className = "td_etape_tableIngredient";
@@ -93,32 +92,42 @@ class Etape {
         document.getElementById("etape_"+this.getID()+"_description").addEventListener("input",function(){
             own.setDescription(this.value);
         });
+        document.getElementById("etape_"+this.getID()+"_description").addEventListener("keydown",function(){
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight+'px';
+        });
+        document.getElementById("etape_"+this.getID()).getElementsByTagName("button")[0].addEventListener("click",function(){
+           own.removeHTML();
+           own.recette.removeEtape(own);
+        });
     }
 
     updateHTML(){
-        //let ligneEtape = document.getElementById("etape_"+this.id).getElementsByTagName("td")[0];
-        //ligneEtape.rowSpan = this.nbIngredients>0 ? this.nbIngredients+1 : 1;
-
         document.getElementById("etape_"+this.id+"_name").value = this.getNom();
         document.getElementById("etape_"+this.id+"_description").value = this.getDescription();
 
         for(let ingredient in this.ingredients)
             this.ingredients[ingredient].updateHTML();
+        this.recette.updateHTML();
+    }
+    removeHTML() {
+        document.getElementById("etape_"+this.getID()).remove();
     }
 
     addIngredient(infosIngredient) {
         this.ingredients[this.nbIngredients++] = new Ingredient(this, infosIngredient);
         this.updateHTML();
     }
-    removeIngredient(idIngredient) {
+    removeIngredient(ingredientToRemove) {
         for(let ingredient in this.ingredients) {
-            if(this.ingredients[ingredient].getID() = idIngredient) {
+            if(this.ingredients[ingredient] == ingredientToRemove) {
                 delete this.ingredients[ingredient];
                 break;
             }
         }
-        this.nbIngredients--;
+
         this.updateHTML();
+        this.recette.updateTotal();
     }
 
     getID() {

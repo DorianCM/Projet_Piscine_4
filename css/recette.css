@@ -18,39 +18,45 @@ table#tabInfos {
     border-bottom: 1px solid black;
 }
 
-td#infosNom {
+#infosNom {
     text-align: center;
     border-right: 1px solid black;
     margin-right: 20%;
     min-width: 300px;
 }
-td#infosNom input {
+#infosNom input {
     font-size: 90%;
     padding: 5px;
     border: none;
     width: 95%;
 }
-td#infosPortionsAuteur {
-    display:grid;
-    grid-template-columns: max-content max-content;
-    grid-gap:5px;
+input:focus {
+    outline: 1px solid grey;;
+}
+
+#infosPortionsAuteur {
     text-align: right;
     padding: 5px;
+    padding-right: 5%;
+}
+#infosPortionsAuteur input {
+    min-width: 60%;
+    border: none;
 }
 
 #ligneTh th, #ligneTd td {
     padding: 5px 0;
     border-bottom: 1px solid black;
 }
-#ligneTh th:nth-child(1), #ligneTh th:nth-child(2) { /*Le premier th (Etapes) et le deuxième (Ingrédients)*/
+#ligneTh th {
     border-right: 1px solid black;
+}
+#ligneTd td:last-child, #ligneTh th:last-child {
+    border-right: none;
 }
 #ligneTd td {
     padding: 5px;
     border-right: 1px solid black;
-}
-#ligneTd td:nth-child(6) { /*Le dernier (Coût)*/
-    border-right: none;
 }
 
 .etape td{
@@ -99,17 +105,46 @@ td#infosPortionsAuteur {
     position: relative;
     padding-left: 10px;
 }
-.etapeIngredient td:nth-child(5) {
+.etapeIngredient td:last-child {
     border-right: none;
+}
+.etapeIngredient input {
+    border: none;
+    width: 50%;
+}
+.etapeIngredient button {
+    float: right;
 }
 
 #addEtape td {
     padding: 5px;
     text-align: center;
     border-right: 1px solid black;
+    border-bottom: 1px solid black;
 }
 #addEtape button {
-    width: 200px;
-    height: 70px;
-    font-size: 20px;
+    width: 150px;
+    height: 30px;
+    font-size: 14px;
+}
+
+#ligneCouts td, #ligneTotal td, .cout td, #addCout td {
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    padding: 5px;
+}
+#ligneCouts td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
+    border-right:none;
+}
+.cout td {
+    padding: 0;
+}
+.cout td input {
+    padding: auto;
+    margin: 0;
+    width: 100px;
+    border: none;
+}
+.cout button {
+    float: right;
 }

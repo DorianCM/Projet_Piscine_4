@@ -3,6 +3,8 @@ class Cout {
     nom = 'Cout';
     valeur = 0;
     multiplicateur = false;
+    recette = null;
+    trCout = null;
 
     constructor(recette, infos = undefined) {
         this.recette = recette
@@ -15,8 +17,58 @@ class Cout {
         else {
             this.id = recette.getAvailableCoutID();
         }
+        this.createHTML();
+    }
+    createHTML() {
+        this.trCout = document.createElement("tr");
+        this.trCout.id = "cout_"+this.getID();
+        this.trCout.className = "cout";
+        let tdVide = document.createElement("td");
+        tdVide.colSpan = "3";
+
+        let tdMultiplicateur = document.createElement("td");
+
+        let tdNom = document.createElement("td");
+        let inputNom = document.createElement("input");
+        inputNom.value = this.getNom();
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "-";
+        tdNom.appendChild(inputNom);
+        tdNom.appendChild(removeButton);
+        
+        let tdValeur = document.createElement("td");
+        let inputValeur = document.createElement("input");
+        inputValeur.type = "number";
+        inputValeur.value = this.getValeur();
+        tdValeur.appendChild(inputValeur);
+
+        this.trCout.appendChild(tdVide);
+        this.trCout.appendChild(tdMultiplicateur);
+        this.trCout.appendChild(tdNom);
+        this.trCout.appendChild(tdValeur);
+
+        document.getElementById("tabEtapes").insertBefore(this.trCout, document.getElementById("addCout"));
+
+        this.setEventListener();
     }
 
+    setEventListener() {
+        let own = this;
+        document.getElementById("cout_"+this.getID()).getElementsByTagName("input")[0].addEventListener("input",function(){
+            own.setNom(this.value);
+        });
+        document.getElementById("cout_"+this.getID()).getElementsByTagName("button")[0].addEventListener("click",function(){
+            own.removeHTML();
+            own.recette.removeCout(own);
+        });
+        document.getElementById("cout_"+this.getID()).getElementsByTagName("input")[1].addEventListener("input",function(){
+            own.setValeur(this.value);
+            own.recette.updateTotal();
+        });
+    }
+    removeHTML() {
+        this.trCout.remove();
+    }
 
     getID() {
         return this.id;

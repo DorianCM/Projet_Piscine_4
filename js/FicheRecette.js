@@ -31,9 +31,9 @@ class FicheRecette {
 
             let coutPersonnel = {"id":0, "nom":"Coût personnel", "valeur":0, "multiplicateur":false};
             this.addCout(coutPersonnel);
-            let coutMatieres = {"id":0, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
+            let coutMatieres = {"id":1, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
             this.addCout(coutMatieres);
-            let coutCoef = {"id":0, "nom":"Coef", "valeur":2, "multiplicateur":true};
+            let coutCoef = {"id":2, "nom":"Coef", "valeur":2, "multiplicateur":true};
             this.addCout(coutCoef);
         }  
 
@@ -50,6 +50,9 @@ class FicheRecette {
         document.getElementById("addEtapeButton").addEventListener("click",function(){
             own.addEtape();
         });
+        document.getElementById("addCoutButton").addEventListener("click",function(){
+            own.addCout();
+        });
         document.getElementById("recette_nom").addEventListener("input",function(){
             own.setNom(this.value);
         });
@@ -65,6 +68,23 @@ class FicheRecette {
         document.getElementById("recette_nom").value = this.nom;
         document.getElementById("recette_nbportions").value = this.nbPortions;
         document.getElementById("recette_auteur").value = this.auteur;
+        this.updateTotal();
+    }
+
+    updateTotal() {
+        let total = 0;
+        for(let etape in this.etapes) {
+            let listingre = this.etapes[etape].getListIngredients();
+            for(let ingre in listingre)
+                total += parseInt(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
+        }
+        for(let cout in this.couts)
+            if(this.couts[cout].getMultiplicateur())
+                total *= parseInt(this.couts[cout].getValeur());
+            else   
+                total += parseInt(this.couts[cout].getValeur());
+
+        document.getElementById("valeurTotal").innerHTML = total;
     }
 
     getAvailableEtapeID() {
@@ -85,27 +105,29 @@ class FicheRecette {
     }
     addEtape(infos = null) {
         this.etapes[this.nbEtapes++] = new Etape(this, infos);
+        this.updateTotal();
     }
-    removeEtape(idEtape) {
+    removeEtape(etapeToRemove) {
         for(let etape in this.etapes) {
-            if(this.etapes[etape].getID() = idEtape) {
+            if(this.etapes[etape] == etapeToRemove) {
                 delete this.etapes[etape];
                 break;
             }
         }
-        this.nbEtapes--;
+        this.updateTotal();
     }
     addCout(infos = null) {
         this.couts[this.nbCouts++] = new Cout(this, infos);
+        this.updateTotal();
     }
-    removeCout(idCout) {
+    removeCout(coutToRemove) {
         for(let cout in this.couts) {
-            if(this.couts[cout].getID() = idCout) {
+            if(this.couts[cout] == coutToRemove) {
                 delete this.couts[cout];
                 break;
             }
         }
-        this.nbCouts--
+        this.updateTotal();
     }
     addIngredient(idEtape, infosIngredient) {
         for(let etape in this.etapes) {
