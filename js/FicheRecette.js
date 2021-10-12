@@ -8,6 +8,7 @@ class FicheRecette {
     nbCouts = 0;
     etapes = {};
     nbEtapes = 0;
+    modalIngredient = null;
     content = null;
 
     constructor(infos = null) {
@@ -39,6 +40,7 @@ class FicheRecette {
 
         this.setEventListener();
         this.updateHTML();
+        this.modalIngredient = new ModalIngredient(this);
     }
 
     setEventListener() {
@@ -164,5 +166,8 @@ class FicheRecette {
     }
     getListEtapes() {
         return this.etapes;
+    }
+    getModalIngredient() {
+        return this.modalIngredient;
     }
 }
