@@ -19,16 +19,18 @@ class ModalIngredient{
         modalContent.id = "modalContent";
         this.modal.appendChild(modalContent);
 
-        let own = this;
         let closeButton = document.createElement("button");
+        closeButton.id = "closeModalIngredient";
         closeButton.innerHTML = "Annuler";
-        closeButton.addEventListener("click",function(){
-            own.closeModal();
-         });
+
+        let inputSearch = document.createElement("input");
+        inputSearch.id = "inputSearchIngredient";
+        inputSearch.placeholder = "Recherche ...";
         let tableList = document.createElement("table");
         let ligneTh = document.createElement("tr");
         tableList.appendChild(ligneTh);
         modalContent.appendChild(closeButton);
+        modalContent.appendChild(inputSearch);
         modalContent.appendChild(tableList);
 
         let libelle = document.createElement("th");
@@ -60,37 +62,17 @@ class ModalIngredient{
         ligneTh.appendChild(categorieTVA);
         ligneTh.appendChild(valeurTVA);
 
-        for(let ingre in this.listIngredients) {
-            let i = this.listIngredients[ingre];
-            let ligneIngre = document.createElement("tr");
-            ligneIngre.addEventListener("click",function(){
-                let infos = {"id":i["id_ingrediant"], "libelle":i["nom_ingrediant"], "prix":i["prix_ingrediant"], "tva":i["valeur_tva"], "categorie":i["categorie_tva"], "categorieAllergene":i["nom_categorie_allergene"], "unite":i["nom_unite"], "quantite":1};
-                own.currentEtape.addIngredient(infos);
-             });
-            let tdLibelle = document.createElement("td");
-            tdLibelle.innerHTML = i["nom_ingrediant"];
-            let tdUnite = document.createElement("td");
-            tdUnite.innerHTML = i["nom_unite"];
-            let tdPrix = document.createElement("td");
-            tdPrix.innerHTML = i["prix_ingrediant"];
-            let tdAllergène = document.createElement("td");
-            tdAllergène.innerHTML = i["nom_categorie_allergene"];
-            let tdCategorie = document.createElement("td");
-            tdCategorie.innerHTML = i["nom_categorie"];
-            let tdCatTVA = document.createElement("td");
-            tdCatTVA.innerHTML = i["categorie_tva"];
-            let tdTVA = document.createElement("td");
-            tdTVA.innerHTML = i["valeur_tva"];
+        this.setEventListener();
+    }
 
-            ligneIngre.appendChild(tdLibelle);
-            ligneIngre.appendChild(tdUnite);
-            ligneIngre.appendChild(tdPrix);
-            ligneIngre.appendChild(tdAllergène);
-            ligneIngre.appendChild(tdCategorie);
-            ligneIngre.appendChild(tdCatTVA);
-            ligneIngre.appendChild(tdTVA);
-            tableList.appendChild(ligneIngre)
-        }
+    setEventListener() {
+        let own = this;
+        document.getElementById("closeModalIngredient").addEventListener("click",function(){
+            own.closeModal();
+         });
+         document.getElementById("inputSearchIngredient").addEventListener("input",function(){
+            own.filterList(this.value.toLowerCase());
+         });
     }
 
     fillListIngredients() {
@@ -104,9 +86,66 @@ class ModalIngredient{
         requete.send(null);
     }
 
+    isAlreadySelected(id) {
+        let list = this.currentEtape.getListIngredients();
+        for(let ingre in list)
+            if(list[ingre].getID() == id)
+                return true;
+        return false;
+    }
+
+    filterList(value = "") {
+        let own = this;
+        let tableList = this.modal.getElementsByTagName("table")[0];
+        tableList.innerHTML = "";
+        for(let ingre in this.listIngredients) {
+            let i = this.listIngredients[ingre];
+            if(i["nom_ingrediant"].toLowerCase().indexOf(value) != -1) {
+                let ligneIngre = document.createElement("tr");
+                if(this.isAlreadySelected(i["id_ingrediant"])){
+                    ligneIngre.className = "ligneIngredient alreadySelected";
+                }
+                else {
+                    ligneIngre.className = "ligneIngredient";
+                    function myClick(event) {
+                        let infos = {"id":i["id_ingrediant"], "libelle":i["nom_ingrediant"], "prix":i["prix_ingrediant"], "tva":i["valeur_tva"], "categorie":i["categorie_tva"], "categorieAllergene":i["nom_categorie_allergene"], "unite":i["nom_unite"], "quantite":1};
+                        own.currentEtape.addIngredient(infos);
+                        ligneIngre.classList.add("alreadySelected");
+                        ligneIngre.removeEventListener("click", myClick);
+                    }
+                    ligneIngre.addEventListener("click", myClick);
+                } 
+                let tdLibelle = document.createElement("td");
+                tdLibelle.innerHTML = i["nom_ingrediant"];
+                let tdUnite = document.createElement("td");
+                tdUnite.innerHTML = i["nom_unite"];
+                let tdPrix = document.createElement("td");
+                tdPrix.innerHTML = i["prix_ingrediant"];
+                let tdAllergène = document.createElement("td");
+                tdAllergène.innerHTML = i["nom_categorie_allergene"];
+                let tdCategorie = document.createElement("td");
+                tdCategorie.innerHTML = i["nom_categorie"];
+                let tdCatTVA = document.createElement("td");
+                tdCatTVA.innerHTML = i["categorie_tva"];
+                let tdTVA = document.createElement("td");
+                tdTVA.innerHTML = i["valeur_tva"];
+
+                ligneIngre.appendChild(tdLibelle);
+                ligneIngre.appendChild(tdUnite);
+                ligneIngre.appendChild(tdPrix);
+                ligneIngre.appendChild(tdAllergène);
+                ligneIngre.appendChild(tdCategorie);
+                ligneIngre.appendChild(tdCatTVA);
+                ligneIngre.appendChild(tdTVA);
+                tableList.appendChild(ligneIngre);
+            }
+        }
+    }
+
     openModal(etape) {
         this.currentEtape = etape;
         this.modal.style.display = "";
+        this.filterList();
     }
 
     closeModal() {

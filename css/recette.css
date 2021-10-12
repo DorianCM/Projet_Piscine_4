@@ -100,7 +100,7 @@ input:focus {
 .etapeIngredient td {
     border-top: 1px solid black;
     border-right: 1px solid black;
-    border-bottom: none;
+    border-bottom: 1px solid black;
     left: -1px;
     position: relative;
     padding-left: 10px;
@@ -166,10 +166,19 @@ input:focus {
     padding: 20px;
     border: 1px solid #888;
     width: 80%; 
+    min-height: 75%;
 }
-#modalContent tr:hover{
+#modalContent button, #modalContent input {
+    display: block;
+    margin-bottom: 10px;
+}
+#modalContent tr.ligneIngredient:hover{
     background-color: lightgray;
+    cursor: pointer;
 
+}
+#modalContent tr.alreadySelected {
+    background-color: darkgray;
 }
 #modalContent th, #modalContent td {
     border:1px solid black;
