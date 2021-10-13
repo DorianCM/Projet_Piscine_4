@@ -142,10 +142,19 @@ input:focus {
 .cout td input {
     padding: auto;
     margin: 0;
-    width: 100px;
     border: none;
 }
 .cout button {
+    float: right;
+}
+.inputNom{
+    width: 100px;
+}
+.cout_input_valeur {
+    width: 50px;
+
+}
+.cout span{
     float: right;
 }
 

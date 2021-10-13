@@ -31,16 +31,21 @@ class Cout {
         let tdNom = document.createElement("td");
         let inputNom = document.createElement("input");
         inputNom.value = this.getNom();
+        inputNom.className = "inputNom";
         let removeButton = document.createElement("button");
         removeButton.innerHTML = "-";
         tdNom.appendChild(inputNom);
         tdNom.appendChild(removeButton);
-        
+
         let tdValeur = document.createElement("td");
         let inputValeur = document.createElement("input");
         inputValeur.type = "number";
         inputValeur.value = this.getValeur();
+        inputValeur.className = "cout_input_valeur";
+        let spanValeur = document.createElement("span");
+        spanValeur.innerHTML = "€";
         tdValeur.appendChild(inputValeur);
+        tdValeur.appendChild(spanValeur);
 
         this.trCout.appendChild(tdVide);
         this.trCout.appendChild(tdMultiplicateur);

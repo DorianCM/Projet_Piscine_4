@@ -52,7 +52,7 @@ class Ingredient {
 
         let tdCout = document.createElement("td");
         tdCout.className = "ingredientTotal";
-        tdCout.innerHTML = this.getPrix()*this.getQuantite();
+        tdCout.innerHTML = this.getPrix()*this.getQuantite() + "€";
 
         this.trIngredient.appendChild(tdLibelle);
         this.trIngredient.appendChild(tdQuantite);
@@ -81,7 +81,7 @@ class Ingredient {
     }
     updateTotal() {
         let tdCout = this.trIngredient.getElementsByClassName("ingredientTotal")[0];
-        tdCout.innerHTML = this.getPrix()*this.getQuantite();
+        tdCout.innerHTML = this.getPrix()*this.getQuantite() + "€";
         this.recette.updateTotal();
     }
     updateHTML() {

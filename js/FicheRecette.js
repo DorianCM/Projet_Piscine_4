@@ -78,15 +78,17 @@ class FicheRecette {
         for(let etape in this.etapes) {
             let listingre = this.etapes[etape].getListIngredients();
             for(let ingre in listingre)
-                total += parseInt(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
+                total += parseFloat(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
         }
+        document.getElementById("TotalIngredients").innerHTML = total + "<span>€</span>";
+
         for(let cout in this.couts)
             if(this.couts[cout].getMultiplicateur())
-                total *= parseInt(this.couts[cout].getValeur());
+                total *= parseFloat(this.couts[cout].getValeur());
             else   
-                total += parseInt(this.couts[cout].getValeur());
+                total += parseFloat(this.couts[cout].getValeur());
 
-        document.getElementById("valeurTotal").innerHTML = total;
+        document.getElementById("valeurTotal").innerHTML = total + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
@@ -131,14 +133,14 @@ class FicheRecette {
         }
         this.updateTotal();
     }
-    addIngredient(idEtape, infosIngredient) {
+    /*addIngredient(idEtape, infosIngredient) {
         for(let etape in this.etapes) {
             if(this.etapes[etape].getID() = idEtape) {
                 this.etapes[etape].addIngredient(infosIngredient);
                 break;
             }
         }
-    }
+    }*/
 
     getID() {
         return this.id;
