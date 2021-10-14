@@ -9,10 +9,12 @@ html, section {
     padding: 0;
 }
 #content table {
-    border: 1px solid black;
     width: 100%;
     margin: auto;
     border-spacing:0;
+}
+#tabInfos, #tableEtapes {
+    border: 1px solid black;
 }
 table#tabInfos {
     border-bottom: 1px solid black;
@@ -142,10 +144,19 @@ input:focus {
 .cout td input {
     padding: auto;
     margin: 0;
-    width: 100px;
     border: none;
 }
 .cout button {
+    float: right;
+}
+.inputNom{
+    width: 100px;
+}
+.cout_input_valeur {
+    width: 50px;
+
+}
+.cout span{
     float: right;
 }
 

@@ -81,15 +81,17 @@ class FicheRecette {
         for(let etape in this.etapes) {
             let listingre = this.etapes[etape].getListIngredients();
             for(let ingre in listingre)
-                total += parseInt(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
+                total += parseFloat(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
         }
+        document.getElementById("TotalIngredients").innerHTML = Math.round(total*100)/100 + "<span>€</span>";
+
         for(let cout in this.couts)
             if(this.couts[cout].getMultiplicateur())
-                total *= parseInt(this.couts[cout].getValeur());
+                total *= parseFloat(this.couts[cout].getValeur());
             else   
-                total += parseInt(this.couts[cout].getValeur());
+                total += parseFloat(this.couts[cout].getValeur());
 
-        document.getElementById("valeurTotal").innerHTML = total;
+        document.getElementById("valeurTotal").innerHTML = Math.round(total*100)/100 + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
@@ -174,6 +176,24 @@ class FicheRecette {
         }
         infos["etapes"] = infosEtapes;
         console.log(infos);
+        console.log(JSON.stringify(infos));
+        if(this.getID() == 0) {
+            infos["fonction"] = "ajouterFicheRecette"
+            let url = "../API/models/ModelFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
+            let requete = new XMLHttpRequest();
+            requete.open("POST", url, true);
+            requete.send(null);
+            requete.addEventListener("load", function (){
+                console.log(requete.response);
+            });
+        //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
+        // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
+        
+        //setID();
+        }
+        else { //Sinon, on update la table
+            infos["fonction"] = "updateFicheRecette"
+        }
     }
 
     getID() {
@@ -187,6 +207,9 @@ class FicheRecette {
     }
     getAuteur() {
         return this.auteur;
+    }
+    setID(nouveauID) {
+        this.id = nouveauID;
     }
     setAuteur(nouveauAuteur) {
         this.auteur = nouveauAuteur;
