@@ -64,6 +64,9 @@ class FicheRecette {
         document.getElementById("recette_auteur").addEventListener("input",function(){
             own.setAuteur(this.value);
         });
+        document.getElementById("saveButton").addEventListener("click",function(){
+            own.saveUpdates();
+        });
     }
 
     updateHTML() {
@@ -131,13 +134,46 @@ class FicheRecette {
         }
         this.updateTotal();
     }
-    addIngredient(idEtape, infosIngredient) {
-        for(let etape in this.etapes) {
-            if(this.etapes[etape].getID() = idEtape) {
-                this.etapes[etape].addIngredient(infosIngredient);
-                break;
-            }
+
+    saveUpdates() {
+        let infos = {};
+        infos["id"] = this.getID();
+        infos["nom"] = this.getNom();
+        infos["auteur"] = this.getAuteur();
+        infos["nbPortions"] = this.getNbPortions();
+
+        let infosCouts = {};
+        let nbCout = 0;
+        for(let c in this.couts) {
+            let cout = {};
+            cout["id"] = this.couts[c].getID();
+            cout["nom"] = this.couts[c].getNom();
+            cout["valeur"] = this.couts[c].getValeur();
+            cout["multiplicateur"] = this.couts[c].getMultiplicateur();
+            infosCouts[nbCout++] = cout;
         }
+        infos["couts"] = infosCouts;
+        let infosEtapes = {};
+        let nbEtape = 0
+        for(let e in this.etapes) {
+            let etape = {};
+            etape["id"] = this.etapes[e].getID();
+            etape["nom"] = this.etapes[e].getNom();
+            etape["description"] = this.etapes[e].getDescription();
+            let ingredients = {};
+            let nbIngre = 0;
+            let listIngre = this.etapes[e].getListIngredients();
+            for(let i in listIngre) {
+                let ingre = {};
+                ingre["id"] = listIngre[i].getID();
+                ingre['quantite'] = listIngre[i].getQuantite();
+                ingredients[nbIngre++] = ingre;
+            }
+            etape["ingredients"] = ingredients; 
+            infosEtapes[nbEtape++] = etape;
+        }
+        infos["etapes"] = infosEtapes;
+        console.log(infos);
     }
 
     getID() {

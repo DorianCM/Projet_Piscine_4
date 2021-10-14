@@ -5,11 +5,11 @@ html, section {
 #content {
     width: 85%;
     height: 80%;
-    border: 1px solid black;
     margin:0 auto;
     padding: 0;
 }
 #content table {
+    border: 1px solid black;
     width: 100%;
     margin: auto;
     border-spacing:0;
