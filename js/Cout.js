@@ -27,6 +27,29 @@ class Cout {
         tdVide.colSpan = "3";
 
         let tdMultiplicateur = document.createElement("td");
+        let inputType = document.createElement("select");
+        inputType.name = "TypeCout";
+        var opt1 = document.createElement("option");
+        var opt2 = document.createElement("option");
+
+        opt1.value = "true";
+        opt1.text = "Multiplier";
+        opt2.value = "false";
+        opt2.text = "Additioner";
+        if (String(this.getMultiplicateur()) == opt1.value){
+            opt1.setAttribute('selected','selected');
+
+        }
+        if (String(this.getMultiplicateur()) == opt2.value) {
+            opt2.setAttribute('selected','selected');
+        }
+
+        inputType.add(opt1,null);
+        inputType.add(opt2, 0);
+
+
+        tdMultiplicateur.appendChild(inputType);
+
 
         let tdNom = document.createElement("td");
         let inputNom = document.createElement("input");
@@ -65,6 +88,15 @@ class Cout {
         document.getElementById("cout_"+this.getID()).getElementsByTagName("button")[0].addEventListener("click",function(){
             own.removeHTML();
             own.recette.removeCout(own);
+        });
+        document.getElementById("cout_"+this.getID()).getElementsByTagName("select")[0].addEventListener("change",function(){
+            console.log(own.getMultiplicateur());
+            if(this.value =="true"){
+                own.setMultiplicateur(true);
+            }else{
+                own.setMultiplicateur(false);
+            }
+           own.recette.updateTotal();
         });
         document.getElementById("cout_"+this.getID()).getElementsByTagName("input")[1].addEventListener("input",function(){
             own.setValeur(this.value);
