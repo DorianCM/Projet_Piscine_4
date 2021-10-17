@@ -21,7 +21,7 @@ class ModalIngredient{
 
         let closeButton = document.createElement("button");
         closeButton.id = "closeModalIngredient";
-        closeButton.innerHTML = "Annuler";
+        closeButton.innerHTML = "Fermer";
 
         let inputSearch = document.createElement("input");
         inputSearch.id = "inputSearchIngredient";
@@ -69,10 +69,10 @@ class ModalIngredient{
         let own = this;
         document.getElementById("closeModalIngredient").addEventListener("click",function(){
             own.closeModal();
-         });
-         document.getElementById("inputSearchIngredient").addEventListener("input",function(){
+        });
+        document.getElementById("inputSearchIngredient").addEventListener("input",function(){
             own.filterList(this.value.toLowerCase());
-         });
+        });
     }
 
     fillListIngredients() {

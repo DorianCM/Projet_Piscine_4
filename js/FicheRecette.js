@@ -1,6 +1,6 @@
 //Classe définissant une recette/fiche technique
 class FicheRecette {
-    id = 0; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
+    id = '0'; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
     nom = '';
     auteur = '';
     nbPortions = 0;
@@ -30,11 +30,11 @@ class FicheRecette {
 
             this.addEtape();
 
-            let coutPersonnel = {"id":0, "nom":"Coût personnel", "valeur":0, "multiplicateur":false};
+            let coutPersonnel = {"id":1, "nom":"Coût personnel", "valeur":0, "multiplicateur":false};
             this.addCout(coutPersonnel);
-            let coutMatieres = {"id":1, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
+            let coutMatieres = {"id":2, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
             this.addCout(coutMatieres);
-            let coutCoef = {"id":2, "nom":"Coef", "valeur":2, "multiplicateur":true};
+            let coutCoef = {"id":3, "nom":"Coef", "valeur":2, "multiplicateur":true};
             this.addCout(coutCoef);
         }  
 
@@ -162,6 +162,7 @@ class FicheRecette {
             etape["id"] = this.etapes[e].getID();
             etape["nom"] = this.etapes[e].getNom();
             etape["description"] = this.etapes[e].getDescription();
+            etape["numero"] = "0"; //this.etapes[e].getNumero();
             let ingredients = {};
             let nbIngre = 0;
             let listIngre = this.etapes[e].getListIngredients();
@@ -175,25 +176,18 @@ class FicheRecette {
             infosEtapes[nbEtape++] = etape;
         }
         infos["etapes"] = infosEtapes;
-        console.log(infos);
-        console.log(JSON.stringify(infos));
-        if(this.getID() == 0) {
-            infos["fonction"] = "ajouterFicheRecette"
             let url = "../API/models/ModelFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
             let requete = new XMLHttpRequest();
             requete.open("POST", url, true);
             requete.send(null);
+            let own = this;
             requete.addEventListener("load", function (){
-                console.log(requete.response);
+                //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
+                // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
+                if(own.getID() == '0')
+                    own.setID(requete.response);
+                else console.log(requete.response);
             });
-        //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
-        // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
-        
-        //setID();
-        }
-        else { //Sinon, on update la table
-            infos["fonction"] = "updateFicheRecette"
-        }
     }
 
     getID() {

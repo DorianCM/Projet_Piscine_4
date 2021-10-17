@@ -90,7 +90,6 @@ class Cout {
             own.recette.removeCout(own);
         });
         document.getElementById("cout_"+this.getID()).getElementsByTagName("select")[0].addEventListener("change",function(){
-            console.log(own.getMultiplicateur());
             if(this.value =="true"){
                 own.setMultiplicateur(true);
             }else{
