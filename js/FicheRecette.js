@@ -67,6 +67,12 @@ class FicheRecette {
         document.getElementById("saveButton").addEventListener("click",function(){
             own.saveUpdates();
         });
+        document.getElementById("PDFFiche").addEventListener("click",function(){
+            own.convertPDF(true);
+        });
+        document.getElementById("PDFFicheCouts").addEventListener("click",function(){
+            own.convertPDF(false);
+        });
     }
 
     updateHTML() {
@@ -188,6 +194,43 @@ class FicheRecette {
                     own.setID(requete.response);
                 else console.log(requete.response);
             });
+    }
+
+    convertPDF(avecLesCout = true) {
+        //Cacher les éléments indésirables
+        let listButtons = document.getElementsByTagName("button");
+        for(let button in listButtons)
+            if(listButtons[button].classList)
+                listButtons[button].classList.add("tempHide");
+        
+        let listSelects = document.getElementsByTagName("select");
+        for(let select in listSelects)
+            if(listSelects[select].classList)
+                listSelects[select].classList.add("tempHide");
+
+        if(!avecLesCout) {
+            document.getElementById("thCout").classList.add("tempHide");
+            document.getElementById("colonneCout").classList.add("tempHide");
+            document.getElementById("ligneCouts").classList.add("tempHide");
+            document.getElementById("addCout").classList.add("tempHide");
+            document.getElementById("ligneTotal").classList.add("tempHide");
+            let listTotalIngredient = document.getElementsByClassName("ingredientTotal");
+            for(let cout in listTotalIngredient)
+                if(listTotalIngredient[cout].classList)
+                    listTotalIngredient[cout].classList.add("tempHide");
+            let listCouts = document.getElementsByClassName("cout");
+            for(let cout in listCouts)
+                if(listCouts[cout].classList)
+                    listCouts[cout].classList.add("tempHide");
+        }
+
+        //Conversion en PDF
+
+        //Remontrer les éléments cachés
+        let listHide = document.getElementsByClassName("tempHide");
+        for(let element in listHide)
+            if(listHide[element].classList)
+                listHide[element].classList.remove("tempHide");
     }
 
     getID() {
