@@ -1,7 +1,7 @@
 <?php
 
-require_once ('Model.php');
+require_once ('models/ModelListeRecette.php');
 
 $id = $_GET["id"];
 
-Model::supprimerRecette($id);
+ModelListeRecette::supprimerRecette($id);

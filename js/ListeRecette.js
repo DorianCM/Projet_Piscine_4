@@ -24,13 +24,13 @@ input_barre_recherche_recette.addEventListener("input",function () {
     }
 });
 
-
 function getAllRecette(name) {
     divList.innerText = "";
     let url = "../API/getAllRecette.php?name="+ encodeURIComponent(name)+ "&order="+encodeURIComponent(order);
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load", function () {
+        console.log(requete.responseText)
         let result = JSON.parse(requete.responseText);
         let table = document.createElement("table");
         let trth = document.createElement("tr");
@@ -40,7 +40,7 @@ function getAllRecette(name) {
         th_nom_recette.innerText="Nom de la fiche technique";
 
         let th_nom_createur = document.createElement("th");//nom_createur
-        th_nom_createur.innerText="Unité";
+        th_nom_createur.innerText="Auteur";
 
         let th_supprimer = document.createElement("th");//supprimer
 
@@ -83,3 +83,5 @@ function getAllRecette(name) {
     });
     requete.send(null);
 }
+
+getAllRecette("");
