@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste fiches techniques</title>
+    <script src="../js/ListeRecette.js" defer></script>
+</head>
+    <body>
+        <div id="recherche">
+            <input name="barre_recherche_recette" id="barre_recherche_recette">
+        </div>
+
+        <div id="divTri">
+            <label>Trier par</label>
+            <select id="tri" name="tri">
+                <option value="nom_recette ASC">Ordre alphabétique(A-Z)</option>
+                <option value="nom_recette DESC">Ordre alphabétique(Z-A)</option>
+                <option value="nom_createur ASC">Ordre alphabétique(A-Z)</option>
+                <option value="nom_createur DESC">Ordre alphabétique(Z-A)</option>
+            </select>
+        </div>
+
+        <div id="listRecette"></div>
+    </body>
+</html>
