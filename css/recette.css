@@ -130,12 +130,12 @@ input:focus {
     font-size: 14px;
 }
 
-#ligneCouts td, #ligneTotal td, .cout td, #addCout td {
+#ligneCouts td, #ligneTotalTTC td, #ligneTotal td, .cout td, #addCout td {
     border-right: 2px solid black;
     border-top: 2px solid black;
     padding: 5px;
 }
-#ligneCouts td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
+#ligneCouts td:last-child, #ligneTotalTTC td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
     border-right:none;
 }
 .cout td {

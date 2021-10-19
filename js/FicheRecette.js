@@ -214,11 +214,12 @@ class FicheRecette {
             document.getElementById("ligneCouts").classList.add("tempHide");
             document.getElementById("addCout").classList.add("tempHide");
             document.getElementById("ligneTotal").classList.add("tempHide");
-            let listTotalIngredient = document.getElementsByClassName("ingredientTotal");
+            document.getElementById("ligneTotalTTC").classList.add("tempHide");
+            let listTotalIngredient = document.querySelectorAll("ingredientTotal");
             for(let cout in listTotalIngredient)
                 if(listTotalIngredient[cout].classList)
                     listTotalIngredient[cout].classList.add("tempHide");
-            let listCouts = document.getElementsByClassName("cout");
+            let listCouts = document.querySelectorAll("cout");
             for(let cout in listCouts)
                 if(listCouts[cout].classList)
                     listCouts[cout].classList.add("tempHide");
@@ -227,7 +228,8 @@ class FicheRecette {
         //Conversion en PDF
 
         //Remontrer les éléments cachés
-        let listHide = document.getElementsByClassName("tempHide");
+        let listHide = document.querySelectorAll(".tempHide");
+        console.log(listHide)
         for(let element in listHide)
             if(listHide[element].classList)
                 listHide[element].classList.remove("tempHide");
