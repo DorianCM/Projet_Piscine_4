@@ -30,7 +30,6 @@ function getAllRecette(name) {
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load", function () {
-        console.log(requete.responseText)
         let result = JSON.parse(requete.responseText);
         let table = document.createElement("table");
         let trth = document.createElement("tr");
@@ -58,7 +57,7 @@ function getAllRecette(name) {
             let td_nom_createur = document.createElement("td");//nom_createur
             td_nom_createur.innerText=val.nom_createur;
 
-            let td_supprimer = document.createElement("th");//supprimer
+            let td_supprimer = document.createElement("td");//supprimer
 
             let btnsuppr = document.createElement("button");
 
@@ -74,7 +73,7 @@ function getAllRecette(name) {
             td_supprimer.appendChild(btnsuppr);
 
             tr.appendChild(td_nom_recette);
-            tr.appendChild(td_nom_recette);
+            tr.appendChild(td_nom_createur);
             tr.appendChild(td_supprimer);
 
             table.appendChild(tr);
