@@ -18,8 +18,6 @@ class Etape {
             this.id = recette.getAvailableEtapeID();
             this.nom = "Etape "+this.id;
         }
-        /*this.createHTML();
-        this.setEventListener();*/
         if(infos)
             for(let ingredient in infos.ingredients)
                 this.addIngredient(infos.ingredients[ingredient]);
@@ -66,26 +64,11 @@ class Etape {
         rechercheIngredient.colSpan = 5;
         rechercheIngredient.className = "rechercheIngredient";
         rechercheIngredient.style.border = "none";
-        /*let labelRecherche = document.createElement("p");
-        labelRecherche.innerHTML = "Ajouter un Ingrédient : "
-        let rechercheIngredientInput = document.createElement("input");
-        rechercheIngredient.appendChild(labelRecherche);
-        rechercheIngredient.appendChild(rechercheIngredientInput);*/
         let buttonAddIngredient = document.createElement("button");
         buttonAddIngredient.className = "buttonAddIngredient";
         buttonAddIngredient.innerHTML = "Ajouter un ingrédient";
         rechercheIngredient.appendChild(buttonAddIngredient);
         tableIngredient.appendChild(rechercheIngredient);
-
-        //A CHANGER : bouton pour ajouter un faux ingrédient pour tester
-        /*let fauxIngre = document.createElement("button");
-        fauxIngre.innerHTML = "Test Ingrédient";
-        let own = this;
-        fauxIngre.addEventListener("click",function(){
-            let fauxIngredient = {"id":0, "libelle":"Carotte", "prix":1.0, "tva":0.1, "categorie":"Légume", "categorieAllergene":null, "unite":"p", "quantite":1};
-            own.addIngredient(fauxIngredient);
-        });
-        rechercheIngredient.appendChild(fauxIngre);*/
 
         //Faire ce qu'il faut pour chercher un ingrédient et l'ajouter
         trRechercheIngredient.appendChild(rechercheIngredient);

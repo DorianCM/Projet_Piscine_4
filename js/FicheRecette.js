@@ -95,6 +95,7 @@ class FicheRecette {
                 total += parseFloat(this.couts[cout].getValeur());
 
         document.getElementById("valeurTotal").innerHTML = Math.round(total*1000)/1000 + "<span>€</span>";
+        document.getElementById("valeurTotalTTC").innerHTML = Math.round(total*1.2*1000)/1000 + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
@@ -148,7 +149,6 @@ class FicheRecette {
             }
             this.dicoEtape[idEtapeUp].printIngredientsHTML();
             this.dicoEtape[idEtapeUp+1].printIngredientsHTML();
-            console.log(this.dicoEtape[idEtapeUp].getListIngredients());
 
             this.updateTotal();
 
@@ -261,7 +261,6 @@ class FicheRecette {
                 // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
                 if(own.getID() == '0')
                     own.setID(requete.response);
-                else console.log(requete.response);
             });
     }
 
@@ -298,7 +297,6 @@ class FicheRecette {
 
         //Remontrer les éléments cachés
         let listHide = document.querySelectorAll(".tempHide");
-        console.log(listHide)
         for(let element in listHide)
             if(listHide[element].classList)
                 listHide[element].classList.remove("tempHide");
