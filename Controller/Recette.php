@@ -1,2 +1,2 @@
 <?php
- include '../View/recette.html';
+ require 'View/recette.html';
