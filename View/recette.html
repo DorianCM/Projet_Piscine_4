@@ -12,10 +12,29 @@
     <script src="../js/FicheRecette.js" defer></script>
     <script type="text/javascript">
         window.onload = function() {
-            //Quand ça sera possible, récup les infos de la recette qui a été cliquée sur la liste des recettes et l'envoyer comme paramètre:
-            
-            //Si pas d'infos récupérées, c'est qu'on a cliqué sur Créer une nouvelle recette (donc par défaut) :
-            var recette = new FicheRecette();
+            let cookies = document.cookie.split(";");
+            let id = 0;
+            cookies.forEach(val => {
+                if (val.indexOf("idFicheRecette") === 0) {
+                    id = val.substring("idFicheRecette".length+1); //+1 pour le =, nameCookie=value
+                    //document.cookie = "idFicheRecette=; Path=/;Max-Age=-99999999;"; //On fait expirer le cookie, faire ça quand on clique sur créer une nouvelle étape
+                }
+            })
+            var recette;
+            if(id == 0)
+                recette = new FicheRecette();
+            else {
+                let url = "../API/getFicheRecette.php?idFicheRecette="+id;
+                let requete = new XMLHttpRequest();
+                requete.open("GET", url, true);
+                
+                requete.addEventListener("load", function (){
+                    let infos = JSON.parse(requete.response);
+                    console.log(infos);
+                    recette = new FicheRecette(infos);
+                });
+                requete.send(null);
+            }
         }
       </script>
 </head>

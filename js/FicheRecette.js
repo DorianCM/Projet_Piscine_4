@@ -1,6 +1,6 @@
 //Classe définissant une recette/fiche technique
 class FicheRecette {
-    id = '0'; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
+    id = 0; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
     nom = '';
     auteur = '';
     nbPortions = 0;
@@ -14,14 +14,14 @@ class FicheRecette {
     constructor(infos = null) {
         this.content = document.getElementById("content");
         if(infos) {
-            this.id = infos.id;
-            this.nom = infos.nom;
-            this.auteur = infos.auteur;
-            this.nbPortions = infos.nbPortions;
+            this.id = infos[0].id_recette;
+            this.nom = infos[0].nom_recette;
+            this.auteur = infos[0].nom_createur;
+            this.nbPortions = infos[0].nb_portions;
             for(let cout in infos.couts)
-                this.addCout(this, infos.couts[cout]);
+                this.addCout(infos.couts[cout]);
             for(let etape in infos.etapes)
-                this.addEtape(this, infos.etapes[etape]);
+                this.addEtape(infos.etapes[etape]);
         }
         else{ //Si pas d'infos pourvues, valeurs par défault
             this.nom = "Nouvelle Recette";
@@ -30,11 +30,11 @@ class FicheRecette {
 
             this.addEtape();
 
-            let coutPersonnel = {"id":1, "nom":"Coût personnel", "valeur":0, "multiplicateur":false};
+            let coutPersonnel = {"id_cout":1, "nom_cout":"Coût personnel", "valeur_cout":0, "multiplicateur":false};
             this.addCout(coutPersonnel);
-            let coutMatieres = {"id":2, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
+            let coutMatieres = {"id_cout":2, "nom_cout":"Coût matières", "valeur_cout":0, "multiplicateur":false};
             this.addCout(coutMatieres);
-            let coutCoef = {"id":3, "nom":"Coef", "valeur":2, "multiplicateur":true};
+            let coutCoef = {"id_cout":3, "nom_cout":"Coef", "valeur_cout":2, "multiplicateur":true};
             this.addCout(coutCoef);
         }
 
@@ -114,10 +114,11 @@ class FicheRecette {
         }
         return max+1;
     }
-    addEtape(infos = null) {
-        var stock = new Etape(this,infos);
+    addEtape(infosEtape = null) {
+        var stock = new Etape(this, infosEtape);
         this.dicoEtape[stock.getID()] = stock;
-        this.dicoEtape[stock.getID()].createHTML();
+        if(!infosEtape)
+            this.dicoEtape[stock.getID()].createHTML();
         this.dicoNbEtape++;
         this.updateTotal();
     }
@@ -198,8 +199,8 @@ class FicheRecette {
 
         this.updateTotal();
     }
-    addCout(infos = null) {
-        this.couts[this.nbCouts++] = new Cout(this, infos);
+    addCout(infosCout = null) {
+        this.couts[this.nbCouts++] = new Cout(this, infosCout);
         this.updateTotal();
     }
     removeCout(coutToRemove) {
@@ -251,17 +252,18 @@ class FicheRecette {
             infosEtapes[nbEtape++] = etape;
         }
         infos["etapes"] = infosEtapes;
-            let url = "../API/models/ModelFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
+            let url = "../API/saveFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
             let requete = new XMLHttpRequest();
             requete.open("POST", url, true);
-            requete.send(null);
+
             let own = this;
             requete.addEventListener("load", function (){
                 //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
                 // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
-                if(own.getID() == '0')
-                    own.setID(requete.response);
+                if(own.getID() == 0)
+                    own.setID(parseInt(requete.response));
             });
+            requete.send(null);
     }
 
     convertPDF(avecLesCout = true) {

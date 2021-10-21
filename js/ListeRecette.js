@@ -57,6 +57,23 @@ function getAllRecette(name) {
             let td_nom_createur = document.createElement("td");//nom_createur
             td_nom_createur.innerText=val.nom_createur;
 
+            let td_modifier = document.createElement("td");//modifier
+
+            let btnmodif = document.createElement("button");
+            btnmodif.innerText = "Modifier";
+            btnmodif.addEventListener("click", function () {
+                let date = new Date();
+                date.setTime(date.getTime() + 5);
+                let expires = date.toUTCString();
+                document.cookie = "idFicheRecette=" + val.id_recette + "; " + expires + "; path=/";
+                /*let url = "../API/setCookieFicheRecette.php?id=" + encodeURIComponent(val.id_recette);
+                let requete = new XMLHttpRequest();
+                requete.open("GET", url, true);
+                requete.send(null);*/
+                window.location = './recette.html';
+            });
+            td_modifier.appendChild(btnmodif);
+
             let td_supprimer = document.createElement("td");//supprimer
 
             let btnsuppr = document.createElement("button");
@@ -74,6 +91,7 @@ function getAllRecette(name) {
 
             tr.appendChild(td_nom_recette);
             tr.appendChild(td_nom_createur);
+            tr.appendChild(td_modifier);
             tr.appendChild(td_supprimer);
 
             table.appendChild(tr);

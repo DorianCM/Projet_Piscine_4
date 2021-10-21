@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../config/Conf.php');
+require_once('../config/Conf.php');
 
 class ModelFicheRecette {
     public static $pdo;
@@ -13,6 +13,89 @@ class ModelFicheRecette {
         try {
             self::$pdo = new PDO("mysql:host=$host;dbname=$dbname", $login, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die("Problème lors de la connexion à la base de données.");
+        }
+    }
+
+    public static function getFicheRecette($id) {
+        $sql = "SELECT id_recette, nom_recette, nb_portions, nom_createur
+            FROM recette r
+            WHERE r.id_recette = $id";
+        try {
+            $req_prep = self::$pdo->prepare($sql);
+            $req_prep->execute();
+            $req_prep->setFetchMode(PDO::FETCH_OBJ);
+            $results= $req_prep->fetchAll();
+            
+
+            $results["etapes"] = ModelFicheRecette::getAllEtape($id);
+            $results["couts"] = ModelFicheRecette::getAllCouts($id);
+
+            echo json_encode($results);
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die("Problème lors de la connexion à la base de données.");
+        }
+    }
+
+    public static function getAllEtape($id_recette) {
+        $sql = "SELECT id_etape, nom_etape, description_etape
+            FROM etapes
+            WHERE id_recette = $id_recette";
+        try {
+            $prepEtape = self::$pdo->prepare($sql);
+            $prepEtape->execute();
+            $prepEtape->setFetchMode(PDO::FETCH_OBJ);
+            $resultsEtapes = $prepEtape->fetchAll();
+
+            $length = count($resultsEtapes);
+            for ($i = 0; $i< $length; $i++) {
+                $resultsEtapes[$i]->ingredients = ModelFicheRecette::getAllIngredient($id_recette, $resultsEtapes[$i]->id_etape);
+                //echo json_encode($resultsEtapes[$i]);
+            }
+
+            return $resultsEtapes;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die("Problème lors de la connexion à la base de données.");
+        }
+    }
+
+    public static function getAllIngredient($id_recette, $id_etape) {
+        $sql = "SELECT ie.id_ingrediant,nom_ingrediant,u.nom_unite,prix_ingrediant,ca.nom_categorie_allergene,c.nom_categorie,t.categorie_tva,t.valeur_tva, ie.quantite
+            FROM `Ingrediant` i 
+            JOIN Unite u ON u.id_unite=i.id_unite
+            JOIN categorie c ON c.id_categorie=i.id_categorie
+            JOIN tva t ON t.id_tva=i.id_tva 
+            JOIN categorie_allergene ca ON ca.id_categorie_allergene=i.id_categorie_allergene
+            JOIN ingrediant_etape ie on ie.id_ingrediant = i.id_ingrediant
+            WHERE ie.id_recette = $id_recette && ie.id_etape = $id_etape";
+        try {
+            $prepIngre = self::$pdo->prepare($sql);
+            $prepIngre->execute();
+            $prepIngre->setFetchMode(PDO::FETCH_OBJ);
+            $resultsIngre = $prepIngre->fetchAll();
+
+            return $resultsIngre;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+            die("Problème lors de la connexion à la base de données.");
+        }
+    }
+
+    public static function getAllCouts($id_recette) {
+        $sql = "SELECT id_cout, nom_cout, valeur_cout, multiplicateur
+            FROM cout
+            WHERE id_recette = $id_recette";
+        try {
+            $prepCout = self::$pdo->prepare($sql);
+            $prepCout->execute();
+            $prepCout->setFetchMode(PDO::FETCH_OBJ);
+            $resultsCouts = $prepCout->fetchAll();
+
+            return $resultsCouts;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
             die("Problème lors de la connexion à la base de données.");
@@ -56,7 +139,6 @@ class ModelFicheRecette {
                 $req_prep->execute();
                 ModelFicheRecette::ajouterCouts($infos["id"], $infos["couts"]);
                 ModelFicheRecette::ajouteretapes($infos["id"], $infos["etapes"]);
-
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -89,13 +171,4 @@ class ModelFicheRecette {
 }
 
 ModelFicheRecette::init_pdo();
-$infos = json_decode($_GET["infos"], true);
-
-if ($infos["id"] == '0') {
-    ModelFicheRecette::ajouterFicheRecette($infos);
-}
-else {
-    ModelFicheRecette::updateFicheRecette($infos);
-}
-
 ?>
