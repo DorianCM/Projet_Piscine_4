@@ -15,9 +15,9 @@
             <img src="View/Images/photoaccueil1.jpg" alt="Photo cuisinier 1">
         </div>
         <div class="child">
-            <div class="bouton" onclick="window.location= './View/Ingrediants.html'">Mercuriale</div>
-            <div class="bouton" onclick="window.location= './View/liste_recette.html'">Liste des fiches techniques</div>
-            <div class="bouton" onclick="document.cookie = 'idFicheRecette=; path=/';window.location= './View/recette.html'">Créer une fiche technique</div>
+            <div class="bouton" onclick="window.location= 'ingrediants.php'">Mercuriale</div>
+            <div class="bouton" onclick="window.location= 'liste_recette.php'">Liste des fiches techniques</div>
+            <div class="bouton" onclick="document.cookie = 'idFicheRecette=; path=/';window.location= 'recette.php'">Créer une fiche technique</div>
         </div>
         <div class="child">
             <img src="View/Images/photoaccueil2.jpg" alt="Photo cuisinier 2">

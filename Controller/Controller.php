@@ -1,2 +1,2 @@
 <?php
- require './View/accueil.html';
+ require './View/accueil.php';

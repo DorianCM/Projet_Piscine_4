@@ -73,7 +73,7 @@ function getAllRecette(name) {
                 date.setTime(date.getTime() + 5);
                 let expires = date.toUTCString();
                 document.cookie = "idFicheRecette=" + val.id_recette + "; " + expires + "; path=/";
-                window.location = './recette.html';
+                window.location = './recette.php';
             });
             td_modifier.appendChild(btnmodif);
 
