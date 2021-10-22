@@ -17,7 +17,7 @@
         <div class="child">
             <div class="bouton" onclick="window.location= 'View/ingrediants.php'">Mercuriale</div>
             <div class="bouton" onclick="window.location= 'View/liste_recette.php'">Liste des fiches techniques</div>
-            <div class="bouton" onclick="document.cookie = 'View/idFicheRecette=; path=/';window.location= 'recette.php'">Créer une fiche technique</div>
+            <div class="bouton" onclick="document.cookie = 'idFicheRecette=; path=/';window.location= 'View/recette.php'">Créer une fiche technique</div>
         </div>
         <div class="child">
             <img src="View/Images/photoaccueil2.jpg" alt="Photo cuisinier 2">
