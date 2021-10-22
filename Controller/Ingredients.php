@@ -1,2 +1,2 @@
 <?php
- include '../View/ingrediants.html';
+ include '../View/ingrediants.php';

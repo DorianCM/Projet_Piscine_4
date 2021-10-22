@@ -1,2 +1,2 @@
 <?php
- require 'View/recette.html';
+ require 'View/recette.php';

@@ -1,2 +1,2 @@
 <?php
- include 'View/accueil.html';
+ include 'View/accueil.php';
