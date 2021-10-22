@@ -356,8 +356,10 @@ function getAllIngrediant(name) {
                 let url = "../API/supprimerIngrediant.php?id=" + encodeURIComponent(val.id_ingrediant);
                 let requete = new XMLHttpRequest();
                 requete.open("GET", url, true);
+                requete.addEventListener("load", function (){
+                    getAllIngrediant("1");
+                });
                 requete.send(null);
-                getAllIngrediant("1");
             });
 
             td_modifier.appendChild(btnmodif);

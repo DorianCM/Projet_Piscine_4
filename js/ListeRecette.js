@@ -86,8 +86,10 @@ function getAllRecette(name) {
                 let url = "../API/supprimerRecette.php?id=" + encodeURIComponent(val.id_recette);
                 let requete = new XMLHttpRequest();
                 requete.open("GET", url, true);
+                requete.addEventListener("load", function (){
+                    getAllRecette("1");
+                });
                 requete.send(null);
-                getAllRecette("1");
             });
 
             td_supprimer.appendChild(btnsuppr);
