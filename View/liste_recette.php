@@ -12,6 +12,7 @@
     <header>
 
         <ul class="entetu">
+            <li class="entetli"><a class="enteta" onclick = "window.location= '../'">Accueil</a></li>
             <li class="entetli"><a class="enteta" href="ingrediants.php">Mercuriale</a></li>
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
             <li class="entetli"><a class="enteta" onclick = "document.cookie = 'idFicheRecette=; path=/';" href="recette.php">Créer une fiche technique</a></li>
