@@ -108,7 +108,8 @@ class ModalIngredient{
                 else {
                     ligneIngre.className = "ligneIngredient";
                     function myClick(event) {
-                        let infos = {"id":i["id_ingrediant"], "libelle":i["nom_ingrediant"], "prix":i["prix_ingrediant"], "tva":i["valeur_tva"], "categorie":i["categorie_tva"], "categorieAllergene":i["nom_categorie_allergene"], "unite":i["nom_unite"], "quantite":1};
+                        let infos = {"id_ingrediant":i["id_ingrediant"], "nom_ingrediant":i["nom_ingrediant"], "prix_ingrediant":i["prix_ingrediant"], "nom_categorie":i["nom_categorie"], "valeur_tva":i["valeur_tva"], "categorie_tva":i["categorie_tva"], "nom_categorie_allergene":i["nom_categorie_allergene"], "nom_unite":i["nom_unite"], "quantite":1};
+                        console.log(infos);
                         own.currentEtape.addIngredient(infos);
                         ligneIngre.classList.add("alreadySelected");
                         ligneIngre.removeEventListener("click", myClick);
