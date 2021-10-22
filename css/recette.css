@@ -14,10 +14,10 @@ html, section {
     border-spacing:0;
 }
 #tabInfos, #tableEtapes {
-    border: 1px solid black;
+    border: 10px solid black;
 }
 table#tabInfos {
-    border-bottom: 1px solid black;
+    border-bottom: 10px solid black;
 }
 
 #infosNom {
