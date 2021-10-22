@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/accueil.css" />
+        <title>Accueil</title>
+    </head>
     <body>
-        <div onclick="window.location= './View/Ingrediants.html'">Liste des produits</div>
-        <div onclick="window.location= './View/liste_recette.html'">Liste des recettes</div>
-        <div onclick="window.location= './View/recette.html'">Créer une nouvelle recette</div>
-        <footer>
+        <header>
 
+        </header>
+        <main>
+            <div id="container">
+                <div class="child">
+                    <img src="Images/photoaccueil1.jpg" alt="Photo cuisinier 1">
+                </div>
+                <div class="child">
+                    <div id="bouton" onclick="window.location= './View/Ingrediants.html'">Liste des produits</div>
+                    <div id="bouton" onclick="window.location= './View/liste_recette.html'">Liste des recettes</div>
+                    <div id="bouton" onclick="window.location= './View/recette.html'">Créer une nouvelle recette</div>
+                </div>
+                <div class="child">
+                    <img src="Images/photoaccueil2.jpg" alt="Photo cuisinier 1">
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div id="dfooter">
+                Tous droits réservés
+            </div>
         </footer>
     </body>
 </html>

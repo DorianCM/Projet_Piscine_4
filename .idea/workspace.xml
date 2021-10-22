@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="327a6aa4-2431-4be1-a789-0dce9d9c21c8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Controller/Accueil.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Accueil.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/Ingredients.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Ingredients.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/accueil.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/accueil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/ingrediants.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/ingrediants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/liste_recette.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/liste_recette.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/accueil.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/accueil.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/View/changer_mot_de_passe.html" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1yWyeINqxgzItCeDJvuy02VsHmQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/View/Images" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MAMP\htdocs\Projet_Piscine_4\View\Images" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="327a6aa4-2431-4be1-a789-0dce9d9c21c8" name="Changes" comment="" />
+      <created>1632381733287</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632381733287</updated>
+      <workItem from="1632381734715" duration="799000" />
+      <workItem from="1632573484820" duration="101000" />
+      <workItem from="1632726246968" duration="4852000" />
+      <workItem from="1632762305960" duration="3942000" />
+      <workItem from="1632925553081" duration="2396000" />
+      <workItem from="1633615224929" duration="3665000" />
+      <workItem from="1634383895647" duration="5379000" />
+      <workItem from="1634465228612" duration="2006000" />
+      <workItem from="1634551706256" duration="3471000" />
+      <workItem from="1634561011646" duration="45000" />
+      <workItem from="1634656222147" duration="6736000" />
+      <workItem from="1634753580165" duration="1198000" />
+      <workItem from="1634755743524" duration="1986000" />
+      <workItem from="1634757957297" duration="545000" />
+      <workItem from="1634803204210" duration="946000" />
+      <workItem from="1634906586739" duration="9627000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

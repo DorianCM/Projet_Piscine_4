@@ -1,21 +1,40 @@
 body{
-	background-color: skyblue;
-}
-img{
-	max-height: 200px;
-	width:  auto;
-	display:  block;
-	margin:  auto;
+	background-color: white;
+    font-family: 'Andada Pro', serif;
+    margin: 0px;
 }
 
-.champ{
-	text-align: center;
+main{
+    margin: 8px;
 }
-.form-outline .form-control {
-    min-height: auto;
-    padding: .33em .75em;
-    border: 1;
-    background: white;
-    -webkit-transition: all .2s linear;
-    transition: all .2s linear;
+
+#bouton{
+    background-color: #c3b7a4;
+    border-radius: 15px;
+    text-align: center;
+    margin: 10px 60px;
+    padding: 20px;
+    font-size: 20px;
+}
+
+footer{
+    background-color: #c3b7a4;
+    width: 100%;
+}
+
+#dfooter{
+    margin: 8px;
+}
+#container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center ; /* for horizontal aligning of child divs */
+    align-items : center ; /* for vertical aligning */
+}
+#child{
+    width: 20%/* yoursize for each div */ ;
+}
+
+img{
+    width: 30%;
 }
