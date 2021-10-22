@@ -122,7 +122,7 @@ class FicheRecette {
 
         document.getElementById("valeurTotal").innerHTML = Math.round(total*1000)/1000 + "<span>€</span>";
         document.getElementById("valeurTotalTTC").innerHTML = Math.round(total*1.2*1000)/1000 + "<span>€</span>";
-        document.getElementById("valeurTTCPortions").innerHTML = Math.round(total*1.2/this.getNbPortions()*1000)/1000 + "<span>€</span>";
+        document.getElementById("valeurTTCPortions").innerHTML = Math.round(total*1.1/this.getNbPortions()*1000)/1000 + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
@@ -303,22 +303,25 @@ class FicheRecette {
         
         let listSelects = document.getElementsByTagName("select");
         for(let select in listSelects)
-            if(listSelects[select].classList)
+            if(listSelects[select].classList && listSelects[select].id != "selectCategorieRecette")
                 listSelects[select].classList.add("tempHide");
-
+        document.getElementById("addEtape").classList.add("tempHide");
+        document.getElementById("addCout").classList.add("tempHide");
+        
         if(!avecLesCout) {
             document.getElementById("thCout").classList.add("tempHide");
             document.getElementById("colonneCout").classList.add("tempHide");
             document.getElementById("ligneCouts").classList.add("tempHide");
-            document.getElementById("addCout").classList.add("tempHide");
             document.getElementById("ligneTotal").classList.add("tempHide");
             document.getElementById("ligneTotalTTC").classList.add("tempHide");
             document.getElementById("ligneTTCPortions").classList.add("tempHide");
+            document.getElementById("thIngredients").classList.add("hideRigthBorder");
+            document.getElementById("colonneCategorie").classList.add("hideRigthBorder");
             let listTotalIngredient = document.querySelectorAll("ingredientTotal");
             for(let cout in listTotalIngredient)
                 if(listTotalIngredient[cout].classList)
                     listTotalIngredient[cout].classList.add("tempHide");
-            let listCouts = document.querySelectorAll("cout");
+            let listCouts = document.querySelectorAll(".cout");
             for(let cout in listCouts)
                 if(listCouts[cout].classList)
                     listCouts[cout].classList.add("tempHide");
@@ -328,9 +331,11 @@ class FicheRecette {
 
         //Remontrer les éléments cachés
         let listHide = document.querySelectorAll(".tempHide");
-        for(let element in listHide)
+        /*for(let element in listHide)
             if(listHide[element].classList)
                 listHide[element].classList.remove("tempHide");
+        document.getElementById("thIngredients").classList.remove("hideRigthBorder");
+        document.getElementById("colonneCategorie").classList.remove("hideRigthBorder");*/
     }
 
     getID() {

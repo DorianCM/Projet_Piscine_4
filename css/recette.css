@@ -15,11 +15,8 @@ html, section {
 }
 #tabInfos, #tableEtapes {
     border: 2px solid black;
+    border-bottom: none;
 }
-table#tabInfos {
-    border-bottom: 2px solid black;
-}
-
 #infosNom {
     text-align: center;
     border-right: 2px solid black;
@@ -32,7 +29,7 @@ table#tabInfos {
     border: none;
     width: 95%;
 }
-input:focus {
+input:focus, #selectCategorieRecette:focus {
     outline: 1px solid grey;;
 }
 
@@ -51,6 +48,18 @@ input:focus {
 }
 #selectCategorieRecette {
     min-width: 50%;
+    border: none;
+}
+#selectCategorieRecette {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+  
+  /* For IE10 */
+#selectCategorieRecette::-ms-expand {
+    display: none;
 }
 
 #ligneTh th, #ligneTd td {
@@ -124,7 +133,6 @@ input:focus {
 .etapeIngredient button {
     float: right;
 }
-
 #addEtape td {
     padding: 5px;
     text-align: center;
@@ -137,16 +145,19 @@ input:focus {
     font-size: 14px;
 }
 
-#ligneCouts td, #ligneTTCPortions td, #ligneTotalTTC td, #ligneTotal td, .cout td, #addCout td {
+#ligneCouts td, .cout td, #addCout td {
     border-right: 2px solid black;
     border-top: 2px solid black;
     padding: 5px;
 }
-#ligneCouts td:last-child, #ligneTTCPortions td:last-child, #ligneTotalTTC td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
+#ligneCouts td{
+    border-top: none;
+}
+#ligneCouts td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
     border-right:none;
 }
 .cout td {
-    padding: 0;
+    padding: 1px;
 }
 .cout td input {
     padding: auto;
@@ -165,6 +176,9 @@ input:focus {
 }
 .cout span{
     float: right;
+}
+#ligneTTCPortions td {
+    border-bottom: 2px solid black;
 }
 
 #modalIngredient {
@@ -204,4 +218,7 @@ input:focus {
 
 .tempHide {
     display: none;
+}
+#ligneTh .hideRigthBorder, #ligneTd .hideRigthBorder {
+    border-right: none;
 }

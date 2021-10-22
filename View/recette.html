@@ -75,7 +75,7 @@
                 <tbody id="tabEtapes">
                 <tr id = "ligneTh">
                     <th>Etapes</th>
-                    <th colspan="4">Ingrédients</th>
+                    <th colspan="4" id="thIngredients">Ingrédients</th>
                     <th id = "thCout">Coûts</th>
                 </tr>
                 <tr id ="ligneTd">
@@ -95,8 +95,7 @@
                 </tr>
                 <tr class="cout">
                     <td colspan="4"></td>
-
-                    <td>Total  Ingredients</td>
+                    <td>Total Ingrédients</td>
                     <td id ="TotalIngredients"></td>
                 </tr>
                 <tr id="addCout">
@@ -104,17 +103,17 @@
                     <td><button id="addCoutButton">Ajouter un coût</button></td>
                     <td></td>
                 </tr>
-                <tr id="ligneTotal">
+                <tr id="ligneTotal" class="cout">
                     <td colspan="4"></td>
                     <td>Total HT</td>
                     <td id="valeurTotal">0</td>
                 </tr>
-                <tr id="ligneTotalTTC">
+                <tr id="ligneTotalTTC" class="cout">
                     <td colspan="4"></td>
                     <td>Total TTC</td>
                     <td id="valeurTotalTTC">0</td>
                 </tr>
-                <tr id="ligneTTCPortions">
+                <tr id="ligneTTCPortions" class="cout">
                     <td colspan="4"></td>
                     <td>Par portions</td>
                     <td id="valeurTTCPortions">0</td>
@@ -130,9 +129,6 @@
             </button>
             <button id = "PDFFicheCouts">
                 Convertif en PDF (sans les coûts)
-            </button>
-            <button onclick="window.location= '../'">
-                Exemple de retour à l'acceuil (à enlever)
             </button>
         </div>
       </section>
