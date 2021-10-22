@@ -26,9 +26,10 @@ class ModelListeRecette {
 
     public static function getAllRecette($name,$order){
             try {
-                $sql = "SELECT id_recette,nom_recette,nom_createur
-                        FROM `recette` WHERE nom_recette
-                        REGEXP \"^$name.*\" ORDER BY $order";
+                $sql = "SELECT id_recette,nom_recette,nom_createur, nom_categorie_recette
+                        FROM `recette` r
+                        JOIN categorie_recette c ON r.id_categorie_recette = c.id_categorie_recette
+                        WHERE nom_recette REGEXP \"^$name.*\" ORDER BY $order";
                 //var_dump($sql);
                 $req_prep = self::$pdo->prepare($sql);
 

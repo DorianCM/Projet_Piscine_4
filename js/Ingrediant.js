@@ -35,24 +35,6 @@ function init_input_id_unite(){
     });
     requete.send(null);
 }
-/*function init_input_id_(name){
-    let url = "../API/getAll" + name +".php";
-    let requete = new XMLHttpRequest();
-    requete.open("GET", url, true);
-    requete.addEventListener("load", function () {
-        let result = JSON.parse(requete.responseText);
-        Array.prototype.forEach.call(result, val =>{
-            let option = document.createElement("option");
-            let idname = "id_"+name;
-            let nomname = "nom_"+name;
-            option.value = val.idname;
-            option.innerText = val.nomname;
-            let input = "input_id_"+name;
-            input.appendChild(option);
-        });
-    });
-    requete.send(null);
-}*/
 
 let input_categorie_allergene = document.createElement("select");
 function init_input_id_categorie_allergene(){
@@ -151,10 +133,6 @@ function plus(event){
     divBtnAjouter.appendChild(input_id_tva);
     divBtnAjouter.appendChild(btnAjouter);
 
-    /*let input = document.createElement("input");
-    input.innerText = "nom d'ingrédiant";
-    divBtnAjouter.appendChild(input);*/
-
     btnPlus.removeEventListener("click", plus);
 
     btnPlus.innerText = "-";
@@ -176,15 +154,23 @@ function moins(event){
     divBtnAjouter.removeChild(btnAjouter);
 }
 
+//Fonction pour créer un th ou un td et le mettre dans le bon element tout en lui donnant un innerText approprié
+//tag -> String ; innerText -> string, parentElement -> DOMElement
+function th_td_creator(tag,innerText,parentElement){
+    let element = document.createElement(tag);//nom_ingrediant
+    element.innerText=innerText;
+    parentElement.appendChild(element);
+}
+
+//listInnerText -> list of String
+function th_td_multiple_creator(tag,listInnerText,ParentElement){
+    Array.prototype.forEach.call(listInnerText, el =>{
+        th_td_creator(tag,el,ParentElement);
+    });
+}
+
 
 btnPlus.addEventListener("click", plus);
-
-/*function getUnitebyId(id){
-    let url = "../API/getUniteById.php?id=" + id;
-    let requete = new XMLHttpRequest();
-    requete.open("GET", url, true);
-    requete.send(null);
-}*/
 
 function getAllIngrediant(name) {
     divList.innerText = "";
@@ -197,42 +183,10 @@ function getAllIngrediant(name) {
         let trth = document.createElement("tr");
         table.appendChild(trth);
 
-        let th_nom_ingrediant = document.createElement("th");//nom_ingrediant
-        th_nom_ingrediant.innerText="Nom ingrédient";
+        //"Nom ingrédient"
+        th_td_multiple_creator("th",["Nom ingrédient","Unité","Prix par unité", "Catégorie allergene",
+            "Nom Catégorie ingrédient","Catégorie TVA","Pourcentage de TVA","",""],trth);
 
-        let th_nom_unite = document.createElement("th");//nom_unite
-        th_nom_unite.innerText="Unité";
-
-        let th_prix_ingredient = document.createElement("th");//prix_ingrediant
-        th_prix_ingredient.innerText="Prix par unité";
-
-        let th_nom_categorie_allergene = document.createElement("th");//nom_categorie_allergene
-        th_nom_categorie_allergene.innerText="Catégorie allergene";
-
-        let th_nom_categorie = document.createElement("th");//nom_categorie
-        th_nom_categorie.innerText= "Nom Catégorie ingrédient";
-
-        let th_categorie_tva = document.createElement("th");//categorie_tva
-        th_categorie_tva.innerText="Catégorie TVA";
-
-        let th_valeur_tva = document.createElement("th");//valeur_tva
-        th_valeur_tva.innerText="Pourcentage de TVA";
-
-        let th_modifier = document.createElement("th");//modifier
-        //th_valeur_tva.value="Pourcentage de TVA";
-
-        let th_supprimer = document.createElement("th");//supprimer
-        //th_valeur_tva.value="Pourcentage de TVA";
-
-        trth.appendChild(th_nom_ingrediant);
-        trth.appendChild(th_nom_unite);
-        trth.appendChild(th_prix_ingredient);
-        trth.appendChild(th_nom_categorie_allergene);
-        trth.appendChild(th_nom_categorie);
-        trth.appendChild(th_categorie_tva);
-        trth.appendChild(th_valeur_tva);
-        trth.appendChild(th_modifier);
-        trth.appendChild(th_supprimer);
 
         Array.prototype.forEach.call(result, val =>{
             let tr = document.createElement("tr");
@@ -346,18 +300,16 @@ function getAllIngrediant(name) {
                     btnmodif.innerText = "Modifier";
                     modifyingState = null;
                 }
-                /*let valeur_tva_input = document.createElement("input");
-                valeur_tva_input.value=td_valeur_tva.innerText;
-                td_valeur_tva.innerText="";
-                td_valeur_tva.appendChild(valeur_tva_input);*/
             });
             btnsuppr.innerText = "Supprimer";
             btnsuppr.addEventListener("click", function () {
                 let url = "../API/supprimerIngrediant.php?id=" + encodeURIComponent(val.id_ingrediant);
                 let requete = new XMLHttpRequest();
                 requete.open("GET", url, true);
+                requete.addEventListener("load", function (){
+                    getAllIngrediant("1");
+                });
                 requete.send(null);
-                getAllIngrediant("1");
             });
 
             td_modifier.appendChild(btnmodif);
@@ -386,5 +338,4 @@ window.addEventListener("load", function () {
     init_input_id_categorie_allergene();
     init_input_id_categorie();
     init_input_id_tva();
-    //init_input_id_allergene();
 });

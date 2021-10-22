@@ -1,5 +1,5 @@
 <?php
 
-require_once("models/ModelIngredient.php");
+require_once("models/ModelUniteCategories.php");
 
-echo json_encode(Model::getAllUnite());
+echo json_encode(ModelUniteCategories::getAllUnite());
