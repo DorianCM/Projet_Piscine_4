@@ -41,10 +41,14 @@ function getAllRecette(name) {
         let th_nom_createur = document.createElement("th");//nom_createur
         th_nom_createur.innerText="Auteur";
 
+        let th_nom_categorie_recette = document.createElement("th");//nom_createur
+        th_nom_categorie_recette.innerText="Catégorie";
+
         let th_supprimer = document.createElement("th");//supprimer
 
         trth.appendChild(th_nom_recette);
         trth.appendChild(th_nom_createur);
+        trth.appendChild(th_nom_categorie_recette);
         trth.appendChild(th_supprimer);
 
         Array.prototype.forEach.call(result, val =>{
@@ -57,6 +61,22 @@ function getAllRecette(name) {
             let td_nom_createur = document.createElement("td");//nom_createur
             td_nom_createur.innerText=val.nom_createur;
 
+            let td_nom_categorie_recette = document.createElement("td");//nom_categorie_recette
+            td_nom_categorie_recette.innerText=val.nom_categorie_recette;
+
+            let td_modifier = document.createElement("td");//modifier
+
+            let btnmodif = document.createElement("button");
+            btnmodif.innerText = "Modifier";
+            btnmodif.addEventListener("click", function () {
+                let date = new Date();
+                date.setTime(date.getTime() + 5);
+                let expires = date.toUTCString();
+                document.cookie = "idFicheRecette=" + val.id_recette + "; " + expires + "; path=/";
+                window.location = './recette.html';
+            });
+            td_modifier.appendChild(btnmodif);
+
             let td_supprimer = document.createElement("td");//supprimer
 
             let btnsuppr = document.createElement("button");
@@ -66,14 +86,18 @@ function getAllRecette(name) {
                 let url = "../API/supprimerRecette.php?id=" + encodeURIComponent(val.id_recette);
                 let requete = new XMLHttpRequest();
                 requete.open("GET", url, true);
+                requete.addEventListener("load", function (){
+                    getAllRecette("1");
+                });
                 requete.send(null);
-                getAllRecette("1");
             });
 
             td_supprimer.appendChild(btnsuppr);
 
             tr.appendChild(td_nom_recette);
             tr.appendChild(td_nom_createur);
+            tr.appendChild(td_nom_categorie_recette);
+            tr.appendChild(td_modifier);
             tr.appendChild(td_supprimer);
 
             table.appendChild(tr);

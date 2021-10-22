@@ -15,13 +15,13 @@ class Ingredient {
     constructor(etape, infos){
         this.recette = etape.recette;
         this.etape = etape;
-        this.id = infos.id;
-        this.libelle = infos.libelle;
-        this.prix = infos.prix;
-        this.tva = infos.tva;
-        this.categorie = infos.categorie;
-        this.categorieAllergene = infos.categorieAllergene;
-        this.unite = infos.unite;
+        this.id = infos.id_ingrediant;
+        this.libelle = infos.nom_ingrediant;
+        this.prix = infos.prix_ingrediant;
+        this.tva = infos.valeur_tva;
+        this.categorie = infos.nom_categorie;
+        this.categorieAllergene = infos.nom_categorie_allergene;
+        this.unite = infos.nom_unite;
         this.quantite = infos.quantite;
 
         /*this.createHTML();*/

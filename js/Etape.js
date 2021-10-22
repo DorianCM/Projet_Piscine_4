@@ -10,17 +10,18 @@ class Etape {
     constructor(recette, infos = undefined) {
         this.recette = recette;
         if(infos) {
-            this.id = infos.id;
-            this.nom = infos.nom;
-            this.description = infos.description;
+            this.id = infos.id_etape;
+            this.nom = infos.nom_etape;
+            this.description = infos.description_etape;
+            this.createHTML();
+
+            for(let ingredient in infos.ingredients)
+                this.addIngredient(infos.ingredients[ingredient]);
         }
         else {
             this.id = recette.getAvailableEtapeID();
             this.nom = "Etape "+this.id;
         }
-        if(infos)
-            for(let ingredient in infos.ingredients)
-                this.addIngredient(infos.ingredients[ingredient]);
     }
 
     createHTML(insererAvant = document.getElementById("addEtape")){

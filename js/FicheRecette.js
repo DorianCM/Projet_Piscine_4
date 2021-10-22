@@ -1,9 +1,10 @@
 //Classe définissant une recette/fiche technique
 class FicheRecette {
-    id = '0'; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
+    id = 0; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
     nom = '';
     auteur = '';
     nbPortions = 0;
+    categorieRecette='';
     couts = {};
     nbCouts = 0;
     modalIngredient = null;
@@ -14,30 +15,33 @@ class FicheRecette {
     constructor(infos = null) {
         this.content = document.getElementById("content");
         if(infos) {
-            this.id = infos.id;
-            this.nom = infos.nom;
-            this.auteur = infos.auteur;
-            this.nbPortions = infos.nbPortions;
+            this.id = infos[0].id_recette;
+            this.nom = infos[0].nom_recette;
+            this.auteur = infos[0].nom_createur;
+            this.nbPortions = infos[0].nb_portions;
+            this.categorieRecette = infos[0].id_categorie_recette;
             for(let cout in infos.couts)
-                this.addCout(this, infos.couts[cout]);
+                this.addCout(infos.couts[cout]);
             for(let etape in infos.etapes)
-                this.addEtape(this, infos.etapes[etape]);
+                this.addEtape(infos.etapes[etape]);
         }
         else{ //Si pas d'infos pourvues, valeurs par défault
             this.nom = "Nouvelle Recette";
             this.auteur = "";
             this.nbPortions = 10;
+            this.categorieRecette = '1';
 
             this.addEtape();
 
-            let coutPersonnel = {"id":1, "nom":"Coût personnel", "valeur":0, "multiplicateur":false};
+            let coutPersonnel = {"id_cout":1, "nom_cout":"Coût personnel", "valeur_cout":0, "multiplicateur":false};
             this.addCout(coutPersonnel);
-            let coutMatieres = {"id":2, "nom":"Coût matières", "valeur":0, "multiplicateur":false};
+            let coutMatieres = {"id_cout":2, "nom_cout":"Coût matières", "valeur_cout":0, "multiplicateur":false};
             this.addCout(coutMatieres);
-            let coutCoef = {"id":3, "nom":"Coef", "valeur":2, "multiplicateur":true};
+            let coutCoef = {"id_cout":3, "nom_cout":"Coef", "valeur_cout":2, "multiplicateur":true};
             this.addCout(coutCoef);
         }
 
+        this.fillSelectCategorie();
         this.setEventListener();
         this.updateHTML();
         this.modalIngredient = new ModalIngredient(this);
@@ -58,6 +62,9 @@ class FicheRecette {
         document.getElementById("recette_nbportions").addEventListener("input",function(){
             own.setNbPortions(this.value);
         });
+        document.getElementById("selectCategorieRecette").addEventListener("change",function(){
+            own.setCategorieRecette(this.value);
+        });
         document.getElementById("recette_auteur").addEventListener("input",function(){
             own.setAuteur(this.value);
         });
@@ -72,10 +79,29 @@ class FicheRecette {
         });
     }
 
+    fillSelectCategorie() {
+        let url = "../API/getRecetteCategorie.php";
+        let requete = new XMLHttpRequest();
+        requete.open("POST", url, true);
+
+        let own = this;
+        requete.addEventListener("load", function (){
+            let categories = JSON.parse(requete.response);
+            for(let cat in categories){
+                let opt = document.createElement("option");
+                opt.value = categories[cat].id_categorie_recette;
+                opt.text = categories[cat].nom_categorie_recette;
+                document.getElementById("selectCategorieRecette").appendChild(opt);
+                opt.selected = (own.getCategorieRecette() == categories[cat].id_categorie_recette);
+            }
+        });
+        requete.send(null);
+    }
     updateHTML() {
         document.getElementById("recette_nom").value = this.nom;
         document.getElementById("recette_nbportions").value = this.nbPortions;
         document.getElementById("recette_auteur").value = this.auteur;
+        document.getElementById("selectCategorieRecette").value = this.categorie;
         this.updateTotal();
     }
 
@@ -96,6 +122,7 @@ class FicheRecette {
 
         document.getElementById("valeurTotal").innerHTML = Math.round(total*1000)/1000 + "<span>€</span>";
         document.getElementById("valeurTotalTTC").innerHTML = Math.round(total*1.2*1000)/1000 + "<span>€</span>";
+        document.getElementById("valeurTTCPortions").innerHTML = Math.round(total*1.2/this.getNbPortions()*1000)/1000 + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
@@ -114,10 +141,11 @@ class FicheRecette {
         }
         return max+1;
     }
-    addEtape(infos = null) {
-        var stock = new Etape(this,infos);
+    addEtape(infosEtape = null) {
+        var stock = new Etape(this, infosEtape);
         this.dicoEtape[stock.getID()] = stock;
-        this.dicoEtape[stock.getID()].createHTML();
+        if(!infosEtape)
+            this.dicoEtape[stock.getID()].createHTML();
         this.dicoNbEtape++;
         this.updateTotal();
     }
@@ -198,8 +226,8 @@ class FicheRecette {
 
         this.updateTotal();
     }
-    addCout(infos = null) {
-        this.couts[this.nbCouts++] = new Cout(this, infos);
+    addCout(infosCout = null) {
+        this.couts[this.nbCouts++] = new Cout(this, infosCout);
         this.updateTotal();
     }
     removeCout(coutToRemove) {
@@ -214,18 +242,19 @@ class FicheRecette {
 
     saveUpdates() {
         let infos = {};
-        infos["id"] = this.getID();
-        infos["nom"] = this.getNom();
-        infos["auteur"] = this.getAuteur();
-        infos["nbPortions"] = this.getNbPortions();
+        infos["id_recette"] = this.getID();
+        infos["nom_recette"] = this.getNom();
+        infos["nom_createur"] = this.getAuteur();
+        infos["nb_portions"] = this.getNbPortions();
+        infos["id_categorie_recette"] = this.getCategorieRecette();
 
         let infosCouts = {};
         let nbCout = 0;
         for(let c in this.couts) {
             let cout = {};
-            cout["id"] = this.couts[c].getID();
-            cout["nom"] = this.couts[c].getNom();
-            cout["valeur"] = this.couts[c].getValeur();
+            cout["id_cout"] = this.couts[c].getID();
+            cout["nom_cout"] = this.couts[c].getNom();
+            cout["valeur_cout"] = this.couts[c].getValeur();
             cout["multiplicateur"] = this.couts[c].getMultiplicateur();
             infosCouts[nbCout++] = cout;
         }
@@ -234,16 +263,16 @@ class FicheRecette {
         let nbEtape = 0
         for(let e in this.dicoEtape) {
             let etape = {};
-            etape["id"] = this.dicoEtape[e].getID();
-            etape["nom"] = this.dicoEtape[e].getNom();
-            etape["description"] = this.dicoEtape[e].getDescription();
-            etape["numero"] = "0"; //this.dicoEtape[e].getNumero();
+            etape["id_etape"] = this.dicoEtape[e].getID();
+            etape["nom_etape"] = this.dicoEtape[e].getNom();
+            etape["description_etape"] = this.dicoEtape[e].getDescription();
+
             let ingredients = {};
             let nbIngre = 0;
             let listIngre = this.dicoEtape[e].getListIngredients();
             for(let i in listIngre) {
                 let ingre = {};
-                ingre["id"] = listIngre[i].getID();
+                ingre["id_ingrediant"] = listIngre[i].getID();
                 ingre['quantite'] = listIngre[i].getQuantite();
                 ingredients[nbIngre++] = ingre;
             }
@@ -251,17 +280,18 @@ class FicheRecette {
             infosEtapes[nbEtape++] = etape;
         }
         infos["etapes"] = infosEtapes;
-            let url = "../API/models/ModelFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
+            let url = "../API/saveFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
             let requete = new XMLHttpRequest();
             requete.open("POST", url, true);
-            requete.send(null);
+
             let own = this;
             requete.addEventListener("load", function (){
                 //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
                 // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
-                if(own.getID() == '0')
-                    own.setID(requete.response);
+                if(own.getID() == 0)
+                    own.setID(parseInt(requete.response));
             });
+            requete.send(null);
     }
 
     convertPDF(avecLesCout = true) {
@@ -283,6 +313,7 @@ class FicheRecette {
             document.getElementById("addCout").classList.add("tempHide");
             document.getElementById("ligneTotal").classList.add("tempHide");
             document.getElementById("ligneTotalTTC").classList.add("tempHide");
+            document.getElementById("ligneTTCPortions").classList.add("tempHide");
             let listTotalIngredient = document.querySelectorAll("ingredientTotal");
             for(let cout in listTotalIngredient)
                 if(listTotalIngredient[cout].classList)
@@ -325,6 +356,12 @@ class FicheRecette {
     }
     setNbPortions(nouveauNbPortions) {
         this.nbPortions = nouveauNbPortions;
+    }
+    getCategorieRecette() {
+        return this.categorieRecette;
+    }
+    setCategorieRecette(nouvelleCategorie) {
+        this.categorieRecette = nouvelleCategorie;
     }
     getListCout() {
         return this.couts;

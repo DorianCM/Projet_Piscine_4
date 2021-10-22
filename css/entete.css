@@ -1,0 +1,39 @@
+body {
+	margin: 0;
+	margin-top: 60px;
+}
+
+main {
+	padding:0 16px;
+}
+
+header{
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.entetu {
+	list-style-type: none;
+	margin:0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #7F7D7D;
+}
+
+.entetli {
+	float: left;
+}
+
+.enteta {
+	display: block;
+	padding: 14px 16px;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+}
+
+header a:hover {
+	background-color: #555454;
+}
+
