@@ -3,10 +3,6 @@ body {
 	margin-top: 60px;
 }
 
-main {
-	padding:0 16px;
-}
-
 header{
 	position: fixed;
 	top: 0;
@@ -18,7 +14,7 @@ header{
 	margin:0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #7F7D7D;
+	background-color: #d8d2cb;
 }
 
 .entetli {
@@ -28,12 +24,12 @@ header{
 .enteta {
 	display: block;
 	padding: 14px 16px;
-	color: white;
+	color: black;
 	text-align: center;
 	text-decoration: none;
 }
 
 header a:hover {
-	background-color: #555454;
+	background-color: #e0dbd5;
 }
 

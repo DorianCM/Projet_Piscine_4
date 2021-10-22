@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste fiches techniques</title>
-    <link rel="stylesheet" href="../css/accueil.css" />
+    <link rel="stylesheet" href="../css/liste_ingredients.css" />
     <script src="../js/ListeRecette.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/entete.css">
 </head>
@@ -22,7 +22,8 @@
     <main>
 
     <div id="recherche">
-            <input name="barre_recherche_recette" id="barre_recherche_recette">
+        <div>Quelle fiche technique recherchez vous ?</div>
+            <input name="barre_recherche_recette" id="barre_recherche_recette" placeholder="Par exemple : Filet de poulet..">
         </div>
 
         <div id="divTri">

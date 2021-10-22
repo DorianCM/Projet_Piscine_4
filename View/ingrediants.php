@@ -20,11 +20,12 @@
     <main>
 
     <div id="recherche">
-        <input name="barre_recherche_ingredient" id="barre_recherche_ingredient">
-
+        <div>Quel produit recherchez vous ?</div>
+        <input name="barre_recherche_ingredient" id="barre_recherche_ingredient" placeholder="Par exemple : Beurre">
     </div>
-    <div id="btnajouter">
 
+    <div id="btnajouter">
+        <div>Pour ajouter un produit :</div>
     </div>
     <div id="divTri">
         <label>Trier par</label>
