@@ -213,10 +213,9 @@ function getAllIngrediant(name) {
             let td_valeur_tva = document.createElement("td");//valeur_tva
             td_valeur_tva.innerText=val.valeur_tva + "%";
 
-            let td_modifier = document.createElement("th");//modifier
-            //th_valeur_tva.value="Pourcentage de TVA";
+            let td_modifier = document.createElement("td");//modifier
 
-            let td_supprimer = document.createElement("th");//supprimer
+            let td_supprimer = document.createElement("td");//supprimer
 
             let btnmodif = document.createElement("button");
             let btnsuppr = document.createElement("button");
