@@ -14,15 +14,15 @@ html, section {
     border-spacing:0;
 }
 #tabInfos, #tableEtapes {
-    border: 10px solid black;
+    border: 2px solid black;
 }
 table#tabInfos {
-    border-bottom: 10px solid black;
+    border-bottom: 2px solid black;
 }
 
 #infosNom {
     text-align: center;
-    border-right: 1px solid black;
+    border-right: 2px solid black;
     margin-right: 20%;
     min-width: 300px;
 }
@@ -45,28 +45,35 @@ input:focus {
     min-width: 60%;
     border: none;
 }
+#tdCategorieRecette {
+    text-align: left;
+    padding-left: 25%;
+}
+#selectCategorieRecette {
+    min-width: 50%;
+}
 
 #ligneTh th, #ligneTd td {
     padding: 5px 0;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 #ligneTh th {
-    border-right: 1px solid black;
+    border-right: 2px solid black;
 }
 #ligneTd td:last-child, #ligneTh th:last-child {
     border-right: none;
 }
 #ligneTd td {
     padding: 5px;
-    border-right: 1px solid black;
+    border-right: 2px solid black;
 }
 
 .etape td{
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 .etapeInfos {
     padding: 10px;
-    border-right: 1px solid black;
+    border-right: 2px solid black;
 }
 .etapeInfos input, .etapeInfos textarea {
     display: block;
@@ -101,7 +108,7 @@ input:focus {
 }
 .etapeIngredient td {
     border-top: 1px solid black;
-    border-right: 1px solid black;
+    border-right: 2px solid black;
     border-bottom: 1px solid black;
     left: -1px;
     position: relative;
@@ -121,8 +128,8 @@ input:focus {
 #addEtape td {
     padding: 5px;
     text-align: center;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
 }
 #addEtape button {
     width: 150px;
@@ -130,12 +137,12 @@ input:focus {
     font-size: 14px;
 }
 
-#ligneCouts td, #ligneTotal td, .cout td, #addCout td {
-    border-right: 1px solid black;
-    border-top: 1px solid black;
+#ligneCouts td, #ligneTTCPortions td, #ligneTotalTTC td, #ligneTotal td, .cout td, #addCout td {
+    border-right: 2px solid black;
+    border-top: 2px solid black;
     padding: 5px;
 }
-#ligneCouts td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
+#ligneCouts td:last-child, #ligneTTCPortions td:last-child, #ligneTotalTTC td:last-child, #ligneTotal td:last-child, .cout td:last-child, #addCout td:last-child, #addEtape td:last-child {
     border-right:none;
 }
 .cout td {
@@ -193,4 +200,8 @@ input:focus {
 }
 #modalContent th, #modalContent td {
     border:1px solid black;
+}
+
+.tempHide {
+    display: none;
 }

@@ -6,13 +6,13 @@ class Cout {
     recette = null;
     trCout = null;
 
-    constructor(recette, infos = undefined) {
+    constructor(recette, infosCout = undefined) {
         this.recette = recette
-        if(infos) {
-            this.id = infos.id;
-            this.nom = infos.nom;
-            this.valeur = infos.valeur;
-            this.multiplicateur = infos.multiplicateur;
+        if(infosCout) {
+            this.id = infosCout.id_cout;
+            this.nom = infosCout.nom_cout;
+            this.valeur = infosCout.valeur_cout;
+            this.multiplicateur = infosCout.multiplicateur;
         }
         else {
             this.id = recette.getAvailableCoutID();

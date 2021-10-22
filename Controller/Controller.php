@@ -1,2 +1,2 @@
 <?php
- include 'View/View.php';
+ require './View/accueil.html';

@@ -10,26 +10,27 @@ class Ingredient {
     quantite = 0;
     recette = null;
     etape = null;
-    trIngredient = null;
+
 
     constructor(etape, infos){
         this.recette = etape.recette;
         this.etape = etape;
-        this.id = infos.id;
-        this.libelle = infos.libelle;
-        this.prix = infos.prix;
-        this.tva = infos.tva;
-        this.categorie = infos.categorie;
-        this.categorieAllergene = infos.categorieAllergene;
-        this.unite = infos.unite;
+        this.id = infos.id_ingrediant;
+        this.libelle = infos.nom_ingrediant;
+        this.prix = infos.prix_ingrediant;
+        this.tva = infos.valeur_tva;
+        this.categorie = infos.nom_categorie;
+        this.categorieAllergene = infos.nom_categorie_allergene;
+        this.unite = infos.nom_unite;
         this.quantite = infos.quantite;
 
-        this.createHTML();
+        /*this.createHTML();*/
     }
 
     createHTML(){
-        this.trIngredient = document.createElement("tr");
-        this.trIngredient.className = "etapeIngredient";
+        let trIngredient = document.createElement("tr");
+        trIngredient.id = "Ingredient_"+this.etape.getID()+"_"+this.getID();
+        trIngredient.className = "etapeIngredient";
 
         let tdLibelle = document.createElement("td");
         tdLibelle.innerHTML = this.getLibelle();
@@ -54,45 +55,47 @@ class Ingredient {
         tdCout.className = "ingredientTotal";
         tdCout.innerHTML = this.getPrix()*this.getQuantite() + "€";
 
-        this.trIngredient.appendChild(tdLibelle);
-        this.trIngredient.appendChild(tdQuantite);
-        this.trIngredient.appendChild(tdUnite);
-        this.trIngredient.appendChild(tdCategorie);
-        this.trIngredient.appendChild(tdCout);
-        document.getElementById("etape_tableIngredient_"+this.etape.getID()).appendChild(this.trIngredient);
+        trIngredient.appendChild(tdLibelle);
+        trIngredient.appendChild(tdQuantite);
+        trIngredient.appendChild(tdUnite);
+        trIngredient.appendChild(tdCategorie);
+        trIngredient.appendChild(tdCout);
+        document.getElementById("etape_tableIngredient_"+this.etape.getID()).appendChild(trIngredient);
 
         this.setEventListener();
         this.updateHTML();
     }
     setEventListener() {
         let own = this;
-        let inputQt = this.trIngredient.getElementsByTagName("input")[0];
+        let inputQt = document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("input")[0];
         inputQt.addEventListener("input",function(){
             if(this.value < 0)
                 this.value = 0
             own.setQuantite(this.value);
             own.updateTotal();
         });
-        let removeButton = this.trIngredient.getElementsByTagName("button")[0];
+        let removeButton = document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("button")[0];
         removeButton.addEventListener("click",function(){
             own.removeHTML();
             own.etape.removeIngredient(own);
         });
     }
     updateTotal() {
-        let tdCout = this.trIngredient.getElementsByClassName("ingredientTotal")[0];
-        tdCout.innerHTML = this.getPrix()*this.getQuantite() + "€";
+        let tdCout = document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByClassName("ingredientTotal")[0];
+        tdCout.innerHTML = Math.round(this.getPrix()*this.getQuantite()*1000)/1000 + "€";
         this.recette.updateTotal();
     }
     updateHTML() {
-        //this.trIngredient.getElementsByTagName("td")[0].style.width = document.getElementById("colonneLibelle").offsetWidth -3+"px";
-        this.trIngredient.getElementsByTagName("td")[1].style.width = 150+"px";
-        /*this.trIngredient.getElementsByTagName("td")[2].style.width = document.getElementById("colonneUnite").offsetWidth -50+"px";
-        this.trIngredient.getElementsByTagName("td")[3].style.width = document.getElementById("colonneCategorie").offsetWidth -3+"px";
-        this.trIngredient.getElementsByTagName("td")[4].style.width = document.getElementById("colonneCout").offsetWidth +"px";*/
+
+        /*document.getElementById()*/
+        //document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[0].style.width = document.getElementById("colonneLibelle").offsetWidth -3+"px";
+        //////*document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[1].style.width = 150+"px";*/
+        /*document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[2].style.width = document.getElementById("colonneUnite").offsetWidth -50+"px";
+        document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[3].style.width = document.getElementById("colonneCategorie").offsetWidth -3+"px";
+        document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[4].style.width = document.getElementById("colonneCout").offsetWidth +"px";*/
     }
     removeHTML() {
-        this.trIngredient.remove();
+        document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).remove();
     }
 
     getID() {
@@ -122,4 +125,8 @@ class Ingredient {
     setQuantite(nouvelleQuantite) {
         this.quantite = nouvelleQuantite;
     }
+    setEtape(nouvelleEtape){
+        this.etape = nouvelleEtape;
+    }
+
 }

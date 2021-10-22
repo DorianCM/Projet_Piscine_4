@@ -10,22 +10,21 @@ class Etape {
     constructor(recette, infos = undefined) {
         this.recette = recette;
         if(infos) {
-            this.id = infos.id;
-            this.nom = infos.nom;
-            this.description = infos.description;
+            this.id = infos.id_etape;
+            this.nom = infos.nom_etape;
+            this.description = infos.description_etape;
+            this.createHTML();
+
+            for(let ingredient in infos.ingredients)
+                this.addIngredient(infos.ingredients[ingredient]);
         }
         else {
             this.id = recette.getAvailableEtapeID();
             this.nom = "Etape "+this.id;
         }
-        this.createHTML();
-        this.setEventListener();
-        if(infos)
-            for(let ingredient in infos.ingredients)
-                this.addIngredient(infos.ingredients[ingredient]);
     }
 
-    createHTML(){
+    createHTML(insererAvant = document.getElementById("addEtape")){
         let nouvelLigneEtape = document.createElement("tr");
         nouvelLigneEtape.id = "etape_"+this.getID();
         nouvelLigneEtape.className = "etape";
@@ -41,10 +40,19 @@ class Etape {
         let removeButton = document.createElement("button");
         removeButton.className = "removeEtape";
         removeButton.innerHTML = "Retirer cette étape";
+        let changeEtapeUp = document.createElement("button");
+        changeEtapeUp.className = "ChangeEtapeUp";
+        changeEtapeUp.innerHTML = "↑";
+        let changeEtapeDown = document.createElement("button");
+        changeEtapeDown.className = "ChangeEtapeDown";
+        changeEtapeDown.innerHTML = "↓";
+
 
         infosEtape.appendChild(name);
         infosEtape.appendChild(descript);
         infosEtape.appendChild(removeButton);
+        infosEtape.appendChild(changeEtapeUp);
+        infosEtape.appendChild(changeEtapeDown);
 
         let tdTableIngredient = document.createElement("td");
         tdTableIngredient.className = "td_etape_tableIngredient";
@@ -57,26 +65,11 @@ class Etape {
         rechercheIngredient.colSpan = 5;
         rechercheIngredient.className = "rechercheIngredient";
         rechercheIngredient.style.border = "none";
-        /*let labelRecherche = document.createElement("p");
-        labelRecherche.innerHTML = "Ajouter un Ingrédient : "
-        let rechercheIngredientInput = document.createElement("input");
-        rechercheIngredient.appendChild(labelRecherche);
-        rechercheIngredient.appendChild(rechercheIngredientInput);*/
         let buttonAddIngredient = document.createElement("button");
         buttonAddIngredient.className = "buttonAddIngredient";
         buttonAddIngredient.innerHTML = "Ajouter un ingrédient";
         rechercheIngredient.appendChild(buttonAddIngredient);
         tableIngredient.appendChild(rechercheIngredient);
-
-        //A CHANGER : bouton pour ajouter un faux ingrédient pour tester
-        /*let fauxIngre = document.createElement("button");
-        fauxIngre.innerHTML = "Test Ingrédient";
-        let own = this;
-        fauxIngre.addEventListener("click",function(){
-            let fauxIngredient = {"id":0, "libelle":"Carotte", "prix":1.0, "tva":0.1, "categorie":"Légume", "categorieAllergene":null, "unite":"p", "quantite":1};
-            own.addIngredient(fauxIngredient);
-        });
-        rechercheIngredient.appendChild(fauxIngre);*/
 
         //Faire ce qu'il faut pour chercher un ingrédient et l'ajouter
         trRechercheIngredient.appendChild(rechercheIngredient);
@@ -85,8 +78,9 @@ class Etape {
         nouvelLigneEtape.appendChild(tdTableIngredient);
 
         let table = document.getElementById("tabEtapes");
-        table.insertBefore(nouvelLigneEtape, document.getElementById("addEtape"));
+        table.insertBefore(nouvelLigneEtape, insererAvant);
         this.updateHTML();
+        this.setEventListener();
     }
 
     setEventListener() {
@@ -102,29 +96,45 @@ class Etape {
             this.style.height = this.scrollHeight+'px';
         });
         document.getElementById("etape_"+this.getID()).getElementsByClassName("removeEtape")[0].addEventListener("click",function(){
-           own.removeHTML();
-           own.recette.removeEtape(own);
+            own.removeHTML();
+            own.recette.removeEtape(own);
         });
         document.getElementById("etape_"+this.getID()).getElementsByClassName("buttonAddIngredient")[0].addEventListener("click",function(){
             own.recette.getModalIngredient().openModal(own);
-         });
+        });
+
+        document.getElementById("etape_" + this.getID()).getElementsByClassName("ChangeEtapeDown")[0].addEventListener("click", function(){
+            own.recette.switchEtapeDown(own.getID());
+            own.recette.updateTotal();
+        });
+
+        document.getElementById("etape_" + this.getID()).getElementsByClassName("ChangeEtapeUp")[0].addEventListener("click", function(){
+            own.recette.switchEtapeUp(own.getID());
+            own.recette.updateTotal();
+        });
     }
 
-    updateHTML(){
-        document.getElementById("etape_"+this.id+"_name").value = this.getNom();
-        document.getElementById("etape_"+this.id+"_description").value = this.getDescription();
 
-        for(let ingredient in this.ingredients)
-            this.ingredients[ingredient].updateHTML();
-        this.recette.updateHTML();
+    updateHTML() {
+        document.getElementById("etape_" + this.id + "_name").value = this.getNom();
+        document.getElementById("etape_" + this.id + "_description").value = this.getDescription();
     }
     removeHTML() {
         document.getElementById("etape_"+this.getID()).remove();
     }
+    changeHTMLFor(id){
+        let own = this;
+        document.getElementById("etape_"+String(own.getID())).id = ("etape_"+String(id));
+        document.getElementById("etape_"+String(own.getID()+"_name")).id = ("etape_"+String(id)+"_name");
+        document.getElementById("etape_"+String(own.getID()+"_description")).id = ("etape_"+String(id)+"_description");
+        document.getElementById("etape_tableIngredient_"+String(own.getID())).id = ("etape_tableIngredient_"+String(id));
+    }
 
     addIngredient(infosIngredient) {
-        this.ingredients[this.nbIngredients++] = new Ingredient(this, infosIngredient);
-        this.updateHTML();
+        this.ingredients[this.nbIngredients] = new Ingredient(this, infosIngredient);
+        this.ingredients[this.nbIngredients++].createHTML();
+        this.recette.updateTotal();
+
     }
     removeIngredient(ingredientToRemove) {
         for(let ingredient in this.ingredients) {
@@ -134,8 +144,32 @@ class Etape {
             }
         }
 
-        this.updateHTML();
+
         this.recette.updateTotal();
+    }
+    cleanTableIngredient(){
+        for (let ingredient in this.ingredients) {
+            this.ingredients[ingredient].removeHTML();
+
+        }
+    }
+    saveEtape(){
+        var copieEtape = new Etape(this.recette,);
+        copieEtape.setID(this.id);
+        copieEtape.setDescription(this.description);
+        copieEtape.setNom(this.nom);
+        copieEtape.setListIngredients(this.ingredients);
+        copieEtape.setNbIngredient(this.nbIngredients);
+
+        return copieEtape;
+
+    }
+    printIngredientsHTML(){
+        for (let ingredient in this.ingredients) {
+            this.ingredients[ingredient].createHTML();
+        }
+        this.recette.updateHTML();
+
     }
 
     getID() {
@@ -158,5 +192,14 @@ class Etape {
     }
     getListIngredients() {
         return this.ingredients;
+    }
+    setListIngredients(nouvelleListIngredient){
+        this.ingredients = nouvelleListIngredient;
+    }
+    getNbIngredient(){
+        return this.nbIngredients;
+    }
+    setNbIngredient(nouveauNbIngredient){
+        this.nbIngredients = nouveauNbIngredient;
     }
 }
