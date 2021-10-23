@@ -40,10 +40,6 @@
 
 	<input type="submit" value="Valider" id="boutton_valider">
 </form>
-
-<div align="center">
-    <button id="disconnect">Déconnexion</button>
-</div>
 <div align="center">
 		<p id="erreur" style="color:red"></p>
 </div>

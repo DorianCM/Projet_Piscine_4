@@ -42,7 +42,3 @@ document.getElementById('formulaire').addEventListener("submit",function(e){
 
 });
 
-document.getElementById("disconnect").addEventListener("click",function(){
-   document.location = "../API/authentification/disconnect.php";
-
-});
