@@ -57,7 +57,7 @@ class Etape {
         changeEtapeUp.className = "ChangeEtapeUp";
         changeEtapeUp.innerHTML = "↑";
         let changeEtapeDown = document.createElement("button");
-        changeEtapeDown.className = "ChangeEtapeDown";
+        changeEtapeDown.classList.add("ChangeEtapeDown");
         changeEtapeDown.innerHTML = "↓";
 
 
@@ -80,7 +80,7 @@ class Etape {
         rechercheIngredient.className = "rechercheIngredient";
         rechercheIngredient.style.border = "none";
         let buttonAddIngredient = document.createElement("button");
-        buttonAddIngredient.className = "buttonAddIngredient";
+        buttonAddIngredient.classList.add("buttonAddIngredient");
         buttonAddIngredient.innerHTML = "Ajouter un ingrédient";
         rechercheIngredient.appendChild(buttonAddIngredient);
         tableIngredient.appendChild(rechercheIngredient);

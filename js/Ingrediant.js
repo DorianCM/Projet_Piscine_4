@@ -220,6 +220,7 @@ function getAllIngrediant(name) {
             let btnmodif = document.createElement("button");
             let btnsuppr = document.createElement("button");
             btnmodif.innerText = "Modifier";
+            btnmodif.classList.add("Erase");
             btnmodif.addEventListener("click", function(){
                 if(btnmodif.innerText === "Modifier"){
                     if(modifyingState !== null){
@@ -301,6 +302,7 @@ function getAllIngrediant(name) {
                 }
             });
             btnsuppr.innerText = "Supprimer";
+            btnsuppr.classList.add("Erase");
             btnsuppr.addEventListener("click", function () {
                 let url = "../API/supprimerIngrediant.php?id=" + encodeURIComponent(val.id_ingrediant);
                 let requete = new XMLHttpRequest();
@@ -327,8 +329,24 @@ function getAllIngrediant(name) {
             table.appendChild(tr);
         });
         divList.appendChild(table);
+        let url_2 = "../API/authentification/is_connected.php";
+        let requete_2 = new XMLHttpRequest();
+        requete_2.open("GET", url_2, true);
+        requete_2.addEventListener("load", function () {
+            var res = JSON.parse(requete_2.response);
+            console.log(res);
+            var bool_move_page = res['Response'];
+            if (!bool_move_page) {
+                var tab_delete = document.getElementsByClassName('Erase');
+                while(tab_delete[0]){
+                    tab_delete[0].remove();
+                }
+            }
+        });
+        requete_2.send(null);
     });
-    requete.send(null);
+    requete.send(null)
+
 }
 
 window.addEventListener("load", function () {
