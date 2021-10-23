@@ -141,11 +141,11 @@ class Etape {
         document.getElementById("etape_"+this.getID()).remove();
     }
     changeHTMLFor(id){
-        let own = this;
-        document.getElementById("etape_"+String(own.getID())).id = ("etape_"+String(id));
-        document.getElementById("etape_"+String(own.getID()+"_name")).id = ("etape_"+String(id)+"_name");
-        document.getElementById("etape_"+String(own.getID()+"_description")).id = ("etape_"+String(id)+"_description");
-        document.getElementById("etape_tableIngredient_"+String(own.getID())).id = ("etape_tableIngredient_"+String(id));
+        document.getElementById("etape_"+String(this.getID())).id = ("etape_"+String(id));
+        document.getElementById("etape_"+String(this.getID()+"_name")).id = ("etape_"+String(id)+"_name");
+        document.getElementById("etape_"+String(this.getID()+"_description")).id = ("etape_"+String(id)+"_description");
+        document.getElementById("etape_"+String(this.getID()+"_duree")).id = ("etape_"+String(id)+"_duree");
+        document.getElementById("etape_tableIngredient_"+String(this.getID())).id = ("etape_tableIngredient_"+String(id));
     }
 
     addIngredient(infosIngredient) {

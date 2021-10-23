@@ -20,7 +20,7 @@
             <?php if (isset($_SESSION['login'])){
              $adr = '"View/recette.php"';
              $idFicheRecette = 'idFicheRecette=; path=/';
-             $document = 'document.cookie = "$idFicheRecette"';
+             $document = 'document.cookie = "'.$idFicheRecette.'"';
              $address1 = 'window.location = "API/authentification/disconnect.php"';
              echo "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
              echo "<div class='bouton' onclick ='$address1'>Deconnexion</div>";

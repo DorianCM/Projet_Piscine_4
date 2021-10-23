@@ -220,14 +220,12 @@ class FicheRecette {
     }
     removeEtape(etapeToRemove) {
         for(let i = etapeToRemove.getID(); i< this.dicoNbEtape; i++){
-            this.dicoEtape[i] = this.dicoEtape[i+1];
+            this.dicoEtape[i] = this.dicoEtape[parseInt(i)+1];
             this.dicoEtape[i].changeHTMLFor(i);
             this.dicoEtape[i].setID(i);
         }
         delete this.dicoEtape[this.dicoNbEtape];
         this.dicoNbEtape--;
-
-
 
         this.updateTotal();
     }
@@ -300,12 +298,21 @@ class FicheRecette {
             requete.send(null);
     }
 
-    convertPDF(avecLesCout = true) {
-        //Cacher les éléments indésirables
+    hideForPDF(avecLesCout = true) {
         let listButtons = document.getElementsByTagName("button");
         for(let button in listButtons)
             if(listButtons[button].classList)
                 listButtons[button].classList.add("tempHide");
+
+        let listInput = document.getElementsByTagName("input");
+        for(let input in listInput)
+            if(listInput[input].classList)
+                listInput[input].classList.add("hideArrowInput");
+
+        let listTextArea = document.getElementsByTagName("textarea");
+        for(let area in listTextArea)
+            if(listTextArea[area].classList)
+                listTextArea[area].classList.add("hideBorderTextArea");
         
         let listSelects = document.getElementsByTagName("select");
         for(let select in listSelects)
@@ -339,10 +346,8 @@ class FicheRecette {
                 if(listCouts[cout].classList)
                     listCouts[cout].classList.add("tempHide");
         }
-
-        //Conversion en PDF
-        window.print();
-        //Remontrer les éléments cachés
+    }
+    disableHideForPDF() {
         document.getElementById("ligneCoutsType").classList.remove("hideText");
         let listHide = document.querySelectorAll(".tempHide");
         for(let element in listHide)
@@ -352,6 +357,23 @@ class FicheRecette {
         for(let element in listHideRigthBorder)
             if(listHideRigthBorder[element].classList)
                 listHideRigthBorder[element].classList.remove("hideRigthBorder");
+        let listHideTextArea = document.querySelectorAll(".hideBorderTextArea");
+        for(let area in listHideTextArea)
+            if(listHideTextArea[area].classList)
+                listHideTextArea[area].classList.remove("hideBorderTextArea");
+        let listHideInput = document.querySelectorAll(".hideArrowInput");
+        for(let input in listHideInput)
+            if(listHideInput[input].classList)
+                listHideInput[input].classList.remove("hideArrowInput");
+    }
+    convertPDF(avecLesCout = true) {
+        //Cacher les éléments indésirables
+        this.hideForPDF(avecLesCout);
+
+        //Conversion en PDF
+        window.print();
+        //Remontrer les éléments cachés
+        this.disableHideForPDF();
     }
 
     addSousRecette(id_sous_recette) {
