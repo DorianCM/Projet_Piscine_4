@@ -371,9 +371,13 @@ class FicheRecette {
         this.hideForPDF(avecLesCout);
 
         //Conversion en PDF
+        let content = document.getElementById("content");
+        content.classList.add("transform");
         window.print();
+
         //Remontrer les éléments cachés
         this.disableHideForPDF();
+        content.classList.remove("transform");
     }
 
     addSousRecette(id_sous_recette) {

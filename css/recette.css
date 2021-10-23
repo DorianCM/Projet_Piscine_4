@@ -7,11 +7,25 @@ html, section {
     height: 85%;
     margin:0 auto;
     padding: 0;
+    font-size: 10px;
 }
 #content table {
     width: 100%;
     margin: auto;
     border-spacing:0;
+    font-size: 10px;
+}
+input{
+    font-size: 10px;
+}
+select{
+    font-size: 10px;
+}
+textarea{
+    font-size: 10px;
+}
+.transform{
+    transform: translate(-5px,-55px);
 }
 #tabInfos, #tableEtapes {
     border: 2px solid black;
