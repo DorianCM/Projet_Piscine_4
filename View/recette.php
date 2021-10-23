@@ -60,10 +60,10 @@
             "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
             echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
             $address1 = "../API/authentification/disconnect.php";
-            echo "<li class='entetli'><a class='enteta' href ='$address1'>Deconnexion</a></li>";
+            echo "<li style='float:right;'><a class='enteta' href ='$address1'>Deconnexion</a></li>";
             }else{
             $address = "authentification.php";
-            echo "<li class='entetli'><a class='enteta' href ='$address'>Connexion</a></li>";
+            echo "<li style='float:right;'><a class='enteta' href ='$address'>Connexion</a></li>";
             }
             ?>
         </ul>
