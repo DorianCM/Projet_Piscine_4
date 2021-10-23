@@ -60,12 +60,15 @@ function getAllRecette(name) {
             table.appendChild(tr);
 
             let td_nom_recette = document.createElement("td");//nom_recette
+            td_nom_recette.style.textAlign="center";
             td_nom_recette.innerText = val.nom_recette;
 
             let td_nom_createur = document.createElement("td");//nom_createur
+            td_nom_createur.style.textAlign="center";
             td_nom_createur.innerText = val.nom_createur;
 
             let td_nom_categorie_recette = document.createElement("td");//nom_categorie_recette
+            td_nom_categorie_recette.style.textAlign="center";
             td_nom_categorie_recette.innerText = val.nom_categorie_recette;
 
             let td_modifier = document.createElement("td");//modifier
