@@ -15,6 +15,7 @@ body{
 
 .bouton:hover{
     background-color: #e0dbd5;
+    cursor: pointer;
 }
 
 footer{

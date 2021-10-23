@@ -57,7 +57,38 @@ button:hover{
     pointer-events:none;outline:none;
 }
 
-#bntajouter{
+#barre_recherche_recette{
+    background-color: #d8d2cb;
+    width: 300px;
+    height: 15px;
+    border-radius: 5px;
+    padding: 4px;
+    border: 0px;
+}
+
+#barre_recherche_recette:hover {
+    background-color: #e0dbd5;
+}
+
+#barre_recherche_recette:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+#btnajouter{
+    margin: 0 10px;
+}
+button#btnajouter{
+    background-color: #d8d2cb;
+    border-radius: 5px ;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
+    margin: 4px 10px;
+    cursor: pointer;
+}
+
+#divTri{
     margin: 10px;
 }

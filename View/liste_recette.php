@@ -37,7 +37,7 @@
     <main>
 
     <div id="recherche">
-        <div>Quelle fiche technique recherchez vous ?</div>
+        <label>Quelle fiche technique recherchez vous ?</label>
             <input name="barre_recherche_recette" id="barre_recherche_recette" placeholder="Par exemple : Filet de poulet..">
         </div>
 

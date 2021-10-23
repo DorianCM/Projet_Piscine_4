@@ -32,5 +32,6 @@ header{
 
 header a:hover {
 	background-color: #e0dbd5;
+	cursor: pointer;
 }
 
