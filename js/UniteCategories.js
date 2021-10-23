@@ -4,7 +4,9 @@ let liste_categorie_recette = document.getElementById("liste_categorie_recette")
 let liste_categorie_tva = document.getElementById("liste_categorie_tva");
 
 let inputUnite = document.getElementById("inputUnite");
+inputUnite.placeholder = "Nom d\'Unité";
 let btnAjouterUnite = document.getElementById("btnAjouterUnite");
+btnAjouterUnite.classList.add("Erase");
 
 btnAjouterUnite.addEventListener("click",function () {
     if (inputUnite.value.length > 0){
@@ -14,7 +16,9 @@ btnAjouterUnite.addEventListener("click",function () {
 });
 
 let inputCategorie = document.getElementById("inputCategorie");
+inputCategorie.placeholder = "Nom de catégorie";
 let btnAjouterCategorie = document.getElementById("btnAjouterCategorie");
+btnAjouterCategorie.classList.add("Erase");
 
 btnAjouterCategorie.addEventListener("click",function () {
     if (inputCategorie.value.length > 0){
@@ -24,7 +28,9 @@ btnAjouterCategorie.addEventListener("click",function () {
 });
 
 let inputCategorieRecette = document.getElementById("inputCategorieRecette");
+inputCategorieRecette.placeholder = "Nom de catégorie de recette";
 let btnAjouterCategorieRecette = document.getElementById("btnAjouterCategorieRecette");
+btnAjouterCategorieRecette.classList.add("Erase");
 
 btnAjouterCategorieRecette.addEventListener("click",function () {
     if (inputCategorieRecette.value.length > 0){
@@ -34,8 +40,11 @@ btnAjouterCategorieRecette.addEventListener("click",function () {
 });
 
 let inputCategorieTVA = document.getElementById("inputCategorieTVA");
+inputCategorieTVA.placeholder = "Nom de catégorie de TVA";
 let inputValeurTVA = document.getElementById("inputValeurTVA");
+inputValeurTVA.placeholder = "Valeur de TVA";
 let btnAjouterCategorieTVA = document.getElementById("btnAjouterCategorieTVA");
+btnAjouterCategorieTVA.classList.add("Erase");
 
 btnAjouterCategorieTVA.addEventListener("click",function () {
     if (inputCategorieTVA.value.length > 0 && inputValeurTVA.value.length > 0){
@@ -148,6 +157,7 @@ function th_td_multiple_creator_with_buttons(tag,listInnerText,ParentElement,lis
             ParentElement.appendChild(td);
             let btn = document.createElement("button");
             btn.innerText=listInnerTextButton[buttonCpt];
+            btn.classList.add("Erase");
             if (btn.innerText==="Supprimer"){
                 btn.onclick = function(){
                     let url = "../API/supprimerGenerique.php?table=" + encodeURIComponent(table) + "&fieldname=" + encodeURIComponent(primary_key) + "&id_generique=" + encodeURIComponent(id);
@@ -215,8 +225,24 @@ function getAllGeneric(name,order,tab,reg,listButtons,parentDiv,primary_key) {
             table.appendChild(tr_val);
             th_td_multiple_creator_with_buttons("td",[val,"",""],tr_val,listButtons,tab,primary_key,parseInt(val[primary_key]));
         });
+        let url_2 = "../API/authentification/is_connected.php";
+        let requete_2 = new XMLHttpRequest();
+        requete_2.open("GET", url_2, true);
+        requete_2.addEventListener("load", function () {
+            var res = JSON.parse(requete_2.response);
+            console.log(res);
+            var bool_move_page = res['Response'];
+            if (!bool_move_page) {
+                var tab_delete = document.getElementsByClassName('Erase');
+                while(tab_delete[0]){
+                    tab_delete[0].remove();
+                }
+            }
+        });
+        requete_2.send(null);
     });
     requete.send(null);
+
 }
 
 function ajouterUnite(nom){
@@ -264,6 +290,7 @@ function loadLists(){
     getAllGeneric(1,"nom_categorie ASC","Categorie","nom_categorie",["Modifier","Supprimer"],liste_categorie_ingredient,"id_categorie");
     getAllGeneric(1,"categorie_tva ASC","tva","categorie_tva",["Modifier","Supprimer"],liste_categorie_tva, "id_tva");
     getAllGeneric(1,"nom_categorie_recette ASC","categorie_recette","nom_categorie_recette",["Modifier","Supprimer"],liste_categorie_recette, "id_categorie_recette");
+
 }
 
 window.addEventListener("load",function () {

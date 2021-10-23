@@ -3,15 +3,29 @@ html, section {
     height: 100%;
 }
 #content {
-    width: 85%;
-    height: 80%;
+    width: 98%;
+    height: 85%;
     margin:0 auto;
     padding: 0;
+    font-size: 10px;
 }
 #content table {
     width: 100%;
     margin: auto;
     border-spacing:0;
+    font-size: 10px;
+}
+input{
+    font-size: 10px;
+}
+select{
+    font-size: 10px;
+}
+textarea{
+    font-size: 10px;
+}
+.transform{
+    transform: translate(-5px,-55px);
 }
 #tabInfos, #tableEtapes {
     border: 2px solid black;
@@ -34,17 +48,17 @@ input:focus, #selectCategorieRecette:focus {
 }
 
 #infosPortionsAuteur {
-    text-align: right;
+    text-align: left;
     padding: 5px;
-    padding-right: 5%;
+    padding-left: 5%;
 }
-#infosPortionsAuteur input {
+#infosPortionsAuteur #recette_auteur {
     min-width: 60%;
     border: none;
 }
-#tdCategorieRecette {
-    text-align: left;
-    padding-left: 25%;
+#infosPortionsAuteur #recette_nbportions{
+    max-width: 60%;
+    border: none;
 }
 #selectCategorieRecette {
     min-width: 50%;
@@ -85,6 +99,10 @@ input:focus, #selectCategorieRecette:focus {
 }
 .etape td{
     border-bottom: 2px solid black;
+}
+textarea {
+    resize: none;
+    overflow: hidden;
 }
 .etapeInfos {
     padding: 10px;
@@ -237,9 +255,21 @@ input:focus, #selectCategorieRecette:focus {
 .tempHide {
     display: none;
 }
-#ligneTh th.hideRigthBorder, #ligneTd td.hideRigthBorder, #ligneCouts td.hideRigthBorder {
+#ligneTh th.hideRigthBorder, #ligneTd td.hideRigthBorder, #ligneCouts td.hideRigthBorder, .cout .coutVide.hideRigthBorder {
     border-right: none;
 }
 .hideText {
     text-indent: -9999px; 
+}
+.hideBorderTextArea {
+    border: none;
+}
+input.hideArrowInput::-webkit-outer-spin-button,
+input.hideArrowInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number].hideArrowInput {
+  -moz-appearance: textfield;
 }

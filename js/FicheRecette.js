@@ -47,6 +47,7 @@ class FicheRecette {
         this.updateHTML();
         this.modalIngredient = new ModalIngredient(this);
         this.modalSousFicheRecette = new ModalSousFicheRecette(this);
+        this.deleteButton();
     }
 
     setEventListener() {
@@ -220,14 +221,12 @@ class FicheRecette {
     }
     removeEtape(etapeToRemove) {
         for(let i = etapeToRemove.getID(); i< this.dicoNbEtape; i++){
-            this.dicoEtape[i] = this.dicoEtape[i+1];
+            this.dicoEtape[i] = this.dicoEtape[parseInt(i)+1];
             this.dicoEtape[i].changeHTMLFor(i);
             this.dicoEtape[i].setID(i);
         }
         delete this.dicoEtape[this.dicoNbEtape];
         this.dicoNbEtape--;
-
-
 
         this.updateTotal();
     }
@@ -300,18 +299,27 @@ class FicheRecette {
             requete.send(null);
     }
 
-    convertPDF(avecLesCout = true) {
-        //Cacher les éléments indésirables
+    hideForPDF(avecLesCout = true) {
         let listButtons = document.getElementsByTagName("button");
         for(let button in listButtons)
             if(listButtons[button].classList)
                 listButtons[button].classList.add("tempHide");
+
+        let listInput = document.getElementsByTagName("input");
+        for(let input in listInput)
+            if(listInput[input].classList)
+                listInput[input].classList.add("hideArrowInput");
+
+        let listTextArea = document.getElementsByTagName("textarea");
+        for(let area in listTextArea)
+            if(listTextArea[area].classList)
+                listTextArea[area].classList.add("hideBorderTextArea");
         
         let listSelects = document.getElementsByTagName("select");
         for(let select in listSelects)
             if(listSelects[select].classList && listSelects[select].id != "selectCategorieRecette")
                 listSelects[select].classList.add("tempHide");
-        document.querySelectorAll(".entetu")[0].classList.add("tempHide");
+
         document.getElementById("addEtape").classList.add("tempHide");
         document.getElementById("addCout").classList.add("tempHide");
         document.getElementById("ligneCoutsType").classList.add("hideText");
@@ -339,10 +347,8 @@ class FicheRecette {
                 if(listCouts[cout].classList)
                     listCouts[cout].classList.add("tempHide");
         }
-
-        //Conversion en PDF
-
-        //Remontrer les éléments cachés
+    }
+    disableHideForPDF() {
         document.getElementById("ligneCoutsType").classList.remove("hideText");
         let listHide = document.querySelectorAll(".tempHide");
         for(let element in listHide)
@@ -352,6 +358,28 @@ class FicheRecette {
         for(let element in listHideRigthBorder)
             if(listHideRigthBorder[element].classList)
                 listHideRigthBorder[element].classList.remove("hideRigthBorder");
+        let listHideTextArea = document.querySelectorAll(".hideBorderTextArea");
+        for(let area in listHideTextArea)
+            if(listHideTextArea[area].classList)
+                listHideTextArea[area].classList.remove("hideBorderTextArea");
+        let listHideInput = document.querySelectorAll(".hideArrowInput");
+        for(let input in listHideInput)
+            if(listHideInput[input].classList)
+                listHideInput[input].classList.remove("hideArrowInput");
+    }
+    convertPDF(avecLesCout = true) {
+        //Cacher les éléments indésirables
+        this.hideForPDF(avecLesCout);
+        document.querySelectorAll(".entetu")[0].classList.add("tempHide");
+
+        //Conversion en PDF
+        let content = document.getElementById("content");
+        content.classList.add("transform");
+        window.print();
+
+        //Remontrer les éléments cachés
+        this.disableHideForPDF();
+        content.classList.remove("transform");
     }
 
     addSousRecette(id_sous_recette) {
@@ -365,6 +393,13 @@ class FicheRecette {
                 own.addEtape(infos.etapes[etape], true);
         });
         requete.send(null);
+    }
+
+    deleteButton(){
+        let res = document.getElementsByClassName("test");
+        while(res[0]){
+            res[0].remove();
+        }
     }
 
     getID() {
