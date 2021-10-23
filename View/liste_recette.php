@@ -44,10 +44,10 @@
         <div id="divTri">
             <label>Trier par</label>
             <select id="tri" name="tri">
-                <option value="nom_recette ASC">Ordre alphabétique(A-Z)</option>
-                <option value="nom_recette DESC">Ordre alphabétique(Z-A)</option>
-                <option value="nom_createur ASC">Ordre alphabétique(A-Z)</option>
-                <option value="nom_createur DESC">Ordre alphabétique(Z-A)</option>
+                <option value="nom_recette ASC">Nom recette(A-Z)</option>
+                <option value="nom_recette DESC">Nom recette(Z-A)</option>
+                <option value="nom_createur ASC">Auteur(A-Z)</option>
+                <option value="nom_createur DESC">Auteur(Z-A)</option>
             </select>
         </div>
 
