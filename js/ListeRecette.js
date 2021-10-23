@@ -44,11 +44,15 @@ function getAllRecette(name) {
         let th_nom_categorie_recette = document.createElement("th");//nom_createur
         th_nom_categorie_recette.innerText="Catégorie";
 
+        let th_modifier = document.createElement("th");//modifier
+
         let th_supprimer = document.createElement("th");//supprimer
+
 
         trth.appendChild(th_nom_recette);
         trth.appendChild(th_nom_createur);
         trth.appendChild(th_nom_categorie_recette);
+        trth.appendChild(th_modifier);
         trth.appendChild(th_supprimer);
 
         Array.prototype.forEach.call(result, val =>{
