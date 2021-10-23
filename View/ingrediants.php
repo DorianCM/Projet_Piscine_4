@@ -11,20 +11,31 @@
 
     <header>
         <ul class="entetu">
+            <li class="entetli"><a class="enteta" onclick = "window.location= '../'">Accueil</a></li>
             <li class="entetli"><a class="enteta" href="ingrediants.php">Mercuriale</a></li>
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
-            <li class="entetli"><a class="enteta" onclick = "document.cookie = 'idFicheRecette=; path=/';" href="recette.php">Créer une fiche technique</a></li>
+            <?php
+            session_start();
+            if(isset($_SESSION['login'])){
+            $adr = '"recette.php"';
+            $idFicheRecette = 'idFicheRecette=; path=/';
+            $document = 'document.cookie = "$idFicheRecette"';
+            "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
+            echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
+            }
+            ?>
         </ul>
     </header>
 
     <main>
 
     <div id="recherche">
-        <input name="barre_recherche_ingredient" id="barre_recherche_ingredient">
-
+        <div>Quel produit recherchez vous ?</div>
+        <input name="barre_recherche_ingredient" id="barre_recherche_ingredient" placeholder="Par exemple : Beurre">
     </div>
-    <div id="btnajouter">
 
+    <div id="btnajouter">
+        <div>Pour ajouter un produit :</div>
     </div>
     <div id="divTri">
         <label>Trier par</label>

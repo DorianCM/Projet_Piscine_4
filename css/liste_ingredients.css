@@ -1,22 +1,27 @@
+main{
+    padding: 0 0;
+}
+
+
 table{
     border-collapse: collapse;
     width: 100%;
 }
+
 th{
-    background-color: #E0d7cb;
-    border:1px solid #c3b7a4;
+    background-color: #d8d2cb;
+    text-align: center;
 }
 tr:nth-child(odd)  {
-    background-color : #dbd4c8;
+    background-color : #ece9e5;
 }
 tr:nth-child(even) {
-    background-color : #f3f1ed;
+    background-color : #f3f2ef;
 }
 
 button{
-    background-color: #c3b7a4;
-    border:#c3b7a4;
-    border-radius: 10px ;
+    background-color: #d8d2cb;
+    border-radius: 5px ;
     color: black;
     padding: 10px 20px;
     text-align: center;
@@ -27,5 +32,32 @@ button{
 }
 
 button:hover{
-    background-color: #f3f1ed;
+    background-color: #e0dbd5;
+}
+#recherche{
+    display: inline-block;
+    margin: 10px;
+}
+
+#barre_recherche_ingredient {
+    background-color: #d8d2cb;
+    width: 300px;
+    height: 15px;
+    border-radius: 5px;
+    padding: 4px;
+    border: 0px;
+}
+
+#barre_recherche_ingredient:hover {
+    background-color: #e0dbd5;
+}
+
+#barre_recherche_ingredient:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#bntajouter{
+    display: inline-block;
+    margin: 10px;
 }

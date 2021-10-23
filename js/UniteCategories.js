@@ -70,6 +70,17 @@ function modifierCategorie(id_categorie,nom_categorie){
     });
 }
 
+function modifierCategorieTva(id_tva,list){
+
+    let url = "../API/modifierCategorieTVA.php?id_tva=" + encodeURIComponent(id_tva) + "&nom_tva=" + encodeURIComponent(list[0].value) + "&valeur=" + encodeURIComponent(list[1].value);
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.send(null);
+    requete.addEventListener("load", function () {
+        loadLists()
+    });
+}
+
 function formModifier(btn,id,func) {
     btn.innerText = "Valider";
     Array.prototype.forEach.call(btn.parentElement.parentElement.children, el =>{
@@ -85,6 +96,26 @@ function formModifier(btn,id,func) {
                 //formModifier(btn,id,table)
             });
         }
+    });
+}
+
+let list = [];
+function formModifierTVA(btn,id,func) {
+    btn.innerText = "Valider";
+    Array.prototype.forEach.call(btn.parentElement.parentElement.children, el => {
+        if (el.innerText !== "Modifier" && el.innerText !== "Valider" && el.innerText !== "Supprimer") {
+            let input = document.createElement("input");
+            input.value = el.innerText;
+            el.innerText = "";
+            list.push(input);
+            el.appendChild(input);
+        }
+    });
+    btn.removeEventListener("click",arguments.callee);
+    btn.addEventListener("click", function () {
+        btn.innerText = "Modifier";
+        func(id,list);
+        list = [];
     });
 }
 
@@ -118,22 +149,25 @@ function th_td_multiple_creator_with_buttons(tag,listInnerText,ParentElement,lis
                        formModifier(this,id,modifierCategorie);
                    });
                }
-
                else{
-
+                   btn.addEventListener("click", function () {
+                       formModifierTVA(this,id,modifierCategorieTva);
+                   });
                }
-
                 //btn.addEventListener("click",function ());
             }
             buttonCpt++;
             td.appendChild(btn);
         }
         else{
-            th_td_creator(tag,el,ParentElement);
+            for(let elem in el) {
+                let re = new RegExp('^id');
+                if(!re.test(elem)){
+                    th_td_creator(tag, el[elem], ParentElement);
+                }
+            }
         }
     });
-
-
 }
 
 function getAllGeneric(name,order,tab,reg,listButtons,parentDiv,primary_key) {
@@ -148,12 +182,11 @@ function getAllGeneric(name,order,tab,reg,listButtons,parentDiv,primary_key) {
         parentDiv.appendChild(table);
         let tr = document.createElement("tr");
         table.appendChild(tr);
-        th_td_multiple_creator("th",["Nom "+tab,""],tr);
+        th_td_multiple_creator("th",["Nom "+tab,"",""],tr);
         Array.prototype.forEach.call(result, val =>{
             let tr_val = document.createElement("tr");
             table.appendChild(tr_val);
-            //console.log(parseInt(val[primary_key]));
-            th_td_multiple_creator_with_buttons("td",[val[reg],"",""],tr_val,listButtons,tab,primary_key,parseInt(val[primary_key]));
+            th_td_multiple_creator_with_buttons("td",[val,"",""],tr_val,listButtons,tab,primary_key,parseInt(val[primary_key]));
         });
     });
     requete.send(null);

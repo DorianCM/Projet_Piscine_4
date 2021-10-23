@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste fiches techniques</title>
-    <link rel="stylesheet" href="../css/accueil.css" />
+    <link rel="stylesheet" href="../css/liste_ingredients.css" />
     <script src="../js/ListeRecette.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/entete.css">
 </head>
@@ -12,9 +12,19 @@
     <header>
 
         <ul class="entetu">
+            <li class="entetli"><a class="enteta" onclick = "window.location= '../'">Accueil</a></li>
             <li class="entetli"><a class="enteta" href="ingrediants.php">Mercuriale</a></li>
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
-            <li class="entetli"><a class="enteta" onclick = "document.cookie = 'idFicheRecette=; path=/';" href="recette.php">Créer une fiche technique</a></li>
+            <?php
+            session_start();
+            if(isset($_SESSION['login'])){
+            $adr = '"recette.php"';
+            $idFicheRecette = 'idFicheRecette=; path=/';
+            $document = 'document.cookie = "$idFicheRecette"';
+            "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
+            echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
+            }
+            ?>
         </ul>
 
     </header>
@@ -22,7 +32,8 @@
     <main>
 
     <div id="recherche">
-            <input name="barre_recherche_recette" id="barre_recherche_recette">
+        <div>Quelle fiche technique recherchez vous ?</div>
+            <input name="barre_recherche_recette" id="barre_recherche_recette" placeholder="Par exemple : Filet de poulet..">
         </div>
 
         <div id="divTri">
