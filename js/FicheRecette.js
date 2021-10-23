@@ -149,6 +149,7 @@ class FicheRecette {
         this.updateTotal();
     }
     switchEtapeDown(idEtapeUp){
+        idEtapeUp = parseInt(idEtapeUp);
         if (idEtapeUp != this.dicoNbEtape){
             var copie1 = this.dicoEtape[idEtapeUp].saveEtape();
             var copie2 = this.dicoEtape[idEtapeUp +1].saveEtape();
@@ -182,6 +183,7 @@ class FicheRecette {
         }
     }
     switchEtapeUp(idEtapeDown){
+        idEtapeDown = parseInt(idEtapeDown);
         if (idEtapeDown != 1){
             var copie1 = this.dicoEtape[idEtapeDown].saveEtape();
             var copie2 = this.dicoEtape[idEtapeDown -1].saveEtape();

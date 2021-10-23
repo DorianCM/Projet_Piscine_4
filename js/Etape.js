@@ -172,6 +172,7 @@ class Etape {
         var copieEtape = new Etape(this.recette,);
         copieEtape.setID(this.id);
         copieEtape.setDescription(this.description);
+        copieEtape.setDuree(this.duree);
         copieEtape.setNom(this.nom);
         copieEtape.setListIngredients(this.ingredients);
         copieEtape.setNbIngredient(this.nbIngredients);
