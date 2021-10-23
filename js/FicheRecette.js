@@ -130,8 +130,7 @@ class FicheRecette {
         for(let etape in this.dicoEtape)
             if(this.dicoEtape[etape].getID() > max)
                 max = this.dicoEtape[etape].getID();
-        
-        return max+1; //Car dans la BD l'id commence à 1
+        return (parseInt(max)+1).toString();
     }
     getAvailableCoutID() {
         let max = 0;
@@ -139,7 +138,7 @@ class FicheRecette {
             if(this.couts[cout].getID() > max)
                 max = this.couts[cout].getID();
         }
-        return max+1;
+        return (parseInt(max)+1).toString();
     }
     addEtape(infosEtape = null) {
         var stock = new Etape(this, infosEtape);
@@ -266,6 +265,7 @@ class FicheRecette {
             etape["id_etape"] = this.dicoEtape[e].getID();
             etape["nom_etape"] = this.dicoEtape[e].getNom();
             etape["description_etape"] = this.dicoEtape[e].getDescription();
+            etape["duree"] = this.dicoEtape[e].getDuree();
 
             let ingredients = {};
             let nbIngre = 0;

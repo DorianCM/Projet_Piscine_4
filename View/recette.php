@@ -17,7 +17,9 @@
             cookies.forEach(val => {
                 if (val.indexOf("idFicheRecette") === 0)
                     id = val.substring("idFicheRecette".length+1); //+1 pour le =, nameCookie=value
-            })
+                else if (val.indexOf(" idFicheRecette") === 0) //Car il peut avoir un espace qui se met au début{
+                    id = val.substring("idFicheRecette".length+2);
+            });
             var recette;
             if(id == 0)
                 recette = new FicheRecette();
@@ -28,7 +30,6 @@
                 
                 requete.addEventListener("load", function (){
                     let infos = JSON.parse(requete.response);
-                    //console.log(infos);
                     recette = new FicheRecette(infos);
                 });
                 requete.send(null);

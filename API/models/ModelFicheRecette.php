@@ -41,7 +41,7 @@ class ModelFicheRecette {
     }
 
     public static function getAllEtape($id_recette) {
-        $sql = "SELECT id_etape, nom_etape, description_etape
+        $sql = "SELECT id_etape, nom_etape, description_etape, duree
             FROM etapes
             WHERE id_recette = $id_recette";
         try {
@@ -53,7 +53,6 @@ class ModelFicheRecette {
             $length = count($resultsEtapes);
             for ($i = 0; $i< $length; $i++) {
                 $resultsEtapes[$i]->ingredients = ModelFicheRecette::getAllIngredient($id_recette, $resultsEtapes[$i]->id_etape);
-                //echo json_encode($resultsEtapes[$i]);
             }
 
             return $resultsEtapes;
@@ -149,7 +148,7 @@ class ModelFicheRecette {
 
     public static function ajouterEtapes($id_recette, $etapes) {
         foreach ($etapes as $etape) {
-            $sql = "INSERT INTO etapes (id_etape, id_recette, nom_etape, description_etape) VALUES ('".$etape['id_etape']."', '".$id_recette."', '".$etape['nom_etape']."', '".$etape['description_etape']."')";
+            $sql = "INSERT INTO etapes (id_etape, id_recette, nom_etape, description_etape, duree) VALUES ('".$etape['id_etape']."', '".$id_recette."', '".$etape['nom_etape']."', '".$etape['description_etape']."', '".$etape['duree']."')";
             $req_prep = self::$pdo->prepare($sql);
             $req_prep->execute();
             //Quel ingrédient est associé à quelle étape :
@@ -178,8 +177,6 @@ class ModelFicheRecette {
             $req_prep->execute();
             $req_prep->setFetchMode(PDO::FETCH_ASSOC);
             return $req_prep->fetchAll();
-
-            return $resultsEtapes;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
             die("Problème lors de la connexion à la base de données.");

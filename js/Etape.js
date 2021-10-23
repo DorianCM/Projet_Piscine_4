@@ -3,6 +3,7 @@ class Etape {
     id = 0;
     nom = '';
     description = '';
+    duree = '';
     ingredients = {};
     nbIngredients = 0;
     recette = null;
@@ -13,6 +14,7 @@ class Etape {
             this.id = infos.id_etape;
             this.nom = infos.nom_etape;
             this.description = infos.description_etape;
+            this.duree = infos.duree;
             this.createHTML();
 
             for(let ingredient in infos.ingredients)
@@ -35,6 +37,14 @@ class Etape {
 
         let name = document.createElement("input");
         name.id = "etape_"+this.getID()+"_name";
+        let divDuree = document.createElement("div");
+        divDuree.className = "etapeDuree";
+        let labelDuree = document.createElement("p");
+        labelDuree.innerHTML = "Durée : "
+        let inputDuree = document.createElement("input");
+        inputDuree.id = "etape_"+this.getID()+"_duree";
+        divDuree.appendChild(labelDuree);
+        divDuree.appendChild(inputDuree);
         let descript = document.createElement("textarea");
         descript.id = "etape_"+this.getID()+"_description";
         let removeButton = document.createElement("button");
@@ -49,6 +59,7 @@ class Etape {
 
 
         infosEtape.appendChild(name);
+        infosEtape.appendChild(divDuree);
         infosEtape.appendChild(descript);
         infosEtape.appendChild(removeButton);
         infosEtape.appendChild(changeEtapeUp);
@@ -88,6 +99,9 @@ class Etape {
         document.getElementById("etape_"+this.getID()+"_name").addEventListener("input",function(){
             own.setNom(this.value);
         });
+        document.getElementById("etape_"+this.getID()+"_duree").addEventListener("input",function(){
+            own.setDuree(this.value);
+        });
         document.getElementById("etape_"+this.getID()+"_description").addEventListener("input",function(){
             own.setDescription(this.value);
         });
@@ -117,6 +131,7 @@ class Etape {
 
     updateHTML() {
         document.getElementById("etape_" + this.id + "_name").value = this.getNom();
+        document.getElementById("etape_" + this.id + "_duree").value = this.getDuree();
         document.getElementById("etape_" + this.id + "_description").value = this.getDescription();
     }
     removeHTML() {
@@ -189,6 +204,12 @@ class Etape {
     }
     setDescription(nouvelleDescription) {
         this.description = nouvelleDescription;
+    }
+    getDuree() {
+        return this.duree;
+    }
+    setDuree(nouvelleDuree) {
+        this.duree = nouvelleDuree;
     }
     getListIngredients() {
         return this.ingredients;

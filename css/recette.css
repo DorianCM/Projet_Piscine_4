@@ -96,6 +96,15 @@ input:focus, #selectCategorieRecette:focus {
     margin-top: 5px;
     width: 90%;
 }
+.etapeDuree {
+    display: inline;
+}
+.etapeDuree p, .etapeDuree input {
+    display: inline;
+    width: 30%;
+    margin: 5px 0;
+    padding: 0;
+}
 
 .td_etape_tableIngredient {
     vertical-align: top;
