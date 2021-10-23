@@ -117,7 +117,7 @@ class FicheRecette {
             for(let ingre in listingre)
                 total += parseFloat(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
         }
-        document.getElementById("TotalIngredients").innerHTML = Math.round(total*100)/100 + "<span>€</span>";
+        document.getElementById("TotalIngredients").innerHTML =total.toFixed(2)+ "<span>€</span>";
 
         for(let cout in this.couts)
             if(this.couts[cout].getMultiplicateur())
@@ -125,9 +125,9 @@ class FicheRecette {
             else   
                 total += parseFloat(this.couts[cout].getValeur());
 
-        document.getElementById("valeurTotal").innerHTML = Math.round(total*100)/100 + "<span>€</span>";
-        document.getElementById("valeurTotalTTC").innerHTML = Math.round(total*1.2*100)/100 + "<span>€</span>";
-        document.getElementById("valeurTTCPortions").innerHTML = Math.round(total*1.1/this.getNbPortions()*100)/100 + "<span>€</span>";
+        document.getElementById("valeurTotal").innerHTML = total.toFixed(2) + "<span>€</span>";
+        document.getElementById("valeurTotalTTC").innerHTML = (total*1.2).toFixed(2) + "<span>€</span>";
+        document.getElementById("valeurTTCPortions").innerHTML =(total*1.1/this.getNbPortions()).toFixed(2) + "<span>€</span>";
     }
 
     getAvailableEtapeID() {
