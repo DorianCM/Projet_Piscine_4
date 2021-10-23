@@ -47,6 +47,7 @@ class FicheRecette {
         this.updateHTML();
         this.modalIngredient = new ModalIngredient(this);
         this.modalSousFicheRecette = new ModalSousFicheRecette(this);
+        this.deleteButton();
     }
 
     setEventListener() {
@@ -318,7 +319,7 @@ class FicheRecette {
         for(let select in listSelects)
             if(listSelects[select].classList && listSelects[select].id != "selectCategorieRecette")
                 listSelects[select].classList.add("tempHide");
-        document.querySelectorAll(".entetu")[0].classList.add("tempHide");
+
         document.getElementById("addEtape").classList.add("tempHide");
         document.getElementById("addCout").classList.add("tempHide");
         document.getElementById("ligneCoutsType").classList.add("hideText");
@@ -369,6 +370,7 @@ class FicheRecette {
     convertPDF(avecLesCout = true) {
         //Cacher les éléments indésirables
         this.hideForPDF(avecLesCout);
+        document.querySelectorAll(".entetu")[0].classList.add("tempHide");
 
         //Conversion en PDF
         window.print();
@@ -387,6 +389,13 @@ class FicheRecette {
                 own.addEtape(infos.etapes[etape], true);
         });
         requete.send(null);
+    }
+
+    deleteButton(){
+        let res = document.getElementsByClassName("test");
+        while(res[0]){
+            res[0].remove();
+        }
     }
 
     getID() {

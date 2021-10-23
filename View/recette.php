@@ -11,7 +11,6 @@
     <script src="../js/ModalIngredient.js" defer></script>
     <script src="../js/ModalSousFicheRecette.js" defer></script>
     <script src="../js/FicheRecette.js" defer></script>
-
     <script type="text/javascript">
         window.onload = function() {
             let cookies = document.cookie.split(";");
@@ -36,7 +35,11 @@
                 });
                 requete.send(null);
             }
-
+        window.onload = function(){
+                console.log(document.getElementsByClassName("test"));
+                let test = document.getElementsByClassName("test");
+                console.log(test([0]));
+                }
         }
       </script>
 </head>
@@ -152,6 +155,5 @@
       </section>
 
     </main>
-
 </body>
 </html>
