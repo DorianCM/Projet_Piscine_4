@@ -341,7 +341,7 @@ class FicheRecette {
         }
 
         //Conversion en PDF
-
+        window.print();
         //Remontrer les éléments cachés
         document.getElementById("ligneCoutsType").classList.remove("hideText");
         let listHide = document.querySelectorAll(".tempHide");
