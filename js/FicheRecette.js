@@ -8,6 +8,7 @@ class FicheRecette {
     couts = {};
     nbCouts = 0;
     modalIngredient = null;
+    modalSousFicheRecette = null;
     content = null;
     dicoEtape ={};
     dicoNbEtape = 0;
@@ -45,11 +46,14 @@ class FicheRecette {
         this.setEventListener();
         this.updateHTML();
         this.modalIngredient = new ModalIngredient(this);
+        this.modalSousFicheRecette = new ModalSousFicheRecette(this);
     }
 
     setEventListener() {
         let own = this;
-
+        document.getElementById("addSousRecetteButton").addEventListener("click",function(){
+            own.modalSousFicheRecette.openModal();
+        });
         document.getElementById("addEtapeButton").addEventListener("click",function(){
             own.addEtape();
         });
@@ -140,8 +144,8 @@ class FicheRecette {
         }
         return (parseInt(max)+1).toString();
     }
-    addEtape(infosEtape = null) {
-        var stock = new Etape(this, infosEtape);
+    addEtape(infosEtape = null, etapeSousRecette = false) {
+        var stock = new Etape(this, infosEtape, etapeSousRecette);
         this.dicoEtape[stock.getID()] = stock;
         if(!infosEtape)
             this.dicoEtape[stock.getID()].createHTML();
@@ -348,6 +352,19 @@ class FicheRecette {
         for(let element in listHideRigthBorder)
             if(listHideRigthBorder[element].classList)
                 listHideRigthBorder[element].classList.remove("hideRigthBorder");
+    }
+
+    addSousRecette(id_sous_recette) {
+        let url = "../API/getFicheRecette.php?idFicheRecette="+id_sous_recette;
+        let requete = new XMLHttpRequest();
+        requete.open("GET", url, true);
+        let own = this;
+        requete.addEventListener("load", function (){
+            let infos = JSON.parse(requete.response);
+            for(let etape in infos.etapes)
+                own.addEtape(infos.etapes[etape], true);
+        });
+        requete.send(null);
     }
 
     getID() {

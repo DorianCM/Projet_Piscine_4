@@ -26,7 +26,7 @@ class ModelListeRecette {
 
     public static function getAllRecette($name,$order){
             try {
-                $sql = "SELECT id_recette,nom_recette,nom_createur, nom_categorie_recette
+                $sql = "SELECT id_recette,nom_recette,nom_createur, nom_categorie_recette, nb_portions
                         FROM `recette` r
                         JOIN categorie_recette c ON r.id_categorie_recette = c.id_categorie_recette
                         WHERE nom_recette REGEXP \"^$name.*\" ORDER BY $order";

@@ -9,6 +9,7 @@
     <script src="../js/Etape.js" defer></script>
     <script src="../js/Cout.js" defer></script>
     <script src="../js/ModalIngredient.js" defer></script>
+    <script src="../js/ModalSousFicheRecette.js" defer></script>
     <script src="../js/FicheRecette.js" defer></script>
     <script type="text/javascript">
         window.onload = function() {
@@ -80,7 +81,7 @@
                     <th id = "thCout">Coûts</th>
                 </tr>
                 <tr id ="ligneTd">
-                    <td></td>
+                    <td id="addSousRecette"><button id="addSousRecetteButton">Ajouter une sous-recette</button></td>
                     <td id ="colonneLibelle">Libellé</td>
                     <td id ="colonneQuantite">Quantité</td>
                     <td id ="colonneUnite">Unité</td>

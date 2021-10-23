@@ -12,7 +12,7 @@ class Cout {
             this.id = infosCout.id_cout;
             this.nom = infosCout.nom_cout;
             this.valeur = infosCout.valeur_cout;
-            this.multiplicateur = infosCout.multiplicateur;
+            this.multiplicateur = infosCout.multiplicateur == true;
         }
         else {
             this.id = recette.getAvailableCoutID();
@@ -28,8 +28,8 @@ class Cout {
         tdVide.colSpan = "3";
 
         let tdMultiplicateur = document.createElement("td");
-        let inputType = document.createElement("select");
-        inputType.name = "TypeCout";
+        let selectType = document.createElement("select");
+        selectType.name = "TypeCout";
         var opt1 = document.createElement("option");
         var opt2 = document.createElement("option");
 
@@ -37,19 +37,16 @@ class Cout {
         opt1.text = "Multiplier";
         opt2.value = "false";
         opt2.text = "Additioner";
-        if (String(this.getMultiplicateur()) == opt1.value){
-            opt1.setAttribute('selected','selected');
+        if (this.getMultiplicateur())
+            opt1.selected = true;
+        else
+            opt2.selected = true;
 
-        }
-        if (String(this.getMultiplicateur()) == opt2.value) {
-            opt2.setAttribute('selected','selected');
-        }
-
-        inputType.add(opt1,null);
-        inputType.add(opt2, 0);
+        selectType.add(opt1,null);
+        selectType.add(opt2, 0);
 
 
-        tdMultiplicateur.appendChild(inputType);
+        tdMultiplicateur.appendChild(selectType);
 
 
         let tdNom = document.createElement("td");

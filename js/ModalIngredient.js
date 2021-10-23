@@ -16,7 +16,7 @@ class ModalIngredient{
         this.recette.content.appendChild(this.modal);
 
         let modalContent = document.createElement("div");
-        modalContent.id = "modalContent";
+        modalContent.id = "modalContentIngredient";
         this.modal.appendChild(modalContent);
 
         let closeButton = document.createElement("button");
@@ -27,11 +27,17 @@ class ModalIngredient{
         inputSearch.id = "inputSearchIngredient";
         inputSearch.placeholder = "Recherche ...";
         let tableList = document.createElement("table");
-        let ligneTh = document.createElement("tr");
-        tableList.appendChild(ligneTh);
         modalContent.appendChild(closeButton);
         modalContent.appendChild(inputSearch);
         modalContent.appendChild(tableList);
+
+        this.setEventListener();
+    }
+
+    addTH() {
+        let tableList = this.modal.getElementsByTagName("table")[0];
+        let ligneTh = document.createElement("tr");
+        tableList.appendChild(ligneTh);
 
         let libelle = document.createElement("th");
         libelle.innerText="Libellé";
@@ -61,8 +67,6 @@ class ModalIngredient{
         ligneTh.appendChild(categorieIngredient);
         ligneTh.appendChild(categorieTVA);
         ligneTh.appendChild(valeurTVA);
-
-        this.setEventListener();
     }
 
     setEventListener() {
@@ -98,6 +102,7 @@ class ModalIngredient{
         let own = this;
         let tableList = this.modal.getElementsByTagName("table")[0];
         tableList.innerHTML = "";
+        this.addTH();
         for(let ingre in this.listIngredients) {
             let i = this.listIngredients[ingre];
             if(i["nom_ingrediant"].toLowerCase().indexOf(value) != -1) {
@@ -144,6 +149,7 @@ class ModalIngredient{
 
     openModal(etape) {
         this.currentEtape = etape;
+        document.getElementById("inputSearchIngredient").value= '';
         this.modal.style.display = "";
         this.filterList();
     }

@@ -77,6 +77,12 @@ input:focus, #selectCategorieRecette:focus {
     border-right: 2px solid black;
 }
 
+#addSousRecette {
+    text-align: center;
+}
+#addSousRecetteButton {
+    font-size: medium;
+}
 .etape td{
     border-bottom: 2px solid black;
 }
@@ -193,7 +199,7 @@ input:focus, #selectCategorieRecette:focus {
     font-weight: bold;
 }
 
-#modalIngredient {
+#modalIngredient, #modalSousFicheRecette {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -204,7 +210,7 @@ input:focus, #selectCategorieRecette:focus {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#modalContent {
+#modalContentIngredient, #modalContentSousFicheRecette {
     background-color: white;
     margin: 15% auto;
     padding: 20px;
@@ -212,19 +218,19 @@ input:focus, #selectCategorieRecette:focus {
     width: 80%; 
     min-height: 75%;
 }
-#modalContent button, #modalContent input {
+#modalContentIngredient button, #modalContentIngredient input, #modalContentSousFicheRecette button , #modalContentSousFicheRecette input {
     display: block;
     margin-bottom: 10px;
 }
-#modalContent tr.ligneIngredient:hover{
+#modalContentIngredient tr.ligneIngredient:hover, #modalContentSousFicheRecette tr.ligneRecette:hover{
     background-color: lightgray;
     cursor: pointer;
 
 }
-#modalContent tr.alreadySelected {
+#modalContentIngredient tr.alreadySelected {
     background-color: darkgray;
 }
-#modalContent th, #modalContent td {
+#modalContentIngredient th, #modalContentIngredient td, #modalContentSousFicheRecette th, #modalContentSousFicheRecette td {
     border:1px solid black;
 }
 

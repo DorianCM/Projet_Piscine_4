@@ -8,10 +8,13 @@ class Etape {
     nbIngredients = 0;
     recette = null;
 
-    constructor(recette, infos = undefined) {
+    constructor(recette, infos = undefined, etapeSousRecette = false) {
         this.recette = recette;
         if(infos) {
-            this.id = infos.id_etape;
+            if(etapeSousRecette)
+                this.id = recette.getAvailableEtapeID();
+            else
+                this.id = infos.id_etape;
             this.nom = infos.nom_etape;
             this.description = infos.description_etape;
             this.duree = infos.duree;
