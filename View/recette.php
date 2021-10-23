@@ -35,11 +35,6 @@
                 });
                 requete.send(null);
             }
-        window.onload = function(){
-                console.log(document.getElementsByClassName("test"));
-                let test = document.getElementsByClassName("test");
-                console.log(test([0]));
-                }
         }
       </script>
 </head>
