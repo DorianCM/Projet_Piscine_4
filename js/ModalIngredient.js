@@ -82,7 +82,7 @@ class ModalIngredient{
     fillListIngredients() {
         let own = this;
         let requete = new XMLHttpRequest();
-        requete.open("GET", "../API/getIngrediants.php?name=1&order=null", true);
+        requete.open("GET", "../API/getIngrediants.php?name=1&order=nom_ingrediant ASC", true);
         requete.addEventListener("load", function () {
             own.listIngredients = JSON.parse(requete.responseText);
             own.createHTML();

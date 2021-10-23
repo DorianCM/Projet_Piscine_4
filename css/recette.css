@@ -3,7 +3,7 @@ html, section {
     height: 100%;
 }
 #content {
-    width: 90%;
+    width: 98%;
     height: 85%;
     margin:0 auto;
     padding: 0;
@@ -88,6 +88,7 @@ input:focus, #selectCategorieRecette:focus {
 }
 textarea {
     resize: none;
+    overflow: hidden;
 }
 .etapeInfos {
     padding: 10px;
