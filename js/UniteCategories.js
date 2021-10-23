@@ -1,5 +1,6 @@
 let liste_unite = document.getElementById("liste_unite");
 let liste_categorie_ingredient = document.getElementById("liste_categorie_ingredient");
+let liste_categorie_recette = document.getElementById("liste_categorie_recette");
 let liste_categorie_tva = document.getElementById("liste_categorie_tva");
 
 let inputUnite = document.getElementById("inputUnite");
@@ -19,6 +20,16 @@ btnAjouterCategorie.addEventListener("click",function () {
     if (inputCategorie.value.length > 0){
         ajouterCategorie(inputCategorie.value);
         inputCategorie.value = "";
+    }
+});
+
+let inputCategorieRecette = document.getElementById("inputCategorieRecette");
+let btnAjouterCategorieRecette = document.getElementById("btnAjouterCategorieRecette");
+
+btnAjouterCategorieRecette.addEventListener("click",function () {
+    if (inputCategorieRecette.value.length > 0){
+        ajouterCategorieRecette(inputCategorieRecette.value);
+        inputCategorieRecette.value = "";
     }
 });
 
@@ -62,6 +73,16 @@ function modifierUnite(id_unite,nom_unite){
 
 function modifierCategorie(id_categorie,nom_categorie){
     let url = "../API/modifierCategorie.php?id_categorie=" + encodeURIComponent(id_categorie) + "&nom_categorie=" + encodeURIComponent(nom_categorie);
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.send(null);
+    requete.addEventListener("load", function () {
+        loadLists()
+    });
+}
+
+function modifierCategorieRecette(id_categorie,nom_categorie){
+    let url = "../API/modifierCategorieRecette.php?id_categorie=" + encodeURIComponent(id_categorie) + "&nom_categorie=" + encodeURIComponent(nom_categorie);
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.send(null);
@@ -149,6 +170,12 @@ function th_td_multiple_creator_with_buttons(tag,listInnerText,ParentElement,lis
                        formModifier(this,id,modifierCategorie);
                    });
                }
+               else if (table==="categorie_recette"){
+                   btn.addEventListener("click", function () {
+                       console.log("ok");
+                       formModifier(this,id,modifierCategorieRecette);
+                   });
+               }
                else{
                    btn.addEventListener("click", function () {
                        formModifierTVA(this,id,modifierCategorieTva);
@@ -212,6 +239,16 @@ function ajouterCategorie(nom){
     });
 }
 
+function ajouterCategorieRecette(nom){
+    let url = "../API/ajouterCategorieRecette.php?nom=" + encodeURIComponent(nom);
+    let requete = new XMLHttpRequest();
+    requete.open("GET", url, true);
+    requete.send(null);
+    requete.addEventListener("load", function () {
+        loadLists()
+    });
+}
+
 function ajouterCategorieTVA(nom,valeur){
     let url = "../API/ajouterCategorieTva.php?nom=" + encodeURIComponent(nom) + "&valeur=" + encodeURIComponent(valeur);
     let requete = new XMLHttpRequest();
@@ -226,6 +263,7 @@ function loadLists(){
     getAllGeneric(1,"nom_unite ASC","Unite","nom_unite",["Modifier","Supprimer"],liste_unite,"id_unite");
     getAllGeneric(1,"nom_categorie ASC","Categorie","nom_categorie",["Modifier","Supprimer"],liste_categorie_ingredient,"id_categorie");
     getAllGeneric(1,"categorie_tva ASC","tva","categorie_tva",["Modifier","Supprimer"],liste_categorie_tva, "id_tva");
+    getAllGeneric(1,"nom_categorie_recette ASC","categorie_recette","nom_categorie_recette",["Modifier","Supprimer"],liste_categorie_recette, "id_categorie_recette");
 }
 
 window.addEventListener("load",function () {

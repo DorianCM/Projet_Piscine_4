@@ -32,6 +32,7 @@
     <div id="recherche">
         <div>Quel produit recherchez vous ?</div>
         <input name="barre_recherche_ingredient" id="barre_recherche_ingredient" placeholder="Par exemple : Beurre">
+        <button id="btncategories" onclick="window.location= 'uniteCategories.php'">Ajouter ou modifier Categories et/ou unité</button>
     </div>
 
     <div id="btnajouter">

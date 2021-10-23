@@ -259,6 +259,23 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
     }
 
+    public static function modifierCategorieRecette($id_categorie,$nom_categorie){
+        try {
+            $sql = "UPDATE `categorie_recette` 
+                    SET nom_categorie_recette = :name
+                    WHERE id_categorie_recette = :id";
+            $req_prep = self::$pdo->prepare($sql);
+
+            $values = array("id" => $id_categorie,
+                "name" => $nom_categorie);
+
+            $req_prep->execute($values);
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
     public static function modifierCategorieTVA($id_categorie_tva,$nom_categorie_tva,$valeur){
         try {
             $sql = "UPDATE `tva` 
@@ -280,6 +297,17 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
     public static function ajouterCategorie($nom_categorie){
         try {
             $sql = "INSERT INTO `Categorie` (`nom_categorie`) VALUES ('$nom_categorie')";
+            $req_prep = self::$pdo->prepare($sql);
+            $req_prep->execute();
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die("Erreur lors de la recherche dans la base de données.");
+        }
+    }
+
+    public static function ajouterCategorieRecette($nom_categorie){
+        try {
+            $sql = "INSERT INTO `Categorie_Recette` (`nom_categorie_recette`) VALUES ('$nom_categorie')";
             $req_prep = self::$pdo->prepare($sql);
             $req_prep->execute();
         } catch (PDOException $e){
