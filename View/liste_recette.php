@@ -23,6 +23,11 @@
             $document = 'document.cookie = "$idFicheRecette"';
             "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
             echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
+            $address1 = 'window.location = "../API/authentification/disconnect.php"';
+             echo "<div class='bouton' onclick ='$address1'>Deconnexion</div>";
+            }else{
+            $address = 'window.location = "authentification.php"';
+            echo "<div class='bouton' onclick ='$address'>Connexion</div>";
             }
             ?>
         </ul>
