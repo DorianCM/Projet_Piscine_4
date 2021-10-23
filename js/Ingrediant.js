@@ -193,24 +193,31 @@ function getAllIngrediant(name) {
             table.appendChild(tr);
 
             let td_nom_ingrediant = document.createElement("td");//nom_ingrediant
+            td_nom_ingrediant.style.textAlign="center";
             td_nom_ingrediant.innerText=val.nom_ingrediant;
 
             let td_nom_unite = document.createElement("td");//nom_unite
+            td_nom_unite.style.textAlign="center";
             td_nom_unite.innerText=val.nom_unite;
 
             let td_prix_ingredient = document.createElement("td");//prix_ingrediant
+            td_prix_ingredient.style.textAlign="center";
             td_prix_ingredient.innerText=val.prix_ingrediant + "€";
 
             let td_nom_categorie_allergene = document.createElement("td");//nom_categorie_allergene
+            td_nom_categorie_allergene.style.textAlign="center";
             td_nom_categorie_allergene.innerText=val.nom_categorie_allergene;
 
             let td_nom_categorie = document.createElement("td");//nom_categorie
+            td_nom_categorie.style.textAlign="center";
             td_nom_categorie.innerText= val.nom_categorie;
 
             let td_categorie_tva = document.createElement("td");//categorie_tva
+            td_categorie_tva.style.textAlign="center";
             td_categorie_tva.innerText=val.categorie_tva;
 
             let td_valeur_tva = document.createElement("td");//valeur_tva
+            td_valeur_tva.style.textAlign="center";
             td_valeur_tva.innerText=val.valeur_tva + "%";
 
             let td_modifier = document.createElement("td");//modifier
