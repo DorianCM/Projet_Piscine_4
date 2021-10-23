@@ -83,7 +83,7 @@ class Ingredient {
     }
     updateTotal() {
         let tdCout = document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByClassName("ingredientTotal")[0];
-        tdCout.innerHTML = Math.round(this.getPrix()*this.getQuantite()*1000)/1000 + "€";
+        tdCout.innerHTML = Math.round(this.getPrix()*this.getQuantite()*100)/100 + "€";
         this.recette.updateTotal();
     }
     updateHTML() {

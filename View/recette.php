@@ -32,8 +32,23 @@
                 requete.addEventListener("load", function (){
                     let infos = JSON.parse(requete.response);
                     recette = new FicheRecette(infos);
+
+                    let url_2 = "../API/authentification/is_connected.php";
+                    let requete_2 = new XMLHttpRequest();
+                    requete_2.open("GET", url_2, true);
+                    requete_2.addEventListener("load", function () {
+                        var res = JSON.parse(requete_2.response);
+                        console.log(res);
+                        var bool_move_page = res['Response'];
+                        if (!bool_move_page) {
+                            recette.hideForPDF(true);
+                            }
+
+                    });
+                    requete_2.send(null);
                 });
                 requete.send(null);
+
             }
         }
       </script>
