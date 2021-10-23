@@ -12,7 +12,7 @@
 
     <header>
         <ul class="entetu">
-            <li class="entetli"><a class="enteta" onclick = "window.location= '../'">Accueil</a></li>
+            <li class="entetli"><a class="enteta" href= "../">Accueil</a></li>
             <li class="entetli"><a class="enteta" href="ingrediants.php">Mercuriale</a></li>
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
             <?php
@@ -23,11 +23,11 @@
             $document = 'document.cookie = "'.$idFicheRecette.'"';
             "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
             echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
-            $address1 = 'window.location = "../API/authentification/disconnect.php"';
-            echo "<li class='entetli'><a class='enteta' onclick ='$address1'>Deconnexion</a></li>";
+            $address1 = "../API/authentification/disconnect.php";
+            echo "<li class='entetli'><a class='enteta' href ='$address1'>Deconnexion</a></li>";
             }else{
-            $address = 'window.location = "authentification.php"';
-            echo "<li class='entetli'><a class='enteta' onclick ='$address'>Connexion</a></li>";
+            $address = "authentification.php";
+            echo "<li class='entetli'><a class='enteta' href ='$address'>Connexion</a></li>";
             }
             ?>
         </ul>

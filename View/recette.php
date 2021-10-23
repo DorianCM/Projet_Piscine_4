@@ -11,7 +11,7 @@
     <script src="../js/ModalIngredient.js" defer></script>
     <script src="../js/ModalSousFicheRecette.js" defer></script>
     <script src="../js/FicheRecette.js" defer></script>
-    
+
     <script type="text/javascript">
         window.onload = function() {
             let cookies = document.cookie.split(";");
@@ -36,6 +36,7 @@
                 });
                 requete.send(null);
             }
+
         }
       </script>
 </head>
@@ -55,11 +56,11 @@
             $document = 'document.cookie = "'.$idFicheRecette.'"';
             "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
             echo "<li class='entetli'><a class='enteta' onclick='$document;'href=$adr>Créer une fiche technique</a></li>";
-            $address1 = 'window.location = "../API/authentification/disconnect.php"';
-            echo "<li class='entetli'><a class='enteta' onclick ='$address1'>Deconnexion</a></li>";
+            $address1 = "../API/authentification/disconnect.php";
+            echo "<li class='entetli'><a class='enteta' href ='$address1'>Deconnexion</a></li>";
             }else{
-            $address = 'window.location = "authentification.php"';
-            echo "<li class='entetli'><a class='enteta' onclick ='$address'>Connexion</a></li>";
+            $address = "authentification.php";
+            echo "<li class='entetli'><a class='enteta' href ='$address'>Connexion</a></li>";
             }
             ?>
         </ul>
