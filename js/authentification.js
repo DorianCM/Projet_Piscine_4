@@ -19,9 +19,7 @@ document.getElementById('formulaire').addEventListener("submit",function(e){
    }
    else{
       identifiant = document.getElementById('id_identifiant').value;
-      console.log(identifiant);
       mdp = document.getElementById('id_mdp').value;
-      console.log(mdp);
       let url = "../API/authentification/connect.php?Identifiant="+identifiant+"&MDP="+mdp;
       let requete = new XMLHttpRequest();
       requete.open("GET", url, true);
