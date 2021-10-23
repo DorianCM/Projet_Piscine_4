@@ -305,8 +305,15 @@ class FicheRecette {
         for(let select in listSelects)
             if(listSelects[select].classList && listSelects[select].id != "selectCategorieRecette")
                 listSelects[select].classList.add("tempHide");
+        document.querySelectorAll(".entetu")[0].classList.add("tempHide");
         document.getElementById("addEtape").classList.add("tempHide");
         document.getElementById("addCout").classList.add("tempHide");
+        document.getElementById("ligneCoutsType").classList.add("hideText");
+
+        let colonneVides = document.querySelectorAll(".coutVide");
+        for(let c in colonneVides)
+            if(colonneVides[c].classList)
+                colonneVides[c].classList.add("hideRigthBorder");
         
         if(!avecLesCout) {
             document.getElementById("thCout").classList.add("tempHide");
@@ -317,7 +324,7 @@ class FicheRecette {
             document.getElementById("ligneTTCPortions").classList.add("tempHide");
             document.getElementById("thIngredients").classList.add("hideRigthBorder");
             document.getElementById("colonneCategorie").classList.add("hideRigthBorder");
-            let listTotalIngredient = document.querySelectorAll("ingredientTotal");
+            let listTotalIngredient = document.querySelectorAll(".ingredientTotal");
             for(let cout in listTotalIngredient)
                 if(listTotalIngredient[cout].classList)
                     listTotalIngredient[cout].classList.add("tempHide");
@@ -330,12 +337,15 @@ class FicheRecette {
         //Conversion en PDF
 
         //Remontrer les éléments cachés
+        document.getElementById("ligneCoutsType").classList.remove("hideText");
         let listHide = document.querySelectorAll(".tempHide");
-        /*for(let element in listHide)
+        for(let element in listHide)
             if(listHide[element].classList)
                 listHide[element].classList.remove("tempHide");
-        document.getElementById("thIngredients").classList.remove("hideRigthBorder");
-        document.getElementById("colonneCategorie").classList.remove("hideRigthBorder");*/
+        let listHideRigthBorder = document.querySelectorAll(".hideRigthBorder");
+        for(let element in listHideRigthBorder)
+            if(listHideRigthBorder[element].classList)
+                listHideRigthBorder[element].classList.remove("hideRigthBorder");
     }
 
     getID() {

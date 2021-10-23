@@ -39,6 +39,7 @@ class Ingredient {
         tdLibelle.appendChild(removeButton);
 
         let tdQuantite = document.createElement("td");
+        tdQuantite.style.maxWidth = "100px"
         let inputQt = document.createElement("input");
         inputQt.type = "number";
         inputQt.value = this.getQuantite();

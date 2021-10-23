@@ -24,6 +24,7 @@ class Cout {
         this.trCout.id = "cout_"+this.getID();
         this.trCout.className = "cout";
         let tdVide = document.createElement("td");
+        tdVide.className = "coutVide";
         tdVide.colSpan = "3";
 
         let tdMultiplicateur = document.createElement("td");

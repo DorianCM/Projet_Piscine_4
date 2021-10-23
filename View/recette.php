@@ -87,14 +87,14 @@
                 </tr>
                 <tr id="addEtape"><td><button id="addEtapeButton">Ajouter une étape</button></td><td colspan="5"></td></tr>
                 <tr id ="ligneCouts">
-                    <td colspan="3"></td>
-                    <td>Type</td>
+                    <td class="coutVide" colspan="3"></td>
+                    <td id="ligneCoutsType">Type</td>
                     <td>Nom du coût</td>
                     <td>Valeur</td>
                 </tr>
                 <tr class="cout">
                     <td colspan="4"></td>
-                    <td>Total Ingrédients</td>
+                    <td class="total">Total Ingrédients</td>
                     <td id ="TotalIngredients"></td>
                 </tr>
                 <tr id="addCout">
@@ -104,17 +104,17 @@
                 </tr>
                 <tr id="ligneTotal" class="cout">
                     <td colspan="4"></td>
-                    <td>Total HT</td>
+                    <td class="total">Total HT</td>
                     <td id="valeurTotal">0</td>
                 </tr>
                 <tr id="ligneTotalTTC" class="cout">
                     <td colspan="4"></td>
-                    <td>Total TTC</td>
+                    <td class="total">Total TTC</td>
                     <td id="valeurTotalTTC">0</td>
                 </tr>
                 <tr id="ligneTTCPortions" class="cout">
                     <td colspan="4"></td>
-                    <td>Par portions</td>
+                    <td class="total">Par portions</td>
                     <td id="valeurTTCPortions">0</td>
                 </tr>
                 </tbody>
