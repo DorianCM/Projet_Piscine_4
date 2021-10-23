@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     border: 0;
-    width: 98%;
+    width: 99%;
     height: 98%;
     display: flex;
     flex-direction: row;
@@ -32,3 +32,85 @@
     }
 }
 
+button{
+    background-color: #c3b7a4;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 10px;
+}
+
+button:hover{
+    background-color: #e0dbd5;
+}
+
+#inputUnite{
+    background-color: #d8d2cb;
+    width: 100%;
+    height: 15px;
+    padding: 4px;
+    border: 0px;
+}
+
+#inputCategorie{
+    background-color: #d8d2cb;
+    width: 100%;
+    height: 15px;
+    padding: 4px;
+    border: 0px;
+}
+
+#inputCategorieRecette{
+    background-color: #d8d2cb;
+    width: 100%;
+    height: 15px;
+    padding: 4px;
+    border: 0px;
+}
+
+#inputCategorieTVA{
+    background-color: #d8d2cb;
+    width: 100%;
+    height: 15px;
+    padding: 4px;
+    border: 0px;
+}
+
+#inputUnite:hover{
+    background-color: #e0dbd5;
+}
+
+#inputCategorie:hover{
+    background-color: #e0dbd5;
+}
+
+#inputCategorieRecette:hover{
+    background-color: #e0dbd5;
+}
+
+#inputCategorieTVA:hover{
+    background-color: #e0dbd5;
+}
+
+#inputUnite:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#inputCategorie:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#inputCategorieRecette:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#inputCategorieTVA:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#unite{
+    margin-left: 1%;
+}

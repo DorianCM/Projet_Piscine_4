@@ -4,7 +4,7 @@ let liste_categorie_recette = document.getElementById("liste_categorie_recette")
 let liste_categorie_tva = document.getElementById("liste_categorie_tva");
 
 let inputUnite = document.getElementById("inputUnite");
-inputUnite.placeholder = "Nom d\'Unité";
+inputUnite.placeholder = "Nom d\'unité";
 let btnAjouterUnite = document.getElementById("btnAjouterUnite");
 btnAjouterUnite.classList.add("Erase");
 
