@@ -26,7 +26,7 @@
             echo "<li class='entetli'><a class='enteta' onclick ='$address1'>Deconnexion</a></li>";
             }else{
             $address = 'window.location = "authentification.php"';
-            echo "<li class='enteteli'><a class='enteta' onclick ='$address'>Connexion</a></div>";
+            echo "<li class='entetli'><a class='enteta' onclick ='$address'>Connexion</a></li>";
             }
             ?>
         </ul>
