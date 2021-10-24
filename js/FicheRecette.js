@@ -85,6 +85,9 @@ class FicheRecette {
         document.getElementById("PDFFicheCouts").addEventListener("click",function(){
             own.convertPDF(false);
         });
+        document.getElementById("Etiquetes").addEventListener("click", function () {
+            own.getEtiquettes();
+        });
     }
 
     //Remplie la liste de catégorie de recette
@@ -493,6 +496,22 @@ class FicheRecette {
                 own.addEtape(infos.etapes[etape], true);
         });
         requete.send(null);
+    }
+
+    getEtiquettes(){
+        let listIngredient = "";
+        for(let etape in this.dicoEtape){
+            listIngredient === ""? listIngredient = "" : listIngredient += "_";
+            let listingre = this.dicoEtape[etape].getListIngredients();
+            for(let ingre in listingre)
+                listIngredient += listingre[ingre].categorieAllergene !== "non allergene"? listingre[ingre].libelle + "-" +"oui": listingre[ingre].libelle + "-" + "non";
+        }
+        let today = new Date();
+        let day = today.getDate();
+        let dayPeremption = today.getDate()+3;
+        let dateF = day+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        let datePer = dayPeremption+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+        window.open('../API/genererEtiquettePDF.php?nom=' + encodeURIComponent(this.nom) + '&liste=' + encodeURIComponent(listIngredient) + '&dateFab=' + dateF +' &datePer=' + datePer, '_blank');
     }
 
     getID() {

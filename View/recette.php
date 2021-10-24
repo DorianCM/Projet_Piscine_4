@@ -165,7 +165,10 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
                 Convertir en PDF
             </button>
             <button id = "PDFFicheCouts">
-                Convertif en PDF (sans les coûts)
+                Convertir en PDF (sans les coûts)
+            </button>
+            <button id = "Etiquetes">
+                Générer les étiquetes
             </button>
         </div>
       </section>
