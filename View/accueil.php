@@ -15,7 +15,7 @@
             <img src="View/Images/photoaccueil1.jpg" alt="Photo cuisinier 1">
         </div>
         <div class="milieu">
-            <div class="titre">Nom du site</div>
+            <div class="titre">MyFicheTechnique</div>
                 <div class="regr">
                     <div class="bouton" onclick="window.location= 'View/ingrediants.php'">Mercuriale</div>
                     <div class="bouton" onclick="window.location= 'View/liste_recette.php'">Liste des fiches techniques</div>
