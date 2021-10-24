@@ -400,7 +400,7 @@ class FicheRecette {
             if(listTextArea[area].classList) {
                 let ptemp = document.createElement("p");
                 ptemp.className = "tempP";
-                ptemp.innerHTML = listTextArea[area].value;
+                ptemp.innerHTML = listTextArea[area].value.replace(/\n/g, "<br />");;
                 listTextArea[area].parentNode.insertBefore(ptemp, listTextArea[area]);
                 listTextArea[area].classList.add("tempHide");
             }
