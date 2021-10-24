@@ -5,7 +5,7 @@ require_once('../config/Conf.php');
 class Model {
 
     public static $pdo;
-
+    //On initialise la BD
     public static function init_pdo() {
         $host   = Conf::getHostname();
         $dbname = Conf::getDatabase();
@@ -23,7 +23,8 @@ class Model {
             die("Problème lors de la connexion à la base de données.");
         }
     }
-
+    //Permet d'envoyer la requête qui renvoie tous les ingrédients en fonction de notre recherche name (si name = 1, renvoie tous les ingrédients,
+    //Sinon renvoie les éléments commençant par la string $name) en les ordonnants selon la variable $order
     public static function getAllIngrediants($name,$order){
         try {
             $sql = "SELECT id_ingrediant,nom_ingrediant,u.nom_unite,prix_ingrediant,ca.nom_categorie_allergene,c.nom_categorie,t.categorie_tva,t.valeur_tva
@@ -45,7 +46,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Permet d'ajouter un ingrédient en prenant tous ses éléments en paramètres à part son id qui est généré automatiquement
     public static function ajouterIngrediant($nom_ingrediant,$id_unite,$prix_ingrediant,$est_allergene,$id_categorie,$id_tva){
         try {
             $sql = "INSERT INTO `Ingrediant` (nom_ingrediant,id_unite,prix_ingrediant,id_categorie_allergene,id_categorie,id_tva) VALUES (:name, :id_unite, :prix_ingrediant, :est_allergene, :id_categorie, :id_tva)";
@@ -65,7 +66,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
 
     }
-
+    //Permet de modifier un ingrédient en prenant tous ses éléments en paramètres
     public static function modifierIngrediant($id_ingrediant,$nom_ingrediant,$id_unite,$prix_ingrediant,$id_categorie_allergene,$id_categorie,$id_tva){
         try {
             $sql = "UPDATE `Ingrediant` 
@@ -88,28 +89,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
 
     }
-
-    //copie colle de la fonction du dessus a adapter
-    /*public static function modifierIngrediant($nom_ingrediant,$id_unite,$prix_ingrediant,$est_allergene,$id_categorie,$id_tva){
-        try {
-            $sql = "INSERT INTO `Ingrediant` (nom_ingrediant,id_unite,prix_ingrediant,est_allergene,id_categorie,id_tva) VALUES (:name, :id_unite, :prix_ingrediant, :est_allergene, :id_categorie, :id_tva)";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("name" => $nom_ingrediant,
-                "id_unite" => $id_unite,
-                "prix_ingrediant" => $prix_ingrediant,
-                "est_allergene" => $est_allergene,
-                "id_categorie" => $id_categorie,
-                "id_tva" => $id_tva);
-
-            $req_prep->execute($values);
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }*/
-
+    //Cette fonction envoie la requete sql pour supprimer un ingrédient en fonction de son id
     public static function supprimerIngrediant($id_ingrediant){
         try {
             $sql = "DELETE FROM `Ingrediant` WHERE id_ingrediant = :id";
@@ -125,7 +105,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
 
     }
-
+    //TODO verifier que cette fonction est utilisé et n'a pas été remplacée par une fonction du ModelUniteCategories
     public static function getAllUnite(){
         try {
             $sql = "SELECT * FROM `Unite`";
@@ -139,7 +119,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction qui permet de récupérer tous les éléments de la table sql categorie_allergene
     public static function getAllCategorie_Allergene(){
         try {
             $sql = "SELECT * FROM `categorie_allergene`";
@@ -153,7 +133,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //TODO verifier que cette fonction est utilisé et n'a pas été remplacée par une fonction du ModelUniteCategories
     public static function getAllCategorie(){
         try {
             $sql = "SELECT * FROM `categorie`";
@@ -167,7 +147,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //TODO verifier que cette fonction est utilisé et n'a pas été remplacée par une fonction du ModelUniteCategories
     public static function getAllTVA(){
         try {
             $sql = "SELECT * FROM `tva`";
@@ -181,142 +161,6 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
-
-    /* logiquement fonction inutile
-    public static function getUnitebyId($id){
-        try {
-            $sql = "SELECT FROM `Unite` WHERE id_unite = :id";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("id" => $id);
-
-            $req_prep->execute($values);
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            return $tabResults;
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-    }*/
-
-
-    /*
-    public static function ajouterAdherent($name){
-        $sql = "INSERT INTO adherent (nomAdherent) VALUES (:name_tag)";
-        $req_prep = self::$pdo->prepare($sql);
-
-        $values = array("name_tag" => $name);
-
-        $req_prep->execute($values);
-    }
-
-    public static function ajouterLivre($titre){
-        $sql = "INSERT INTO livre (titreLivre) VALUES (:name_tag)";
-        $req_prep = self::$pdo->prepare($sql);
-
-        $values = array("name_tag" => $titre);
-
-        $req_prep->execute($values);
-    }
-
-    public static function getAllAdherent(){
-        try {
-            $sql = "SELECT adherent.idAdherent, nomAdherent, COUNT(e.idAdherent) AS nbEmprunts FROM `adherent` LEFT JOIN emprunt e ON e.idAdherent = adherent.idAdherent GROUP BY adherent.idAdherent";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $req_prep->execute();
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-    }
-    // SELECT adherent.idAdherent, nomAdherent, COUNT(e.idAdherent) FROM `adherent` LEFT JOIN emprunt e ON e.idAdherent = adherent.idAdherent GROUP BY adherent.idAdherent
-
-    public static function getLivresDispo(){
-        try {
-            $sql = "SELECT * FROM `livre` WHERE idLivre NOT IN(SELECT idLivre FROM `emprunt`)";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $req_prep->execute();
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }
-
-    public static function getLivresEmprunt(){
-        try {
-            $sql = "SELECT l.titreLivre, e.idLivre, a.nomAdherent FROM livre l JOIN emprunt e ON e.idLivre = l.idLivre JOIN adherent a ON a.idAdherent = e.idAdherent";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $req_prep->execute();
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }
-
-    public static function getListEmprunts($idAdherent){
-    try {
-        $sql = "SELECT titreLivre FROM livre WHERE idLivre IN (SELECT idLivre FROM `emprunt` WHERE idAdherent=:name_tag)";
-        $req_prep = self::$pdo->prepare($sql);
-
-        $values = array("name_tag" => $idAdherent);
-        $req_prep->execute($values);
-        $req_prep->setFetchMode(PDO::FETCH_OBJ);
-        $tabResults = $req_prep->fetchAll();
-        return $tabResults;
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        die("Erreur lors de la recherche dans la base de données.");
-    }
-    }
-
-    public static function emprunterLivre($idLivre, $idAdherent){
-        $sql = "INSERT INTO emprunt (idAdherent, idLivre) VALUES (:adherent, :livre)";
-        $req_prep = self::$pdo->prepare($sql);
-        $values = array("livre" => $idLivre,
-                            "adherent" => $idAdherent);
-        $req_prep->execute($values);
-    }
-
-    public static function rendreLivre($idLivre){
-        $sql = "DELETE FROM emprunt WHERE idLivre=:livre";
-        $req_prep = self::$pdo->prepare($sql);
-        $values = array("livre" => $idLivre);
-        $req_prep->execute($values);
-    }
-
-    /*
-     try {
-            $sql = "INSERT INTO adherent (nomAdherent) VALUES (:name_tag)";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("name_tag" => $name);
-
-            $req_prep->execute($values);
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            // renvoi du tableau de résultats
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-     */
 }
 
 // on initialise la connexion $pdo
