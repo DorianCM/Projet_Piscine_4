@@ -31,7 +31,7 @@
         </ul>
     </header>
 
-<form align="center" id="formulaire">
+<form class="align-center" id="formulaire">
 	<label for="id_identifiant">Identifiant</label><br>
 	<input type="text" placeholder="Identifiant" name="Identifiant" id="id_identifiant"><br><br>
 
@@ -40,7 +40,7 @@
 
 	<input class="bouton" type="submit" value="Se connecter" id="boutton_valider">
 </form>
-<div align="center">
+<div class="align-center">
 		<p id="erreur" style="color:red"></p>
 </div>
 
