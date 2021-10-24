@@ -134,11 +134,14 @@ class ModelFicheRecette {
                 $sql = "DELETE FROM cout WHERE id_recette = '".$infos["id_recette"]."'";
                 $req_prep = self::$pdo->prepare($sql);
                 $req_prep->execute();
+                $sql = "DELETE FROM ingrediant_etapes WHERE id_recette = '".$infos["id_recette"]."'";
+                $req_prep = self::$pdo->prepare($sql);
+                $req_prep->execute();
                 $sql = "DELETE FROM etapes WHERE id_recette = '".$infos["id_recette"]."'";
                 $req_prep = self::$pdo->prepare($sql);
                 $req_prep->execute();
                 ModelFicheRecette::ajouterCouts($infos["id_recette"], $infos["couts"]);
-                ModelFicheRecette::ajouteretapes($infos["id_recette"], $infos["etapes"]);
+                ModelFicheRecette::ajouterEtapes($infos["id_recette"], $infos["etapes"]);
 
                 echo true;
             }
