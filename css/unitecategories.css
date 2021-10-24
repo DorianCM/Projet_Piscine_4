@@ -16,7 +16,7 @@
     position: relative;
     height: 80%;
     width: 24%;
-    border: solid black 2px;
+    border: solid black 1px;
     overflow: scroll;
 }
 
