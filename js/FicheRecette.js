@@ -342,10 +342,35 @@ class FicheRecette {
         requete.addEventListener("load", function (){
             //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
             // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
-            if(own.getID() == 0)
+            if(own.getID() == 0) {
                 own.setID(parseInt(requete.response));
+                own.openConfirmSave("La fiche recette a bien été enregistrée");
+            }
+            else if (requete.response)
+                own.openConfirmSave("Les modifications ont été enregistrées");
+            
         });
         requete.send(null);
+    }
+
+    //Ouvre une fenêtre avec un message, qui se ferme avec un clique
+    //Données d'entrées : message une chaine de caractères
+    openConfirmSave(message) {
+        let modal = document.createElement("div");
+        modal.id = "modalConfirm";
+        this.content.appendChild(modal);
+
+        let modalContent = document.createElement("div");
+        modalContent.id = "modalContentConfirm";
+        modal.appendChild(modalContent);
+
+        let p = document.createElement("p");
+        p.innerHTML = message;
+        modalContent.appendChild(p);
+
+        modal.addEventListener("click",function(){
+            modal.remove();
+        });
     }
 
     //cache les éléments comme les boutons, et remplace les inputs et les textarea par des p
