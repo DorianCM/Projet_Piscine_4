@@ -117,7 +117,6 @@ function getAllRecette(name) {
         requete_2.open("GET", url_2, true);
         requete_2.addEventListener("load", function () {
             var res = JSON.parse(requete_2.response);
-            console.log(res);
             var bool_move_page = res['Response'];
             if (!bool_move_page) {
                 var tab_delete = document.getElementsByClassName('Erase');

@@ -15,7 +15,7 @@ document.getElementById('formulaire').addEventListener("submit",function(e){
    }
    if(erreur){
       document.getElementById("erreur").innerHTML = erreur;
-      console.log(erreur);
+
    }
    else{
       identifiant = document.getElementById('id_identifiant').value;
@@ -25,9 +25,7 @@ document.getElementById('formulaire').addEventListener("submit",function(e){
       requete.open("GET", url, true);
       requete.addEventListener("load", function (){
          res = JSON.parse(requete.response);
-         console.log(res);
          bool_move_page = res['Response'];
-         console.log(bool_move_page);
          if(bool_move_page){
             window.location = "../";
          }

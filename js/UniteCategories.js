@@ -183,7 +183,6 @@ function th_td_multiple_creator_with_buttons(tag,listInnerText,ParentElement,lis
                }
                else if (table==="categorie_recette"){
                    btn.addEventListener("click", function () {
-                       console.log("ok");
                        formModifier(this,id,modifierCategorieRecette);
                    });
                }
@@ -214,7 +213,6 @@ function getAllGeneric(name,order,tab,reg,listButtons,parentDiv,primary_key) {
     let requete = new XMLHttpRequest();
     requete.open("GET", url, true);
     requete.addEventListener("load", function () {
-        //console.log(requete.responseText);
         let result = JSON.parse(requete.responseText);
         let table = document.createElement("table");
         parentDiv.appendChild(table);
@@ -231,7 +229,6 @@ function getAllGeneric(name,order,tab,reg,listButtons,parentDiv,primary_key) {
         requete_2.open("GET", url_2, true);
         requete_2.addEventListener("load", function () {
             var res = JSON.parse(requete_2.response);
-            console.log(res);
             var bool_move_page = res['Response'];
             if (!bool_move_page) {
                 var tab_delete = document.getElementsByClassName('Erase');
