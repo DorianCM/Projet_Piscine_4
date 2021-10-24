@@ -47,7 +47,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
         <h2>Vous allez être redirigé vers l'accueil</h2>
     </main>
 
-    <!-->bandeau en bas de la page sur Georges-Frêche-->
+    <!--bandeau en bas de la page sur Georges-Frêche-->
     <footer style='position: fixed;background-color: #c3b7a4;width: 100%;height: 6%;bottom: 0px;font-family: "Andada Pro", serif;'>
         <div style='display: flex;position: center;margin: 8px;'>
             <div> © </div>
