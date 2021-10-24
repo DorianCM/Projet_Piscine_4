@@ -48,6 +48,8 @@
                 <option value="nom_recette DESC">Nom recette(Z-A)</option>
                 <option value="nom_createur ASC">Auteur(A-Z)</option>
                 <option value="nom_createur DESC">Auteur(Z-A)</option>
+                <option value="nom_categorie_recette ASC">Catégorie recette(A-Z)</option>
+                <option value="nom_categorie_recette DESC">Catégorie recette(Z-A)</option>
             </select>
         </div>
 
