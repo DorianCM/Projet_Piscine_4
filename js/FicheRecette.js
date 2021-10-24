@@ -255,7 +255,7 @@ class FicheRecette {
             this.updateTotal();
         }
     }
-    
+
     removeEtape(etapeToRemove) {
         for(let i = etapeToRemove.getID(); i< this.dicoNbEtape; i++){
             this.dicoEtape[i] = this.dicoEtape[parseInt(i)+1];
