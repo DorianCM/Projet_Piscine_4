@@ -5,7 +5,7 @@ require_once('../config/Conf.php');
 class ModelUniteCategories{
 
     public static $pdo;
-
+    //Initialisation de la BD
     public static function init_pdo()
     {
         $host = Conf::getHostname();
@@ -24,93 +24,11 @@ class ModelUniteCategories{
             die("Problème lors de la connexion à la base de données.");
         }
     }
-/*
-    public static function getAllIngrediants($name, $order)
-    {
-        try {
-            $sql = "SELECT id_ingrediant,nom_ingrediant,u.nom_unite,prix_ingrediant,ca.nom_categorie_allergene,c.nom_categorie,t.categorie_tva,t.valeur_tva
-FROM `Ingrediant` i 
-JOIN Unite u ON u.id_unite=i.id_unite
-JOIN categorie c ON c.id_categorie=i.id_categorie
-JOIN tva t ON t.id_tva=i.id_tva 
-JOIN categorie_allergene ca ON ca.id_categorie_allergene=i.id_categorie_allergene
-WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
-            //var_dump($sql);
-            $req_prep = self::$pdo->prepare($sql);
 
-            $req_prep->execute();
-            $req_prep->setFetchMode(PDO::FETCH_OBJ);
-            $tabResults = $req_prep->fetchAll();
-            return $tabResults;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-    }
+    //Les trois premieres fonctions servent a remplir les input de la liste d'ingrédients, il sont plus spécifiques sur la
+    //selection des éléments et ne peuvent donc pas être récupéré via la requete générique
 
-    public static function ajouterIngrediant($nom_ingrediant, $id_unite, $prix_ingrediant, $est_allergene, $id_categorie, $id_tva)
-    {
-        try {
-            $sql = "INSERT INTO `Ingrediant` (nom_ingrediant,id_unite,prix_ingrediant,id_categorie_allergene,id_categorie,id_tva) VALUES (:name, :id_unite, :prix_ingrediant, :est_allergene, :id_categorie, :id_tva)";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("name" => $nom_ingrediant,
-                "id_unite" => $id_unite,
-                "prix_ingrediant" => $prix_ingrediant,
-                "est_allergene" => $est_allergene,
-                "id_categorie" => $id_categorie,
-                "id_tva" => $id_tva);
-
-            $req_prep->execute($values);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }
-
-    public static function modifierIngrediant($id_ingrediant, $nom_ingrediant, $id_unite, $prix_ingrediant, $id_categorie_allergene, $id_categorie, $id_tva)
-    {
-        try {
-            $sql = "UPDATE `Ingrediant` 
-                    SET nom_ingrediant= :name,id_unite= :id_unite,prix_ingrediant=:prix_ingrediant,id_categorie_allergene=:categorie_allergene,id_categorie=:id_categorie,id_tva=:id_tva
-                    WHERE id_ingrediant = :id";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("id" => $id_ingrediant,
-                "name" => $nom_ingrediant,
-                "id_unite" => $id_unite,
-                "prix_ingrediant" => $prix_ingrediant,
-                "categorie_allergene" => $id_categorie_allergene,
-                "id_categorie" => $id_categorie,
-                "id_tva" => $id_tva);
-
-            $req_prep->execute($values);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }
-
-
-    public static function supprimerIngrediant($id_ingrediant)
-    {
-        try {
-            $sql = "DELETE FROM `Ingrediant` WHERE id_ingrediant = :id";
-            $req_prep = self::$pdo->prepare($sql);
-
-            $values = array("id" => $id_ingrediant);
-
-            $req_prep->execute($values);
-
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }*/
-
+    //Envoie la requete sql afin de récuperer toutes les unités
     public static function getAllUnite()
     {
         try {
@@ -125,7 +43,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Envoie la requete sql afin de récuperer toutes les catégories d'ingrédients
     public static function getAllCategorie()
     {
         try {
@@ -140,7 +58,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Envoie la requete sql afin de récuperer toutes les catégories de TVA
     public static function getAllTVA()
     {
         try {
@@ -156,6 +74,8 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
     }
 
+    //Get générique qui permet de récupérer tous les éléments de n'importe quelle classe en les ordonnants selon un paramètre
+    //en ayant la possibilité de selectionné que les éléments qui commencent par la variable string $regexpEl
     public static function getAllGenericWithOrder($name,$order,$table, $regexpEl){
         try {
             $sql = "SELECT * FROM $table WHERE $regexpEl REGEXP \"^$name.*\" ORDER BY $order";
@@ -170,6 +90,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
     }
 
+    //Fonction générique permettant de supprimer un element par son id, le nom de sa clé primaire $fieldname et le nom de sa table sql
     public static function supprimerGenerique($table, $fieldname, $id_generique){
         try {
             $sql = "DELETE FROM `$table` WHERE $fieldname = :id";
@@ -186,34 +107,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
 
     }
 
-    /*public static function ajouterGenerique($table,$tabNames,$tabValues){
-        try {
-            $names = "";
-            foreach($tabNames as $va){
-                if($names == ""){
-                    $names .= $va;
-                }else{
-                    $names .= "," .$va;
-                }
-            }
-            $values = "";
-            foreach($tabValues as $va){
-                if($values == ""){
-                    $values .= $va;
-                }else{
-                    $values .= "," .$va;
-                }
-            }
-            $sql = "INSERT INTO $table ($names) VALUES ($values)";
-            $req_prep = self::$pdo->prepare($sql);
-            $req_prep->execute();
-        } catch (PDOException $e){
-            echo $e->getMessage();
-            die("Erreur lors de la recherche dans la base de données.");
-        }
-
-    }*/
-
+    //Fonction permetant d'ajouter une unité dans la base de donnée
     public static function ajouterUnite($nom_unite){
         try {
             $sql = "INSERT INTO `Unite` (`nom_unite`) VALUES ('$nom_unite')";
@@ -225,6 +119,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
         }
     }
 
+    //Fonction permetant de modifier une unité dans la base de donnée
     public static function modifierUnite($id_unite,$nom_unite){
         try {
             $sql = "UPDATE `Unite` 
@@ -241,7 +136,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie d'ingrédients dans la base de donnée
     public static function modifierCategorie($id_categorie,$nom_categorie){
         try {
             $sql = "UPDATE `Categorie` 
@@ -258,7 +153,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie de recette dans la base de donnée
     public static function modifierCategorieRecette($id_categorie,$nom_categorie){
         try {
             $sql = "UPDATE `categorie_recette` 
@@ -275,7 +170,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie de TVA dans la base de donnée
     public static function modifierCategorieTVA($id_categorie_tva,$nom_categorie_tva,$valeur){
         try {
             $sql = "UPDATE `tva` 
@@ -293,7 +188,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie d'ingrédients dans la base de donnée
     public static function ajouterCategorie($nom_categorie){
         try {
             $sql = "INSERT INTO `Categorie` (`nom_categorie`) VALUES ('$nom_categorie')";
@@ -304,7 +199,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie de recette dans la base de donnée
     public static function ajouterCategorieRecette($nom_categorie){
         try {
             $sql = "INSERT INTO `Categorie_Recette` (`nom_categorie_recette`) VALUES ('$nom_categorie')";
@@ -315,7 +210,7 @@ WHERE nom_ingrediant REGEXP \"^$name.*\" ORDER BY $order";
             die("Erreur lors de la recherche dans la base de données.");
         }
     }
-
+    //Fonction permetant de modifier une catégorie de TVA dans la base de donnée
     public static function ajouterCategorieTVA($nom_categorie_tva,$valeur_tva){
         try {
             $sql = "INSERT INTO `tva` (`categorie_tva`,`valeur_tva`) VALUES ('$nom_categorie_tva','$valeur_tva')";
