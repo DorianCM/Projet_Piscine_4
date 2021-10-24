@@ -25,7 +25,7 @@
                      $document = 'document.cookie = "'.$idFicheRecette.'"';
                      $address1 = 'window.location = "API/authentification/disconnect.php"';
                      echo "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
-                     echo "<div class='bouton' onclick ='$address1'>Deconnexion</div>";
+                     echo "<div class='bouton' onclick ='$address1'>Déconnexion</div>";
                     }else{
                     $address = 'window.location = "View/authentification.php"';
                      echo "<div class='bouton' onclick ='$address'>Connexion</div>";} ?>
