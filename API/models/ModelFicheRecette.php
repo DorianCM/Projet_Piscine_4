@@ -102,7 +102,7 @@ class ModelFicheRecette {
     }
 
     public static function ajouterFicheRecette($infos) {
-        $sql = "INSERT INTO recette (nom_recette, nb_portions, nom_createur, id_categorie_recette) VALUES ('".$infos['nom_recette']."', '".$infos['nb_portions']."', '".$infos['nom_createur']."', '".$infos['id_categorie_recette']."')";
+        $sql = "INSERT INTO recette (nom_recette, nb_portions, nom_createur, id_categorie_recette) VALUES ('".addslashes($infos['nom_recette'])."', '".$infos['nb_portions']."', '".addslashes($infos['nom_createur'])."', '".$infos['id_categorie_recette']."')";
         try {
             $req_prep = self::$pdo->prepare($sql);
             if($req_prep->execute()) {
@@ -123,7 +123,7 @@ class ModelFicheRecette {
 
     public static function updateFicheRecette($infos) {
         //D'abord, on update les informations de la recette
-        $sql = "UPDATE recette set nom_recette = '".$infos['nom_recette']."', nb_portions = '".$infos['nb_portions']."', nom_createur = '".$infos['nom_createur']."', id_categorie_recette = '".$infos['id_categorie_recette']."' 
+        $sql = "UPDATE recette set nom_recette = '".addslashes($infos['nom_recette'])."', nb_portions = '".$infos['nb_portions']."', nom_createur = '".addslashes($infos['nom_createur'])."', id_categorie_recette = '".$infos['id_categorie_recette']."'
         WHERE id_recette = '".$infos["id_recette"]."'";
 
         try{
@@ -134,7 +134,7 @@ class ModelFicheRecette {
                 $sql = "DELETE FROM cout WHERE id_recette = '".$infos["id_recette"]."'";
                 $req_prep = self::$pdo->prepare($sql);
                 $req_prep->execute();
-                $sql = "DELETE FROM ingrediant_etapes WHERE id_recette = '".$infos["id_recette"]."'";
+                $sql = "DELETE FROM ingrediant_etape WHERE id_recette = '".$infos["id_recette"]."'";
                 $req_prep = self::$pdo->prepare($sql);
                 $req_prep->execute();
                 $sql = "DELETE FROM etapes WHERE id_recette = '".$infos["id_recette"]."'";
@@ -153,7 +153,7 @@ class ModelFicheRecette {
 
     public static function ajouterEtapes($id_recette, $etapes) {
         foreach ($etapes as $etape) {
-            $sql = "INSERT INTO etapes (id_etape, id_recette, nom_etape, description_etape, duree) VALUES ('".$etape['id_etape']."', '".$id_recette."', '".$etape['nom_etape']."', '".$etape['description_etape']."', '".$etape['duree']."')";
+            $sql = "INSERT INTO etapes (id_etape, id_recette, nom_etape, description_etape, duree) VALUES ('".$etape['id_etape']."', '".$id_recette."', '".addslashes($etape['nom_etape'])."', '".addslashes($etape['description_etape'])."', '".addslashes($etape['duree'])."')";
             $req_prep = self::$pdo->prepare($sql);
             $req_prep->execute();
             //Quel ingrédient est associé à quelle étape :
@@ -168,7 +168,7 @@ class ModelFicheRecette {
     public static function ajouterCouts($id_recette, $couts) {
         foreach ($couts as $cout) {
             $multi = $cout['multiplicateur']?1:0;
-            $sql = "INSERT INTO cout (id_cout, id_recette, nom_cout, valeur_cout, multiplicateur) VALUES ('".$cout['id_cout']."', '".$id_recette."', '".$cout['nom_cout']."', '".$cout['valeur_cout']."', '".$multi."')";
+            $sql = "INSERT INTO cout (id_cout, id_recette, nom_cout, valeur_cout, multiplicateur) VALUES ('".$cout['id_cout']."', '".$id_recette."', '".addslashes($cout['nom_cout'])."', '".addslashes($cout['valeur_cout'])."', '".$multi."')";
             $req_prep = self::$pdo->prepare($sql);
             $req_prep->execute();
         }
