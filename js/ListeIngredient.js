@@ -1,9 +1,12 @@
+//Récupération des éléments html par leurs id
 let divList = document.getElementById("listIngrediant");
 let divBtnAjouter = document.getElementById("btnajouter");
+//création du bouton pour ajouter et ajout d'éléments graphiques (innerText + classe css)
 let btnAjouter = document.createElement("Button");
 btnAjouter.innerText = "Ajouter";
 btnAjouter.classList.add('Erase');
 
+//Initialisation des inputs/selects pour la modification des éléments
 let nom_ingrediant_input;
 let clone_unite;
 let prix_ingredient_input;
@@ -11,15 +14,18 @@ let clone_categorie_allergene;
 let clone_categorie;
 let clone_tva;
 
+//Initialisation de l'état de modification des ingrédients
 let modifyingState = null;
 
-
+//Création de l'input name
 let input_name = document.createElement("input");
 input_name.placeholder = "nom d'ingrédiant";
 
+//Création de l'input prix de l'ingrédient
 let input_prix_ingrediant = document.createElement("input");
 input_prix_ingrediant.placeholder = "prix ingrédiant";
 
+//Création du select id_unité, puis requete sql pour ajouter les options en fonction des unités existantes dans la base de données
 let input_id_unite = document.createElement("select");
 function init_input_id_unite(){
     let url = "../API/getAllUnite.php";
@@ -36,7 +42,7 @@ function init_input_id_unite(){
     });
     requete.send(null);
 }
-
+//Création du select categorie allergene, puis requete sql pour ajouter les options en fonction des categories existantes dans la base de données
 let input_categorie_allergene = document.createElement("select");
 function init_input_id_categorie_allergene(){
     let url = "../API/getAllCategorie_Allergene.php";
@@ -53,6 +59,8 @@ function init_input_id_categorie_allergene(){
     });
     requete.send(null);
 }
+
+//Création du select categorie ingrédients, puis requete sql pour ajouter les options en fonction des categories existantes dans la base de données
 let input_id_categorie = document.createElement("select");
 function init_input_id_categorie(){
     let url = "../API/getAllCategorie.php";
@@ -69,6 +77,8 @@ function init_input_id_categorie(){
     });
     requete.send(null);
 }
+
+//Création du select categorie TVA, puis requete sql pour ajouter les options en fonction des categories existantes dans la base de données
 let input_id_tva = document.createElement("select");
 function init_input_id_tva(){
     let url = "../API/getAllTVA.php";
@@ -86,16 +96,23 @@ function init_input_id_tva(){
     requete.send(null);
 }
 
+//Initialisation du tri à faire par défaut (par ajout du plus ancien au plus récent)
 let order = "id_ingrediant ASC";
+//Récupération de l'élément html permettant de faire le tri (un select)
 let inputTri = document.getElementById("tri");
 
+//Event listener qui lorsqu'on change le tri selectionné, change le tri a effectuer et renvoie la requete pour récuperer la liste
+//trié selon l'élément qui a été sélectionné
 inputTri.addEventListener("input", function () {
     order = inputTri.value;
     //TO implement for name
     getAllIngrediant("1");
 });
-let input_barre_recherche_ingredient = document.getElementById("barre_recherche_ingredient");
 
+//initialisation de la barre de recherche
+let input_barre_recherche_ingredient = document.getElementById("barre_recherche_ingredient");
+//Event listener qui effectue une recherche si on écrit plus de 2 caractères dans la barre de recherche (pour éviter d'effectuer trop de requetes inutiles)
+//Et qui réinitialise les éléments lorque l'on efface la recherche
 input_barre_recherche_ingredient.addEventListener("input",function () {
     if (input_barre_recherche_ingredient.value.length >= 2){
         //console.log(input_barre_recherche_ingredient.value);
@@ -106,6 +123,7 @@ input_barre_recherche_ingredient.addEventListener("input",function () {
     }
 });
 
+//Ajout de l'évenement sur le boutonAjouter qui permet d'ajouter un nouvel ingrédient en fonction des inputs déclarés plus haut
 btnAjouter.addEventListener("click", function () {
     let url = "../API/ajouterIngrediant.php?name=" + encodeURIComponent(input_name.value) + "&id_unite=" + encodeURIComponent(input_id_unite.value) +
         "&prix=" + encodeURIComponent(input_prix_ingrediant.value) + "&allergene=" + encodeURIComponent(input_categorie_allergene.value) + "&id_categorie=" +
@@ -119,11 +137,13 @@ btnAjouter.addEventListener("click", function () {
 
 });
 
+//Création du bouton plus qui affiche les input et le bouton pour ajouter un ingrédient
 let btnPlus = document.createElement("Button");
 btnPlus.innerText = "+";
 btnPlus.classList.add('Erase');
 divBtnAjouter.appendChild(btnPlus);
 
+//Fonction de l'évennement plus qui permet d'afficher les input et le bouton d'ajout
 function plus(event){
     btnPlus.innerText = "+";
 
@@ -141,6 +161,7 @@ function plus(event){
     btnPlus.addEventListener("click", moins)
 }
 
+//Fonction de l'évennement moins qui désaffiche les input et le bouton d'ajout
 function moins(event){
     btnPlus.innerText = "+";
 
@@ -164,6 +185,7 @@ function th_td_creator(tag,innerText,parentElement){
     parentElement.appendChild(element);
 }
 
+//Fonction pour créer plusieurs th ou td
 //listInnerText -> list of String
 function th_td_multiple_creator(tag,listInnerText,ParentElement){
     Array.prototype.forEach.call(listInnerText, el =>{
@@ -171,9 +193,13 @@ function th_td_multiple_creator(tag,listInnerText,ParentElement){
     });
 }
 
-
+//Initialisation de l'évenement plus sur le bouton plus
 btnPlus.addEventListener("click", plus);
 
+//Envoie de la requete pour récupérer tous les ingrédients si le parametre nom = 1 ou un ou plusieurs elements selon le début du nom entré,
+//par exemple si nom = "de", la fonction va renvoyer un tableau avec tous les éléments qui ont un nom qui commencent par "de" puis création
+//du tableau contenant tous les ingrédients, initialisation
+//des boutons supprimer et modifier pour chaque ingrédient
 function getAllIngrediant(name) {
     divList.innerText = "";
     let url = "../API/getIngrediants.php?name="+ encodeURIComponent(name)+ "&order="+encodeURIComponent(order);
@@ -360,6 +386,7 @@ function getAllIngrediant(name) {
 
 }
 
+//Initialisation de la liste des ingrédients et des inputs selects qui sont initialisés par une requête sql lors de l'initialisation de la page
 window.addEventListener("load", function () {
     getAllIngrediant("1");
     init_input_id_unite();
