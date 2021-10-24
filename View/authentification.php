@@ -49,7 +49,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
 
     <script src = "../js/authentification.js"></script>
 
-    <!-->bandeau en bas de la page sur Georges-Frêche-->
+    <!--bandeau en bas de la page sur Georges-Frêche-->
     <footer>
         <div id="dfooter">
             <div> © </div>
