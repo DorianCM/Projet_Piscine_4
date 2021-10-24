@@ -500,11 +500,15 @@ class FicheRecette {
 
     getEtiquettes(){
         let listIngredient = "";
+        let list = [];
         for(let etape in this.dicoEtape){
             let listingre = this.dicoEtape[etape].getListIngredients();
             for(let ingre in listingre){
-                listIngredient === ""? listIngredient = "" : listIngredient += "_";
-                listIngredient += listingre[ingre].categorieAllergene !== "non allergene"? listingre[ingre].libelle + "-" +"oui": listingre[ingre].libelle + "-" + "non";
+                if(!list.includes(listingre[ingre].libelle)){
+                    listIngredient === ""? listIngredient = "" : listIngredient += "_";
+                    listIngredient += listingre[ingre].categorieAllergene !== "non allergene"? listingre[ingre].libelle + "-" +"oui": listingre[ingre].libelle + "-" + "non";
+                    list.push(listingre[ingre].libelle);
+                }
             }
         }
         let today = new Date();
