@@ -355,7 +355,7 @@ class FicheRecette {
                 own.openConfirmSave("La fiche recette a bien été enregistrée");
             }
             else if (requete.response)
-                own.openConfirmSave("Les modifications ont été enregistrées");
+                own.openConfirmSave("Modifications enregistrées avec succès");
             
         });
         requete.send(null);

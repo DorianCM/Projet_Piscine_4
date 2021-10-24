@@ -5,7 +5,7 @@ body {
 	margin-top: 60px;
 }
 
-/* l'entête prends la largeur de la fenêtre et reste en haut quand on la descend */
+/* l'entête prends la largeur de la fenêtre, reste en haut quand on la descend et reste au premier plan*/
 header{
 	position: fixed;
 	top: 0;
