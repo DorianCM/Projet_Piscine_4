@@ -152,7 +152,7 @@ class Etape {
 
     //Change l'HTML de l'étape actuelle pour l'id donné
     changeHTMLFor(id){
-        //On cast en String les id
+        //On cast en String les id et on change l'élément HTML correspondant pour son nouvel ID
         document.getElementById("etape_"+String(this.getID())).id = ("etape_"+String(id));
         document.getElementById("etape_"+String(this.getID()+"_name")).id = ("etape_"+String(id)+"_name");
         document.getElementById("etape_"+String(this.getID()+"_description")).id = ("etape_"+String(id)+"_description");
@@ -166,7 +166,6 @@ class Etape {
         this.ingredients[this.nbIngredients] = new Ingredient(this, infosIngredient);
         this.ingredients[this.nbIngredients++].createHTML();
         this.recette.updateTotal();
-
     }
 
     //Efface les ingredients de la liste des ingrédients nommée ingredients[]
@@ -184,6 +183,7 @@ class Etape {
     }
 
     //On efface l'HTML de chaque ingrédient contenu dans la liste ingrédient de l'étape
+    //N'est plus utilisé mais on la garde si nécessaire pour améliorer une partie du site
     cleanTableIngredient(){
         //On itére dans la liste
         for (let ingredient in this.ingredients) {

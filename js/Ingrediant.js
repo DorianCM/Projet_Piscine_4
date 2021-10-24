@@ -338,12 +338,15 @@ function getAllIngrediant(name) {
             table.appendChild(tr);
         });
         divList.appendChild(table);
+
+        //Envoie une requête à la page API/authentification/is_connected.php pour savoir si l'on est connecté
         let url_2 = "../API/authentification/is_connected.php";
         let requete_2 = new XMLHttpRequest();
         requete_2.open("GET", url_2, true);
         requete_2.addEventListener("load", function () {
             var res = JSON.parse(requete_2.response);
             var bool_move_page = res['Response'];
+            //si l'on est pas connecté on efface les bouttons
             if (!bool_move_page) {
                 var tab_delete = document.getElementsByClassName('Erase');
                 while(tab_delete[0]){

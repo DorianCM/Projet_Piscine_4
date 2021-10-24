@@ -18,6 +18,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
             <?php
             session_start();
+            /* Si l'on est connecté on affiche les bouttons Créer une fiche technique et Déconnexion */
             if(isset($_SESSION['login'])){
             $adr = '"recette.php"';
             $idFicheRecette = 'idFicheRecette=; path=/';
@@ -27,6 +28,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
             $address1 = "../API/authentification/disconnect.php";
             echo "<li style='float:right;'><a class='enteta' href ='$address1'>Déconnexion</a></li>";
             }else{
+            /* sinon on affiche le boutton Connexion */
             $address = "authentification.php";
             echo "<li style='float:right;'><a class='enteta' href ='$address'>Connexion</a></li>";
             }
@@ -44,7 +46,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
 
     <div id="btnajouter">
         <?php
-
+        /*Si on est connecté on affiche le Pour ajouter un produit*/
         if(isset($_SESSION['login'])){
         echo '<label>Pour ajouter un produit :</label>';}
         ?>
