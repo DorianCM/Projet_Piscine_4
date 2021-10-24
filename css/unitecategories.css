@@ -75,6 +75,14 @@ button:hover{
     border: 0px;
 }
 
+#inputValeurTVA{
+    background-color: #d8d2cb;
+    width: 100%;
+    height: 15px;
+    padding: 4px;
+    border: 0px;
+}
+
 #inputUnite:hover{
     background-color: #e0dbd5;
 }
@@ -88,6 +96,10 @@ button:hover{
 }
 
 #inputCategorieTVA:hover{
+    background-color: #e0dbd5;
+}
+
+#inputValeurTVA:hover{
     background-color: #e0dbd5;
 }
 
@@ -107,6 +119,11 @@ button:hover{
 }
 
 #inputCategorieTVA:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#inputValeurTVA:focus{
     background-color: #e0dbd5;
     pointer-events:none;outline:none;
 }
