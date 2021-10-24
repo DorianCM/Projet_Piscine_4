@@ -144,6 +144,8 @@ class Etape {
         document.getElementById("etape_" + this.id + "_name").value = this.getNom();
         document.getElementById("etape_" + this.id + "_duree").value = this.getDuree();
         document.getElementById("etape_" + this.id + "_description").value = this.getDescription();
+        document.getElementById("etape_" + this.id + "_description").style.height = 'auto';
+        document.getElementById("etape_" + this.id + "_description").style.height = document.getElementById("etape_" + this.id + "_description").scrollHeight+'px';
     }
     //Enlève les éléments html propres à l'étape
     removeHTML() {
