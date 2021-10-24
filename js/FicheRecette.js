@@ -264,7 +264,7 @@ class FicheRecette {
         }
         infos["couts"] = infosCouts;
         let infosEtapes = {};
-        let nbEtape = 0
+        let nbEtape = 0;
         for(let e in this.dicoEtape) {
             let etape = {};
             etape["id_etape"] = this.dicoEtape[e].getID();
