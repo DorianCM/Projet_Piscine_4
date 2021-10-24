@@ -176,10 +176,6 @@ class FicheRecette {
             //Copie les étapes du dessus et du bas afin de les intervertir
             var copie1 = this.dicoEtape[idEtapeUp].saveEtape();
             var copie2 = this.dicoEtape[idEtapeUp +1].saveEtape();
-            //Efface l'HTML des tables d'ingredients associé à chaque étape
-            //Car l'on va recréer les ingredients après avoir interchangés les étapes
-            this.dicoEtape[idEtapeUp].cleanTableIngredient();
-            this.dicoEtape[idEtapeUp+1].cleanTableIngredient();
             //Affecte une copie à l'autre étape
             //Change les id des étapes correspondantes pour qu'elles correspondent bien à leur place
             //dans le dictionnaire associatif et l'HTML
@@ -227,10 +223,6 @@ class FicheRecette {
             //Copie les étapes du dessus et du bas afin de les intervertir
             var copie1 = this.dicoEtape[idEtapeDown].saveEtape();
             var copie2 = this.dicoEtape[idEtapeDown -1].saveEtape();
-            //Efface l'HTML des tables d'ingredients associé à chaque étape
-            //Car l'on va recréer les ingredients après avoir interchangés les étapes
-            this.dicoEtape[idEtapeDown].cleanTableIngredient();
-            this.dicoEtape[idEtapeDown-1].cleanTableIngredient();
             //Affecte une copie à l'autre étape
             //Change les id des étapes correspondantes pour qu'elles correspondent bien à leur place
             //dans le dictionnaire associatif et l'HTML

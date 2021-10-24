@@ -19,7 +19,9 @@
                 <div class="regr">
                     <div class="bouton" onclick="window.location= 'View/ingrediants.php'">Mercuriale</div>
                     <div class="bouton" onclick="window.location= 'View/liste_recette.php'">Liste des fiches techniques</div>
-                    <?php if (isset($_SESSION['login'])){
+                    <?php
+                    /* Si l'on est connecté on affiche les bouttons Créer une fiche technique et Déconnexion */
+                    if (isset($_SESSION['login'])){
                      $adr = '"View/recette.php"';
                      $idFicheRecette = 'idFicheRecette=; path=/';
                      $document = 'document.cookie = "'.$idFicheRecette.'"';
@@ -27,6 +29,7 @@
                      echo "<div class='bouton' onclick='$document;window.location=$adr'>Créer une fiche technique</div>";
                      echo "<div class='bouton' onclick ='$address1'>Déconnexion</div>";
                     }else{
+                    /* sinon on affiche le boutton Connexion */
                     $address = 'window.location = "View/authentification.php"';
                      echo "<div class='bouton' onclick ='$address'>Connexion</div>";} ?>
                 </div>

@@ -34,12 +34,14 @@
                     let infos = JSON.parse(requete.response);
                     recette = new FicheRecette(infos);
 
+                    //Envoie une requête à la page API/authentification/is_connected.php pour savoir si l'on est connecté
                     let url_2 = "../API/authentification/is_connected.php";
                     let requete_2 = new XMLHttpRequest();
                     requete_2.open("GET", url_2, true);
                     requete_2.addEventListener("load", function () {
                         var res = JSON.parse(requete_2.response);
                         var bool_move_page = res['Response'];
+                        //si l'on est pas connecté on charge la version PDF
                         if (!bool_move_page) {
                             recette.hideForPDF(true);
                             }
@@ -63,6 +65,7 @@
             <li class="entetli"><a class="enteta" href="liste_recette.php">Liste des fiches techniques</a></li>
             <?php
             session_start();
+            /* Si l'on est connecté on affiche les bouttons Créer une fiche technique et Déconnexion */
             if(isset($_SESSION['login'])){
             $adr = '"recette.php"';
             $idFicheRecette = 'idFicheRecette=; path=/';
@@ -72,6 +75,7 @@
             $address1 = "../API/authentification/disconnect.php";
             echo "<li style='float:right;'><a class='enteta' href ='$address1'>Déconnexion</a></li>";
             }else{
+            /* sinon on affiche le boutton Connexion */
             $address = "authentification.php";
             echo "<li style='float:right;'><a class='enteta' href ='$address'>Connexion</a></li>";
             }
