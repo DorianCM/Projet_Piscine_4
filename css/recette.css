@@ -255,6 +255,8 @@ textarea {
 #modalContentIngredient th, #modalContentIngredient td, #modalContentSousFicheRecette th, #modalContentSousFicheRecette td {
     border:1px solid black;
 }
+
+/* propriétés des affichages de confirmation de l'enregistrement des recettes */
 #modalConfirm {
     background-color: rgba(0,0,0,0);
 }
