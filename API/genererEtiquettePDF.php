@@ -83,7 +83,7 @@ $datePer = $_GET['datePer'];
 //<b>Test</b>
 //$pdf->SetFont('helvetica', 'B', 12);
 // set some text for example
-$txt = '<br><p>Nom du plat : ' . $nomPlat .'</p>' . '<p>Ingrédients : ' . $listFinal .'</p>' . "\n" . 'Date de fabrication : ' . $dateFab . '<br>' .  'Date de péremption : ' . $datePer ;
+$txt = '<p>Nom du plat : ' . $nomPlat .'</p>' . '<p>Ingrédients : ' . $listFinal .'</p>' . "\n" . 'Date de fabrication : ' . $dateFab . '<br>' .  'Date de péremption : ' . $datePer ;
 
 // print a blox of text using multicell()
 //$pdf->MultiCell(80, 5, $txt."\n", 1, 'J', 1, 1, '' ,'', true);
