@@ -501,10 +501,11 @@ class FicheRecette {
     getEtiquettes(){
         let listIngredient = "";
         for(let etape in this.dicoEtape){
-            listIngredient === ""? listIngredient = "" : listIngredient += "_";
             let listingre = this.dicoEtape[etape].getListIngredients();
-            for(let ingre in listingre)
+            for(let ingre in listingre){
+                listIngredient === ""? listIngredient = "" : listIngredient += "_";
                 listIngredient += listingre[ingre].categorieAllergene !== "non allergene"? listingre[ingre].libelle + "-" +"oui": listingre[ingre].libelle + "-" + "non";
+            }
         }
         let today = new Date();
         let day = today.getDate();
