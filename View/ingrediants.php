@@ -39,8 +39,13 @@
         <input name="barre_recherche_ingredient" id="barre_recherche_ingredient" placeholder="Par exemple : Beurre">
     </div>
     <button id="btncategories" onclick="window.location= 'uniteCategories.php'">Ajouter ou modifier Categories et/ou unité</button>
+
     <div id="btnajouter">
-        <label>Pour ajouter un produit :</label>
+        <?php
+
+        if(isset($_SESSION['login'])){
+        echo '<label>Pour ajouter un produit :</label>';}
+        ?>
     </div>
     <div id="divTri">
         <label>Trier par</label>

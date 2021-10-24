@@ -36,7 +36,7 @@ class Cout {
         opt1.value = "true";
         opt1.text = "Multiplier";
         opt2.value = "false";
-        opt2.text = "Additioner";
+        opt2.text = "Additionner"; 
         if (this.getMultiplicateur())
             opt1.selected = true;
         else
