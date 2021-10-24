@@ -38,7 +38,6 @@
                     requete_2.open("GET", url_2, true);
                     requete_2.addEventListener("load", function () {
                         var res = JSON.parse(requete_2.response);
-                        console.log(res);
                         var bool_move_page = res['Response'];
                         if (!bool_move_page) {
                             recette.hideForPDF(true);
@@ -90,7 +89,7 @@
                     <td id = "infosPortionsAuteur">
                         <table>
                             <tr>
-                                <td>Nb Portions : <input id="recette_nbportions"></input></td>
+                                <td>Nb Portions : <input type="number" id="recette_nbportions"></input></td>
                             </tr>
                             <tr>
                                 <td>Auteur : <input id="recette_auteur"></input></td>

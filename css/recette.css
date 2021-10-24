@@ -35,7 +35,7 @@ textarea{
     text-align: center;
     border-right: 2px solid black;
     margin-right: 20%;
-    min-width: 300px;
+    max-width: 150px;
 }
 #infosNom input {
     font-size: 90%;
@@ -252,7 +252,7 @@ textarea {
     border:1px solid black;
 }
 
-.tempHide {
+.tempHide, textarea.tempHide, input.tempHide {
     display: none;
 }
 #ligneTh th.hideRigthBorder, #ligneTd td.hideRigthBorder, #ligneCouts td.hideRigthBorder, .cout .coutVide.hideRigthBorder {
@@ -260,9 +260,6 @@ textarea {
 }
 .hideText {
     text-indent: -9999px; 
-}
-.hideBorderTextArea {
-    border: none;
 }
 input.hideArrowInput::-webkit-outer-spin-button,
 input.hideArrowInput::-webkit-inner-spin-button {
@@ -272,4 +269,22 @@ input.hideArrowInput::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number].hideArrowInput {
   -moz-appearance: textfield;
+}
+
+p.tempP {
+    margin: 0;
+    word-wrap: break-word;
+}
+.etapeInfos p.tempP {
+    max-width: 300px;
+}
+.cout p.tempP {
+    max-width: 100px;
+}
+#infosNom p.tempP {
+    max-width: 400px;
+    margin: 0 auto;
+}
+#infosPortionsAuteur p.tempP {
+    display: inline;
 }

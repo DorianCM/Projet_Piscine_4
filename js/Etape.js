@@ -45,6 +45,7 @@ class Etape {
         let labelDuree = document.createElement("p");
         labelDuree.innerHTML = "Durée : "
         let inputDuree = document.createElement("input");
+        inputDuree.maxLength = "30";
         inputDuree.id = "etape_"+this.getID()+"_duree";
         divDuree.appendChild(labelDuree);
         divDuree.appendChild(inputDuree);

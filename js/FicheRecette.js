@@ -307,13 +307,24 @@ class FicheRecette {
 
         let listInput = document.getElementsByTagName("input");
         for(let input in listInput)
-            if(listInput[input].classList)
-                listInput[input].classList.add("hideArrowInput");
+            if(listInput[input].classList){
+                let ptemp = document.createElement("p");
+                ptemp.className = "tempP";
+                ptemp.innerHTML = listInput[input].value;
+                listInput[input].parentNode.insertBefore(ptemp, listInput[input]);
+                listInput[input].classList.add("tempHide");
+            }
+                //listInput[input].classList.add("hideArrowInput");
 
         let listTextArea = document.getElementsByTagName("textarea");
         for(let area in listTextArea)
-            if(listTextArea[area].classList)
-                listTextArea[area].classList.add("hideBorderTextArea");
+            if(listTextArea[area].classList) {
+                let ptemp = document.createElement("p");
+                ptemp.className = "tempP";
+                ptemp.innerHTML = listTextArea[area].value;
+                listTextArea[area].parentNode.insertBefore(ptemp, listTextArea[area]);
+                listTextArea[area].classList.add("tempHide");
+            }
         
         let listSelects = document.getElementsByTagName("select");
         for(let select in listSelects)
@@ -366,6 +377,12 @@ class FicheRecette {
         for(let input in listHideInput)
             if(listHideInput[input].classList)
                 listHideInput[input].classList.remove("hideArrowInput");
+
+        let listTempP = document.querySelectorAll(".tempP");
+        for(let ptemp in listTempP)
+            if(listTempP[ptemp].classList)
+                listTempP[ptemp].remove(); 
+        
     }
     convertPDF(avecLesCout = true) {
         //Cacher les éléments indésirables
@@ -376,10 +393,10 @@ class FicheRecette {
         let content = document.getElementById("content");
         content.classList.add("transform");
         window.print();
+        content.classList.remove("transform");
 
         //Remontrer les éléments cachés
         this.disableHideForPDF();
-        content.classList.remove("transform");
     }
 
     addSousRecette(id_sous_recette) {
