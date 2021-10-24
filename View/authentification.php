@@ -9,8 +9,8 @@
 </head>
 <body>
 
-/* Bandeau de navigation entre les pages, permission d'accéder à certaines pages seulement si l'on est connecté,
-mise en place des liens connexion/déconnexion à droite du bandeau et impossibilité de les avoir simultanément*/
+<!--Bandeau de navigation entre les pages, permission d'accéder à certaines pages seulement si l'on est connecté,
+mise en place des liens connexion/déconnexion à droite du bandeau et impossibilité de les avoir simultanément -->
 <header>
         <ul class="entetu">
             <li class="entetli"><a class="enteta" onclick = "window.location= '../'">Accueil</a></li>
@@ -49,6 +49,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
 
     <script src = "../js/authentification.js"></script>
 
+    <!-->bandeau en bas de la page sur Georges-Frêche-->
     <footer>
         <div id="dfooter">
             <div> © </div>

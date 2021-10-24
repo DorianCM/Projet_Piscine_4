@@ -15,8 +15,8 @@ session_destroy();
 </head>
 <body style='width:100%;text-align: center;'>
 
-/* Bandeau de navigation entre les pages, permission d'accéder à certaines pages seulement si l'on est connecté,
-mise en place des liens connexion/déconnexion à droite du bandeau et impossibilité de les avoir simultanément*/
+<!--Bandeau de navigation entre les pages, permission d'accéder à certaines pages seulement si l'on est connecté,
+mise en place des liens connexion/déconnexion à droite du bandeau et impossibilité de les avoir simultanément-->
     <header>
         <ul class="entetu">
             <li class="entetli"><a class="enteta" onclick = "window.location= '../../'">Accueil</a></li>
@@ -40,14 +40,14 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
         </ul>
     </header>
 
-    /* Message de déconnexion centré sur la page */
+    <!--Message de déconnexion centré sur la page-->
     <main style='margin-top:20%;font-family: "Andada Pro", serif;'>
         <h1>Déconnexion réussie !</h1>
         <br>
         <h2>Vous allez être redirigé vers l'accueil</h2>
     </main>
 
-    /* bandeau en bas de la page sur Georges-Frêche */
+    <!-->bandeau en bas de la page sur Georges-Frêche-->
     <footer style='position: fixed;background-color: #c3b7a4;width: 100%;height: 6%;bottom: 0px;font-family: "Andada Pro", serif;'>
         <div style='display: flex;position: center;margin: 8px;'>
             <div> © </div>
