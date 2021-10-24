@@ -5,6 +5,7 @@ let nom_createur;
 
 let modifyingState = null;
 
+//Mise en place du tri
 let order = "nom_recette ASC";
 let inputTri = document.getElementById("tri");
 
@@ -13,6 +14,8 @@ inputTri.addEventListener("input", function () {
     //TO implement for name
     getAllRecette("1");
 });
+
+//Mise en place d'une barre de recherche
 let input_barre_recherche_recette = document.getElementById("barre_recherche_recette");
 
 input_barre_recherche_recette.addEventListener("input",function () {
@@ -24,6 +27,7 @@ input_barre_recherche_recette.addEventListener("input",function () {
     }
 });
 
+//Fonction qui récupère et liste toutes les recettes, leur nom d'auteur et leur catégorie
 function getAllRecette(name) {
     divList.innerText = "";
     let url = "../API/getAllRecette.php?name=" + encodeURIComponent(name) + "&order=" + encodeURIComponent(order);
