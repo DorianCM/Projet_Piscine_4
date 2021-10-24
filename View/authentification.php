@@ -36,11 +36,13 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
         </ul>
     </header>
 
+<main>
+
 <form class="align-center" id="formulaire">
-	<label for="id_identifiant">Identifiant</label><br>
+	<label class="format" for="id_identifiant">Identifiant</label><br><br>
 	<input type="text" placeholder="Identifiant" name="Identifiant" id="id_identifiant"><br><br>
 
-	<label for="id_mdp">Mot de passe</label><br>
+	<label class="format" for="id_mdp">Mot de passe</label><br><br>
 	<input type="password" placeholder="Mot de passe" name="Mdp" id="id_mdp"><br><br>
 
 	<input class="bouton" type="submit" value="Se connecter" id="boutton_valider">
@@ -48,6 +50,8 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
 <div class="align-center">
 		<p id="erreur" style="color:red"></p>
 </div>
+
+</main>
 
     <script src = "../js/authentification.js"></script>
 

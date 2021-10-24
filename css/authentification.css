@@ -68,3 +68,12 @@ footer{
 .align-center{
     text-align: center;
 }
+
+main {
+    margin-top:15%;
+    font-family: "Andada Pro", serif;
+}
+
+.format {
+    font-size: 25px;
+}
