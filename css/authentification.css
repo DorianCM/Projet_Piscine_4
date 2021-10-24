@@ -3,6 +3,7 @@ body {
     font-family: 'Andada Pro', serif;
 }
 
+/* esthétique du bouton */
 .bouton{
     background-color: #d8d2cb;
     border-radius: 5px ;
@@ -15,6 +16,7 @@ body {
     cursor: pointer;
 }
 
+/* esthétique de l'espace de remplissage de l'identifiant */
 #id_identifiant {
     background-color: #d8d2cb;
     width: 300px;
@@ -33,6 +35,7 @@ body {
     pointer-events:none;outline:none;
 }
 
+/* esthétique de l'espace de remplissage du mot de passe */
 #id_mdp {
     background-color: #d8d2cb;
     width: 300px;
@@ -51,6 +54,7 @@ body {
     pointer-events:none;outline:none;
 }
 
+/* esthétique du bandeau du Georges-Frêche */
 footer{
     position: fixed;
     background-color: #c3b7a4;
@@ -65,6 +69,7 @@ footer{
     margin: 8px;
 }
 
+/* positionnement et format du texte */
 .align-center{
     text-align: center;
 }

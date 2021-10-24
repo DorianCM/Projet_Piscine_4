@@ -36,6 +36,7 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
         </ul>
     </header>
 
+<!-- emplacements pour s'identifier et bouton pour valider l'identification -->
 <main>
 
 <form class="align-center" id="formulaire">
