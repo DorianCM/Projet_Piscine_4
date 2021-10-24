@@ -54,7 +54,7 @@ class Ingredient {
 
         let tdCout = document.createElement("td");
         tdCout.className = "ingredientTotal";
-        tdCout.innerHTML = this.getPrix()*this.getQuantite() + "€";
+        tdCout.innerHTML = (this.getPrix()*this.getQuantite()).toFixed(2) + "€";
 
         trIngredient.appendChild(tdLibelle);
         trIngredient.appendChild(tdQuantite);

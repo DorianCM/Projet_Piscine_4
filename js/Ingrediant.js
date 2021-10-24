@@ -2,6 +2,7 @@ let divList = document.getElementById("listIngrediant");
 let divBtnAjouter = document.getElementById("btnajouter");
 let btnAjouter = document.createElement("Button");
 btnAjouter.innerText = "Ajouter";
+btnAjouter.classList.add('Erase');
 
 let nom_ingrediant_input;
 let clone_unite;
@@ -120,6 +121,7 @@ btnAjouter.addEventListener("click", function () {
 
 let btnPlus = document.createElement("Button");
 btnPlus.innerText = "+";
+btnPlus.classList.add('Erase');
 divBtnAjouter.appendChild(btnPlus);
 
 function plus(event){
