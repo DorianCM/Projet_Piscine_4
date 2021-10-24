@@ -153,72 +153,109 @@ class FicheRecette {
         this.dicoNbEtape++;
         this.updateTotal();
     }
+
+    //Echange l'étape sélectionné avec celle juste en dessous
+    //Si c'est la dernière étape, ne fait rien
     switchEtapeDown(idEtapeUp){
+        //Converti l'id de l'étape du haut en Int
         idEtapeUp = parseInt(idEtapeUp);
+        //Si ce n'est pas la dernière étape, effectue la suite d'instruction suivante
         if (idEtapeUp != this.dicoNbEtape){
+            //Copie les étapes du dessus et du bas afin de les intervertir
             var copie1 = this.dicoEtape[idEtapeUp].saveEtape();
             var copie2 = this.dicoEtape[idEtapeUp +1].saveEtape();
+            //Efface l'HTML des tables d'ingredients associé à chaque étape
+            //Car l'on va recréer les ingredients après avoir interchangés les étapes
             this.dicoEtape[idEtapeUp].cleanTableIngredient();
             this.dicoEtape[idEtapeUp+1].cleanTableIngredient();
+            //Affecte une copie à l'autre étape
+            //Change les id des étapes correspondantes pour qu'elles correspondent bien à leur place
+            //dans le dictionnaire associatif et l'HTML
             this.dicoEtape[idEtapeUp] = copie2;
             this.dicoEtape[idEtapeUp].setID(idEtapeUp);
             this.dicoEtape[idEtapeUp +1] = copie1;
             this.dicoEtape[idEtapeUp +1].setID(idEtapeUp +1);
+            //Pour chaque étape on récupère la liste d'ingrédient correspondante et pour chaque ingrédient on y réaffecte sa recette correspondante
             for(let ingredient in this.dicoEtape[idEtapeUp].getListIngredients()){
                 this.dicoEtape[idEtapeUp].getListIngredients()[ingredient].setEtape(this.dicoEtape[idEtapeUp]);
             }
             for(let ingredient in this.dicoEtape[idEtapeUp+1].getListIngredients()){
                 this.dicoEtape[idEtapeUp+1].getListIngredients()[ingredient].setEtape(this.dicoEtape[idEtapeUp+1]);
             }
+            //Efface l'HTML correspondant aux étapes car on les recrées pour les réinserer juste avant/après certains éléments
             this.dicoEtape[idEtapeUp].removeHTML();
             this.dicoEtape[idEtapeUp+1].removeHTML();
+            //Si il n'y a que deux étapes dans la recette ou que l'étape suivante est la dernière étape
+            //On va d'abord recréer l'étape du dessus puis celle du dessous
+            //car dans le createHTML on insére l'étape juste avant le bouton ajouter étape
             if (this.dicoNbEtape == 2 || (idEtapeUp+1) == this.dicoNbEtape){
                 this.dicoEtape[idEtapeUp].createHTML();
                 this.dicoEtape[idEtapeUp+1].createHTML();
             }
+            //sinon on insére juste avant l'étape qui suit celle du bas de la même manière
             else{
                 this.dicoEtape[idEtapeUp].createHTML(document.getElementById("etape_"+(idEtapeUp+2)));
                 this.dicoEtape[idEtapeUp+1].createHTML(document.getElementById("etape_"+(idEtapeUp+2)));;
             }
+            //on recréer les ingrédients dans la table correspondante
             this.dicoEtape[idEtapeUp].printIngredientsHTML();
             this.dicoEtape[idEtapeUp+1].printIngredientsHTML();
-
+            //On re-modifie le total
             this.updateTotal();
-
         }
     }
+
+    //Echange l'étape sélectionné avec celle juste au dessus d'elle
+    //Si c'est la première étape, ne fait rien
     switchEtapeUp(idEtapeDown){
+        //Converti l'id de l'étape du bas en Int
         idEtapeDown = parseInt(idEtapeDown);
+        //Si ce n'est pas la première étape, effectue la suite d'instruction suivante
         if (idEtapeDown != 1){
+            //Copie les étapes du dessus et du bas afin de les intervertir
             var copie1 = this.dicoEtape[idEtapeDown].saveEtape();
             var copie2 = this.dicoEtape[idEtapeDown -1].saveEtape();
+            //Efface l'HTML des tables d'ingredients associé à chaque étape
+            //Car l'on va recréer les ingredients après avoir interchangés les étapes
             this.dicoEtape[idEtapeDown].cleanTableIngredient();
             this.dicoEtape[idEtapeDown-1].cleanTableIngredient();
+            //Affecte une copie à l'autre étape
+            //Change les id des étapes correspondantes pour qu'elles correspondent bien à leur place
+            //dans le dictionnaire associatif et l'HTML
             this.dicoEtape[idEtapeDown] = copie2;
             this.dicoEtape[idEtapeDown].setID(idEtapeDown);
             this.dicoEtape[idEtapeDown -1] = copie1;
             this.dicoEtape[idEtapeDown -1].setID(idEtapeDown -1);
+            //Pour chaque étape on récupère la liste d'ingrédient correspondante et pour chaque ingrédient on y réaffecte sa recette correspondante
             for(let ingredient in this.dicoEtape[idEtapeDown].getListIngredients()){
                 this.dicoEtape[idEtapeDown].getListIngredients()[ingredient].setEtape(this.dicoEtape[idEtapeDown]);
             }
             for(let ingredient in this.dicoEtape[idEtapeDown-1].getListIngredients()){
                 this.dicoEtape[idEtapeDown-1].getListIngredients()[ingredient].setEtape(this.dicoEtape[idEtapeDown-1]);
             }
+            //Efface l'HTML correspondant aux étapes car on les recrées pour les réinserer juste avant/après certains éléments
             this.dicoEtape[idEtapeDown].removeHTML();
             this.dicoEtape[idEtapeDown-1].removeHTML();
+            //Si il n'y a que deux étapes dans la recette ou que l'étape sélectionné est la dernière étape
+            //On va d'abord recréer l'étape du dessus puis celle du dessous
+            //car dans le createHTML on insére l'étape juste avant le bouton ajouter étape
             if (this.dicoNbEtape == 2 || idEtapeDown == this.dicoNbEtape){
                 this.dicoEtape[idEtapeDown-1].createHTML();
                 this.dicoEtape[idEtapeDown].createHTML();
             }
+            //sinon on insére juste avant l'étape qui suit celle du bas de la même manière
             else{
                 this.dicoEtape[idEtapeDown-1].createHTML(document.getElementById("etape_"+(idEtapeDown+1)));
                 this.dicoEtape[idEtapeDown].createHTML(document.getElementById("etape_"+(idEtapeDown+1)));;
             }
+            //on recréer les ingrédients dans la table correspondante
             this.dicoEtape[idEtapeDown].printIngredientsHTML();
             this.dicoEtape[idEtapeDown-1].printIngredientsHTML();
+            //On re-modifie le total
             this.updateTotal();
         }
     }
+    
     removeEtape(etapeToRemove) {
         for(let i = etapeToRemove.getID(); i< this.dicoNbEtape; i++){
             this.dicoEtape[i] = this.dicoEtape[parseInt(i)+1];

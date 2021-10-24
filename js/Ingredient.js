@@ -23,8 +23,6 @@ class Ingredient {
         this.categorieAllergene = infos.nom_categorie_allergene;
         this.unite = infos.nom_unite;
         this.quantite = infos.quantite;
-
-        /*this.createHTML();*/
     }
 
     createHTML(){
@@ -87,7 +85,6 @@ class Ingredient {
         this.recette.updateTotal();
     }
     updateHTML() {
-
         /*document.getElementById()*/
         //document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[0].style.width = document.getElementById("colonneLibelle").offsetWidth -3+"px";
         //////*document.getElementById("Ingredient_"+this.etape.getID()+"_"+this.getID()).getElementsByTagName("td")[1].style.width = 150+"px";*/
