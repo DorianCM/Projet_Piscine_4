@@ -6,6 +6,10 @@ class Cout {
     recette = null;
     trCout = null;
 
+    //Initialise un Cout
+    //Données d'entrées :
+    // - recette : recette auquel appartient le coût
+    // - infos : dictionnaire contenant les infos du coût, si non pourvu, le coût prendra des valeurs par défaut
     constructor(recette, infosCout = undefined) {
         this.recette = recette
         if(infosCout) {
@@ -19,6 +23,7 @@ class Cout {
         }
         this.createHTML();
     }
+    //Crée les éléments html propres au coût
     createHTML() {
         this.trCout = document.createElement("tr");
         this.trCout.id = "cout_"+this.getID();
@@ -45,9 +50,7 @@ class Cout {
         selectType.add(opt1,null);
         selectType.add(opt2, 0);
 
-
         tdMultiplicateur.appendChild(selectType);
-
 
         let tdNom = document.createElement("td");
         let inputNom = document.createElement("input");
@@ -78,6 +81,7 @@ class Cout {
         this.setEventListener();
     }
 
+    //Ajoute les eventListener aux éléments html
     setEventListener() {
         let own = this;
         document.getElementById("cout_"+this.getID()).getElementsByTagName("input")[0].addEventListener("input",function(){
@@ -100,6 +104,7 @@ class Cout {
             own.recette.updateTotal();
         });
     }
+     //Enlève les éléments html propres au coût
     removeHTML() {
         this.trCout.remove();
     }

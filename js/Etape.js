@@ -1,4 +1,4 @@
-//Classe définissant une étape d'une recette
+//Classe définissant une étape d'une FicheRecette
 class Etape {
     id = 0;
     nom = '';
@@ -8,6 +8,11 @@ class Etape {
     nbIngredients = 0;
     recette = null;
 
+    //Initialise une Etape
+    //Données d'entrées :
+    // - recette : recette auquel appartient l'étape
+    // - infos : dictionnaire contenant les infos de l'étape, si non pourvu, l'étape prendra des valeurs par défaut
+    // - etapeSousRecette : bool indiquant si on ajoute cette étape lorsqu'on ajoute une sous-recette, car on ne doit pas récupérer l'id donné, mais prendre un nouvel id valide
     constructor(recette, infos = undefined, etapeSousRecette = false) {
         this.recette = recette;
         if(infos) {
@@ -29,6 +34,8 @@ class Etape {
         }
     }
 
+    //Crée les éléments html propres à l'étape
+    //Données d'entrées : insererAvant : élément html servant de repère pour insérer l'étape
     createHTML(insererAvant = document.getElementById("addEtape")){
         let nouvelLigneEtape = document.createElement("tr");
         nouvelLigneEtape.id = "etape_"+this.getID();
@@ -86,7 +93,6 @@ class Etape {
         rechercheIngredient.appendChild(buttonAddIngredient);
         tableIngredient.appendChild(rechercheIngredient);
 
-        //Faire ce qu'il faut pour chercher un ingrédient et l'ajouter
         trRechercheIngredient.appendChild(rechercheIngredient);
         tableIngredient.appendChild(trRechercheIngredient);
         tdTableIngredient.appendChild(tableIngredient)
@@ -98,6 +104,7 @@ class Etape {
         this.setEventListener();
     }
 
+    //Ajoute les eventListener aux éléments html
     setEventListener() {
         let own = this;
         document.getElementById("etape_"+this.getID()+"_name").addEventListener("input",function(){
@@ -132,12 +139,13 @@ class Etape {
         });
     }
 
-
+    //Actualise les valeurs de l'étape
     updateHTML() {
         document.getElementById("etape_" + this.id + "_name").value = this.getNom();
         document.getElementById("etape_" + this.id + "_duree").value = this.getDuree();
         document.getElementById("etape_" + this.id + "_description").value = this.getDescription();
     }
+    //Enlève les éléments html propres à l'étape
     removeHTML() {
         document.getElementById("etape_"+this.getID()).remove();
     }
@@ -149,6 +157,8 @@ class Etape {
         document.getElementById("etape_tableIngredient_"+String(this.getID())).id = ("etape_tableIngredient_"+String(id));
     }
 
+    //Ajoute un ingrédient dans la liste d'ingrédients de l'étape
+    //Données d'entrées : infosIngredient : dictionnaire contenant les infos de l'ingrédient
     addIngredient(infosIngredient) {
         this.ingredients[this.nbIngredients] = new Ingredient(this, infosIngredient);
         this.ingredients[this.nbIngredients++].createHTML();

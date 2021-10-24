@@ -1,6 +1,6 @@
 //Classe définissant une recette/fiche technique
 class FicheRecette {
-    id = 0; //Lors de la sauvegarde, si id = 0, on créer une nouvelle table, sinon on modifie celle existante
+    id = 0; //Lors de la sauvegarde, si id = 0, on crée une nouvelle table, sinon on modifie celle existante
     nom = '';
     auteur = '';
     nbPortions = 0;
@@ -13,9 +13,12 @@ class FicheRecette {
     dicoEtape ={};
     dicoNbEtape = 0;
 
+    //Initialise la fiche recette
+    //Données d'entrées :
+    // - infos : dictionnaire contenant les infos de la fiche recette, si non pourvu, on prendra des valeurs par défaut
     constructor(infos = null) {
         this.content = document.getElementById("content");
-        if(infos) {
+        if(infos) { //On initialise avec les valeurs reçues
             this.id = infos[0].id_recette;
             this.nom = infos[0].nom_recette;
             this.auteur = infos[0].nom_createur;
@@ -47,9 +50,9 @@ class FicheRecette {
         this.updateHTML();
         this.modalIngredient = new ModalIngredient(this);
         this.modalSousFicheRecette = new ModalSousFicheRecette(this);
-        this.deleteButton();
     }
 
+    //Ajoute les eventListener aux éléments html
     setEventListener() {
         let own = this;
         document.getElementById("addSousRecetteButton").addEventListener("click",function(){
@@ -84,6 +87,7 @@ class FicheRecette {
         });
     }
 
+    //Remplie la liste de catégorie de recette
     fillSelectCategorie() {
         let url = "../API/getRecetteCategorie.php";
         let requete = new XMLHttpRequest();
@@ -102,6 +106,7 @@ class FicheRecette {
         });
         requete.send(null);
     }
+    //Actualise les valeurs de la recette
     updateHTML() {
         document.getElementById("recette_nom").value = this.nom;
         document.getElementById("recette_nbportions").value = this.nbPortions;
@@ -110,6 +115,7 @@ class FicheRecette {
         this.updateTotal();
     }
 
+    //Actualise les totaux des couts
     updateTotal() {
         let total = 0;
         for(let etape in this.dicoEtape){
@@ -130,6 +136,7 @@ class FicheRecette {
         document.getElementById("valeurTTCPortions").innerHTML =(total*1.1/this.getNbPortions()).toFixed(2) + "<span>€</span>";
     }
 
+    //Renvoie un ID valide pour une nouvelle étape
     getAvailableEtapeID() {
         let max = 0;
         for(let etape in this.dicoEtape)
@@ -137,6 +144,7 @@ class FicheRecette {
                 max = this.dicoEtape[etape].getID();
         return (parseInt(max)+1).toString();
     }
+    //Renvoie un ID valide pour un nouveau coût
     getAvailableCoutID() {
         let max = 0;
         for(let cout in this.couts) {
@@ -145,6 +153,10 @@ class FicheRecette {
         }
         return (parseInt(max)+1).toString();
     }
+    //Ajoute une étape dans la liste d'étapes
+    //Données d'entrées : 
+    // - infos : dictionnaire contenant les infos de l'étape, si non pourvu, l'étape prendra des valeurs par défaut (dans son constructeur)
+    // - etapeSousRecette : bool indiquant si on ajoute cette étape lorsqu'on ajoute une sous-recette, car on ne doit pas récupérer l'id donné, mais prendre un nouvel id valide
     addEtape(infosEtape = null, etapeSousRecette = false) {
         var stock = new Etape(this, infosEtape, etapeSousRecette);
         this.dicoEtape[stock.getID()] = stock;
@@ -153,6 +165,7 @@ class FicheRecette {
         this.dicoNbEtape++;
         this.updateTotal();
     }
+
     switchEtapeDown(idEtapeUp){
         idEtapeUp = parseInt(idEtapeUp);
         if (idEtapeUp != this.dicoNbEtape){
@@ -219,7 +232,10 @@ class FicheRecette {
             this.updateTotal();
         }
     }
+    //Retire une étape
+    //Données d'entrées : l'étape (classe Etape) à enlever
     removeEtape(etapeToRemove) {
+        //Boucle qui replace dans le tableau les étapes situés après l'étape à supprimer
         for(let i = etapeToRemove.getID(); i< this.dicoNbEtape; i++){
             this.dicoEtape[i] = this.dicoEtape[parseInt(i)+1];
             this.dicoEtape[i].changeHTMLFor(i);
@@ -230,10 +246,15 @@ class FicheRecette {
 
         this.updateTotal();
     }
+    //Ajoute une étape dans la liste d'étapes
+    //Données d'entrées : 
+    // - infos : dictionnaire contenant les infos du coût, si non pourvu, le coût prendra des valeurs par défaut (dans son constructeur)
     addCout(infosCout = null) {
         this.couts[this.nbCouts++] = new Cout(this, infosCout);
         this.updateTotal();
     }
+    //Retire un coût
+    //Données d'entrées : le coût (classe Cout) à enlever
     removeCout(coutToRemove) {
         for(let cout in this.couts) {
             if(this.couts[cout] == coutToRemove) {
@@ -244,8 +265,9 @@ class FicheRecette {
         this.updateTotal();
     }
 
+    //Sauvegarde la fiche recette dans la base de données
     saveUpdates() {
-        let infos = {};
+        let infos = {}; //Dictionnaire
         infos["id_recette"] = this.getID();
         infos["nom_recette"] = this.getNom();
         infos["nom_createur"] = this.getAuteur();
@@ -285,20 +307,23 @@ class FicheRecette {
             infosEtapes[nbEtape++] = etape;
         }
         infos["etapes"] = infosEtapes;
-            let url = "../API/saveFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
-            let requete = new XMLHttpRequest();
-            requete.open("POST", url, true);
+        let url = "../API/saveFicheRecette.php?infos=" + encodeURIComponent(JSON.stringify(infos));
+        let requete = new XMLHttpRequest();
+        requete.open("POST", url, true);
 
-            let own = this;
-            requete.addEventListener("load", function (){
-                //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
-                // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
-                if(own.getID() == 0)
-                    own.setID(parseInt(requete.response));
-            });
-            requete.send(null);
+        let own = this;
+        requete.addEventListener("load", function (){
+            //On récupère l'id car si l'id était à 0, la recette n'existait pas encore dans la BD,
+            // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
+            if(own.getID() == 0)
+                own.setID(parseInt(requete.response));
+        });
+        requete.send(null);
     }
 
+    //cache les éléments comme les boutons, et remplace les inputs et les textarea par des p
+    //Cache aussi pour les utilisateurs non connectés
+    //Données d'entrées : avecLesCouts : Bool indiquant si on veut garder les coûts
     hideForPDF(avecLesCout = true) {
         let listButtons = document.getElementsByTagName("button");
         for(let button in listButtons)
@@ -314,7 +339,6 @@ class FicheRecette {
                 listInput[input].parentNode.insertBefore(ptemp, listInput[input]);
                 listInput[input].classList.add("tempHide");
             }
-                //listInput[input].classList.add("hideArrowInput");
 
         let listTextArea = document.getElementsByTagName("textarea");
         for(let area in listTextArea)
@@ -359,6 +383,9 @@ class FicheRecette {
                     listCouts[cout].classList.add("tempHide");
         }
     }
+
+    //Annule les effets de hideForPDF()
+    //Données d'entrées : avecLesCouts : Bool indiquant si on veut garder les coûts
     disableHideForPDF() {
         document.getElementById("ligneCoutsType").classList.remove("hideText");
         let listHide = document.querySelectorAll(".tempHide");
@@ -384,6 +411,8 @@ class FicheRecette {
                 listTempP[ptemp].remove(); 
         
     }
+    //ouvre la page permettant d'imprimer un pdf
+    //Données d'entrées : avecLesCouts : Bool indiquant si on veut garder les coûts
     convertPDF(avecLesCout = true) {
         //Cacher les éléments indésirables
         this.hideForPDF(avecLesCout);
@@ -399,6 +428,8 @@ class FicheRecette {
         this.disableHideForPDF();
     }
 
+    //Ajoute une recette (ses étapes) à la recette actuelle
+    //Données d'entrées : id_sous_recette : id de la sous recette
     addSousRecette(id_sous_recette) {
         let url = "../API/getFicheRecette.php?idFicheRecette="+id_sous_recette;
         let requete = new XMLHttpRequest();
@@ -410,13 +441,6 @@ class FicheRecette {
                 own.addEtape(infos.etapes[etape], true);
         });
         requete.send(null);
-    }
-
-    deleteButton(){
-        let res = document.getElementsByClassName("test");
-        while(res[0]){
-            res[0].remove();
-        }
     }
 
     getID() {

@@ -12,17 +12,18 @@
     <script src="../js/ModalSousFicheRecette.js" defer></script>
     <script src="../js/FicheRecette.js" defer></script>
     <script type="text/javascript">
+        //On va vérifier si on a une recette à charger
         window.onload = function() {
             let cookies = document.cookie.split(";");
             let id = 0;
             cookies.forEach(val => {
                 if (val.indexOf("idFicheRecette") === 0)
                     id = val.substring("idFicheRecette".length+1); //+1 pour le =, nameCookie=value
-                else if (val.indexOf(" idFicheRecette") === 0) //Car il peut avoir un espace qui se met au début{
+                else if (val.indexOf(" idFicheRecette") === 0) //Car il peut avoir un espace au début de la chaine de caractères
                     id = val.substring("idFicheRecette".length+2);
             });
             var recette;
-            if(id == 0)
+            if(id == 0) //dans la base de données, les id commencent à 1, donc 0 = pas de recette
                 recette = new FicheRecette();
             else {
                 let url = "../API/getFicheRecette.php?idFicheRecette="+id;

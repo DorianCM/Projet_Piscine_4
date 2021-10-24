@@ -1,12 +1,17 @@
+//Classe définissant la fenêtre modale de la liste de recette pour la fiche technique
 class ModalSousFicheRecette{
     listSousFicheRecette = null;
     recette = null;
     modal = null;
 
+    //Initialise la fenêtre modale de la liste d'ingrédients
+    //Valeurs d'entrées :
+    // - recette : la recette auquel appartient la fenêtre
     constructor(recette) {
         this.recette = recette;
         this.fillListSousFicheRecette();
     }
+    //Crée l'html de la fenêtre
     createHTML() {
         this.modal = document.createElement("div");
         this.modal.id = "modalSousFicheRecette";
@@ -32,6 +37,7 @@ class ModalSousFicheRecette{
         this.setEventListener();
     }
 
+    //Crée la ligne indiquant les colonnes de la table
     addTH() {
         let tableList = this.modal.getElementsByTagName("table")[0];
         let ligneTh = document.createElement("tr");
@@ -55,6 +61,7 @@ class ModalSousFicheRecette{
         ligneTh.appendChild(portions);
     }
 
+     //Ajoute les eventListener aux éléments html
     setEventListener() {
         let own = this;
         document.getElementById("closeModalSousFicheRecette").addEventListener("click",function(){
@@ -65,6 +72,7 @@ class ModalSousFicheRecette{
         });
     }
 
+    //Remplie la liste de recette
     fillListSousFicheRecette() {
         let own = this;
         let requete = new XMLHttpRequest();
@@ -76,6 +84,8 @@ class ModalSousFicheRecette{
         requete.send(null);
     }
 
+    //Actualise la liste en filtrant les recettes
+    //Données d'entrées : value une chaine de caractères
     filterList(value = "") {
         let own = this;
         let tableList = this.modal.getElementsByTagName("table")[0];
@@ -109,12 +119,14 @@ class ModalSousFicheRecette{
         }
     }
 
+    //Ouvre la fenêtre modale
     openModal() {
         document.getElementById("inputSearchSousFicheRecette").value= '';
         this.modal.style.display = "";
         this.filterList();
     }
 
+    //Ferme la fenêtre
     closeModal() {
         this.modal.style.display = "none";
     }

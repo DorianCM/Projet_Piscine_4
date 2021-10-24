@@ -31,6 +31,7 @@ textarea{
     border: 2px solid black;
     border-bottom: none;
 }
+/*Partie droite des infos de la recette*/
 #infosNom {
     text-align: center;
     border-right: 2px solid black;
@@ -46,7 +47,7 @@ textarea{
 input:focus, #selectCategorieRecette:focus {
     outline: 1px solid grey;;
 }
-
+/*Partie droite des infos de la recette*/
 #infosPortionsAuteur {
     text-align: left;
     padding: 5px;
@@ -64,18 +65,18 @@ input:focus, #selectCategorieRecette:focus {
     min-width: 50%;
     border: none;
 }
+/*Cacher la flèche du select*/
 #selectCategorieRecette {
     /* for Firefox */
     -moz-appearance: none;
     /* for Chrome */
     -webkit-appearance: none;
 }
-  
   /* For IE10 */
 #selectCategorieRecette::-ms-expand {
     display: none;
 }
-
+/*Nom des colonnes*/
 #ligneTh th, #ligneTd td {
     padding: 5px 0;
     border-bottom: 2px solid black;
@@ -91,12 +92,14 @@ input:focus, #selectCategorieRecette:focus {
     border-right: 2px solid black;
 }
 
+/*Partie étapes de la fiche*/
 #addSousRecette {
     text-align: center;
 }
 #addSousRecetteButton {
     font-size: medium;
 }
+/*Infos des étapes*/
 .etape td{
     border-bottom: 2px solid black;
 }
@@ -129,11 +132,10 @@ textarea {
     margin: 5px 0;
     padding: 0;
 }
-
+/*Ingrédients des étapes*/
 .td_etape_tableIngredient {
     vertical-align: top;
 }
-
 .rechercheIngredient {
     position: relative;
     top: 0%;
@@ -178,6 +180,7 @@ textarea {
     font-size: 14px;
 }
 
+/*Partie cout de la fiche*/
 #ligneCouts td, .cout td, #addCout td {
     border-right: 2px solid black;
     border-top: 2px solid black;
@@ -217,6 +220,7 @@ textarea {
     font-weight: bold;
 }
 
+/*Fenêtres modales pour les listes d'ingrédients et de recettes*/
 #modalIngredient, #modalSousFicheRecette {
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -252,6 +256,7 @@ textarea {
     border:1px solid black;
 }
 
+/*Cacher les boutons et les inputs (pour les PDF, et pour un utilisateur non connectés*/
 .tempHide, textarea.tempHide, input.tempHide {
     display: none;
 }
@@ -260,15 +265,6 @@ textarea {
 }
 .hideText {
     text-indent: -9999px; 
-}
-input.hideArrowInput::-webkit-outer-spin-button,
-input.hideArrowInput::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-input[type=number].hideArrowInput {
-  -moz-appearance: textfield;
 }
 
 p.tempP {

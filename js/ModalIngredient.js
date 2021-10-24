@@ -1,14 +1,19 @@
+//Classe définissant la fenêtre modale de la liste d'ingrédients pour la fiche technique
 class ModalIngredient{
     currentEtape = null;
     listIngredients = null;
     recette = null;
     modal = null;
 
+    //Initialise la fenêtre modale de la liste d'ingrédients
+    //Valeurs d'entrées :
+    // - recette : la recette auquel appartient la fenêtre
     constructor(recette) {
         this.recette = recette;
         this.fillListIngredients();
 
     }
+    //Crée l'html de la fenêtre
     createHTML() {
         this.modal = document.createElement("div");
         this.modal.id = "modalIngredient";
@@ -34,6 +39,7 @@ class ModalIngredient{
         this.setEventListener();
     }
 
+    //Crée la ligne indiquant les colonnes de la table
     addTH() {
         let tableList = this.modal.getElementsByTagName("table")[0];
         let ligneTh = document.createElement("tr");
@@ -69,6 +75,7 @@ class ModalIngredient{
         ligneTh.appendChild(valeurTVA);
     }
 
+    //Ajoute les eventListener aux éléments html
     setEventListener() {
         let own = this;
         document.getElementById("closeModalIngredient").addEventListener("click",function(){
@@ -79,6 +86,7 @@ class ModalIngredient{
         });
     }
 
+    //Remplie la liste d'ingrédients
     fillListIngredients() {
         let own = this;
         let requete = new XMLHttpRequest();
@@ -90,6 +98,9 @@ class ModalIngredient{
         requete.send(null);
     }
 
+    //Indique si pour l'étape, cet ingrédient est déjà sélectionné
+    //Données d'entrées : id de l'ingrédient
+    //Sortie : bool indiquant s'il appartient
     isAlreadySelected(id) {
         let list = this.currentEtape.getListIngredients();
         for(let ingre in list)
@@ -98,6 +109,8 @@ class ModalIngredient{
         return false;
     }
 
+    //Actualise la liste en filtrant les ingrédients
+    //Données d'entrées : value une chaine de caractères
     filterList(value = "") {
         let own = this;
         let tableList = this.modal.getElementsByTagName("table")[0];
@@ -147,6 +160,8 @@ class ModalIngredient{
         }
     }
 
+    //Ouvre la fenêtre modale
+    //Données d'entrées : etape l'étape sur laquelle on veut ajouter un ingrédient
     openModal(etape) {
         this.currentEtape = etape;
         document.getElementById("inputSearchIngredient").value= '';
@@ -154,6 +169,7 @@ class ModalIngredient{
         this.filterList();
     }
 
+    //Ferme la fenêtre
     closeModal() {
         this.currentEtape = null;
         this.modal.style.display = "none";
