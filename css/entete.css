@@ -1,8 +1,11 @@
+
+/* met le corps du texte collé à droite et le décale vers le bas pour ne pas superposer l'entête dessus */
 body {
 	margin: 0;
 	margin-top: 60px;
 }
 
+/* l'entête prends la largeur de la fenêtre et reste en haut quand on la descend */
 header{
 	position: fixed;
 	top: 0;
@@ -10,6 +13,7 @@ header{
 	z-index: 10;
 }
 
+/* définit le remplissage et la marge de l'entête */
 .entetu {
 	list-style-type: none;
 	margin:0;
@@ -18,10 +22,11 @@ header{
 	background-color: #d8d2cb;
 }
 
+/* place les éléments de l'entête à gauche */
 .entetli {
 	float: left;
 }
-
+ /* définit le format et la position pour le texte de l'entête */
 .enteta {
 	display: block;
 	padding: 14px 16px;
@@ -30,6 +35,7 @@ header{
 	text-decoration: none;
 }
 
+/* change la couleur quand la souris passe dessus */
 header a:hover {
 	background-color: #e0dbd5;
 	cursor: pointer;
