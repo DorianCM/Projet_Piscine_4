@@ -11,7 +11,7 @@ session_destroy();
     <title>Déconnexion</title>
     <link rel="stylesheet" type="text/css" href="../../css/entete.css">
     <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap" rel="stylesheet">
-    <meta http-equiv="refresh" content="25; url='../../' "/>
+    <meta http-equiv="refresh" content="2.5; url='../../' "/>
 </head>
 <body style='width:100%;text-align: center;'>
     <header>
