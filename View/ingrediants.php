@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Liste ingrediants</title>
     <link rel="stylesheet" href="../css/liste_ingredients.css" />
-    <script src="../js/Ingrediant.js" defer></script>
+    <script src="../js/ListeIngredient.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/entete.css">
 </head>
 <body>
