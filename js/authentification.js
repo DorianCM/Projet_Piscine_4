@@ -8,7 +8,7 @@ document.getElementById('formulaire').addEventListener("submit",function(e){
       erreur = "Veuillez renseigner votre identifiant";
    }
    if(document.getElementById('id_mdp').value == ""){
-      erreur = "Veuilez renseigner votre mot de passe";
+      erreur = "Veuillez renseigner votre mot de passe";
    }
    if(document.getElementById('id_mdp').value == "" && document.getElementById('id_identifiant').value == ""){
       erreur = "Veuillez renseigner les deux champs de connexion";

@@ -1,0 +1,66 @@
+
+body {
+    font-family: 'Andada Pro', serif;
+}
+
+.bouton{
+    background-color: #d8d2cb;
+    border-radius: 5px ;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#id_identifiant {
+    background-color: #d8d2cb;
+    width: 300px;
+    height: 15px;
+    border-radius: 5px;
+    padding: 4px;
+    border: 0px;
+}
+
+#id_identifiant:hover {
+    background-color: #e0dbd5;
+}
+
+#id_identifiant:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+#id_mdp {
+    background-color: #d8d2cb;
+    width: 300px;
+    height: 15px;
+    border-radius: 5px;
+    padding: 4px;
+    border: 0px;
+}
+
+#id_mdp:hover {
+    background-color: #e0dbd5;
+}
+
+#id_mdp:focus{
+    background-color: #e0dbd5;
+    pointer-events:none;outline:none;
+}
+
+footer{
+    position: fixed;
+    background-color: #c3b7a4;
+    width: 100%;
+    height: 6%;
+    bottom: 0px;
+}
+
+#dfooter{
+    display: flex;
+    position: center;
+    margin: 8px;
+}

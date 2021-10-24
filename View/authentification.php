@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 	<title>Authentification</title>
     <link rel="stylesheet" type="text/css" href="../css/entete.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/authentification.css">
 </head>
 <body>
 <header>
@@ -30,20 +31,30 @@
         </ul>
     </header>
 
-<h1 align = "center">Non toccare la mia ricetta</h1>
 <form align="center" id="formulaire">
-	<label for="id_identifiant">Identifiant</label>
-	<input type="text" placeholder="Identifiant" name="Identifiant" id="id_identifiant"><br>
+	<label for="id_identifiant">Identifiant</label><br>
+	<input type="text" placeholder="Identifiant" name="Identifiant" id="id_identifiant"><br><br>
 
-	<label for="id_mdp">Mot de passe</label>
-	<input type="password" placeholder="Mot de passe" name="Mdp" id="id_mdp"><br>
+	<label for="id_mdp">Mot de passe</label><br>
+	<input type="password" placeholder="Mot de passe" name="Mdp" id="id_mdp"><br><br>
 
-	<input type="submit" value="Valider" id="boutton_valider">
+	<input class="bouton" type="submit" value="Se connecter" id="boutton_valider">
 </form>
 <div align="center">
 		<p id="erreur" style="color:red"></p>
 </div>
 
-	<script src = "../js/authentification.js"></script>
+    <script src = "../js/authentification.js"></script>
+
+    <footer>
+        <div id="dfooter">
+            <div> © </div>
+            <div> | </div>
+            <div>
+                Lycée des métiers de la gastronomie, de l'hôtellerie et des tourismes Georges-Frêche
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
