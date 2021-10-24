@@ -344,7 +344,7 @@ class FicheRecette {
             // on a créé dans la BD une nouvelle table et il faut donc savoir l'id
             if(own.getID() == 0) {
                 own.setID(parseInt(requete.response));
-                own.openConfirmSave("La fiche recette a bien été enregistrée");
+                own.openConfirmSave("La fiche recette a bien été créée");
             }
             else if (requete.response)
                 own.openConfirmSave("Modifications enregistrées avec succès");
