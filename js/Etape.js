@@ -149,7 +149,10 @@ class Etape {
     removeHTML() {
         document.getElementById("etape_"+this.getID()).remove();
     }
+
+    //Change l'HTML de l'étape actuelle pour l'id donné
     changeHTMLFor(id){
+        //On cast en String les id
         document.getElementById("etape_"+String(this.getID())).id = ("etape_"+String(id));
         document.getElementById("etape_"+String(this.getID()+"_name")).id = ("etape_"+String(id)+"_name");
         document.getElementById("etape_"+String(this.getID()+"_description")).id = ("etape_"+String(id)+"_description");
@@ -165,24 +168,33 @@ class Etape {
         this.recette.updateTotal();
 
     }
+
+    //Efface les ingredients de la liste des ingrédients nommée ingredients[]
     removeIngredient(ingredientToRemove) {
+        //On itére sur la liste
         for(let ingredient in this.ingredients) {
+            //Si cet ingrédient appartient à la liste on l'efface de la liste
             if(this.ingredients[ingredient] == ingredientToRemove) {
                 delete this.ingredients[ingredient];
                 break;
             }
         }
-
-
+        //On update le total de la recette associée
         this.recette.updateTotal();
     }
-    cleanTableIngredient(){
-        for (let ingredient in this.ingredients) {
-            this.ingredients[ingredient].removeHTML();
 
+    //On efface l'HTML de chaque ingrédient contenu dans la liste ingrédient de l'étape
+    cleanTableIngredient(){
+        //On itére dans la liste
+        for (let ingredient in this.ingredients) {
+            //On efface l'HTML de l'ingrédient donné
+            this.ingredients[ingredient].removeHTML();
         }
     }
+
+    //Créer une copie de l'étape
     saveEtape(){
+        //Créer une recette à laquelle on va y affecter tout les attributs
         var copieEtape = new Etape(this.recette,);
         copieEtape.setID(this.id);
         copieEtape.setDescription(this.description);
@@ -190,16 +202,18 @@ class Etape {
         copieEtape.setNom(this.nom);
         copieEtape.setListIngredients(this.ingredients);
         copieEtape.setNbIngredient(this.nbIngredients);
-
+        //renvoie la copie
         return copieEtape;
-
     }
+
+    //Pour chaque ingrédient de la liste ingrédient
+    //On appelle la fonction createHTML de l'ingrédient donné afin de l'afficher
     printIngredientsHTML(){
         for (let ingredient in this.ingredients) {
             this.ingredients[ingredient].createHTML();
         }
+        //On update l'HTML de la recette
         this.recette.updateHTML();
-
     }
 
     getID() {

@@ -43,6 +43,7 @@ let inputCategorieTVA = document.getElementById("inputCategorieTVA");
 inputCategorieTVA.placeholder = "Nom de catégorie de TVA";
 let inputValeurTVA = document.getElementById("inputValeurTVA");
 inputValeurTVA.placeholder = "Valeur de TVA";
+inputValeurTVA.classList.add('Erase');
 let btnAjouterCategorieTVA = document.getElementById("btnAjouterCategorieTVA");
 btnAjouterCategorieTVA.classList.add("Erase");
 
