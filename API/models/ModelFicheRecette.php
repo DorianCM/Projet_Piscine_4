@@ -139,6 +139,8 @@ class ModelFicheRecette {
                 $req_prep->execute();
                 ModelFicheRecette::ajouterCouts($infos["id_recette"], $infos["couts"]);
                 ModelFicheRecette::ajouteretapes($infos["id_recette"], $infos["etapes"]);
+
+                echo true;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
