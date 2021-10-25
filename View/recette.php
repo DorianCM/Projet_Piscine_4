@@ -131,27 +131,29 @@ mise en place des liens connexion/déconnexion à droite du bandeau et impossibi
                     <td>Valeur</td>
                 </tr>
                 <tr class="cout">
-                    <td colspan="4"></td>
+                    <td id="videTotalIngredient" colspan="3"></td>
+                    <td class="coutType"></td>
                     <td class="total">Total Ingrédients</td>
                     <td id ="TotalIngredients"></td>
                 </tr>
                 <tr id="addCout">
-                    <td colspan="4"></td>
+                    <td class="coutVide" colspan="3"></td>
+                    <td class="colonneType"></td>
                     <td><button id="addCoutButton">Ajouter un coût</button></td>
                     <td></td>
                 </tr>
                 <tr id="ligneTotal" class="cout">
-                    <td colspan="4"></td>
+                    <td class="coutVideTotal" colspan="4"></td>
                     <td class="total">Total HT</td>
                     <td id="valeurTotal">0</td>
                 </tr>
                 <tr id="ligneTotalTTC" class="cout">
-                    <td colspan="4"></td>
+                    <td class="coutVideTotal" colspan="4"></td>
                     <td class="total">Total TTC</td>
                     <td id="valeurTotalTTC">0</td>
                 </tr>
                 <tr id="ligneTTCPortions" class="cout">
-                    <td colspan="4"></td>
+                    <td class="coutVideTotal" colspan="4"></td>
                     <td class="total">Par portions</td>
                     <td id="valeurTTCPortions">0</td>
                 </tr>

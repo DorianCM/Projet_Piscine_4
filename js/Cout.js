@@ -33,6 +33,7 @@ class Cout {
         tdVide.colSpan = "3";
 
         let tdMultiplicateur = document.createElement("td");
+        tdMultiplicateur.className = "coutType"
         let selectType = document.createElement("select");
         selectType.name = "TypeCout";
         var opt1 = document.createElement("option");

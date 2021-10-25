@@ -219,6 +219,16 @@ textarea {
 .total {
     font-weight: bold;
 }
+.cout .coutVide, .cout .coutVideTotal {
+    border: none;
+    border-right: 2px solid black;
+}
+#addCout .coutVide {
+    border: none;
+}
+#videTotalIngredient {
+    border: none;
+}
 
 /*Fenêtres modales pour les listes d'ingrédients et de recettes*/
 #modalIngredient, #modalSousFicheRecette, #modalConfirm {
@@ -280,6 +290,13 @@ textarea {
 }
 #ligneTh th.hideRigthBorder, #ligneTd td.hideRigthBorder, #ligneCouts td.hideRigthBorder, .cout .coutVide.hideRigthBorder {
     border-right: none;
+}
+.coutType.hideTopBorder {
+    border-top: none;
+}
+
+#addCout .colonneType {
+    border-top: 2px solid black;
 }
 .hideText {
     text-indent: -9999px; 

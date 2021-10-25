@@ -121,22 +121,29 @@ class FicheRecette {
     //Actualise les totaux des couts
     updateTotal() {
         let total = 0;
+        let totalTVA = 0;
         for(let etape in this.dicoEtape){
             let listingre = this.dicoEtape[etape].getListIngredients();
-            for(let ingre in listingre)
+            for(let ingre in listingre) {
                 total += parseFloat(listingre[ingre].getPrix()*listingre[ingre].getQuantite());
+                totalTVA += parseFloat(listingre[ingre].getPrix()*listingre[ingre].getQuantite()*(1+1/listingre[ingre].getTVA()));
+            }
         }
         document.getElementById("TotalIngredients").innerHTML =total.toFixed(2)+ "<span>€</span>";
 
         for(let cout in this.couts)
-            if(this.couts[cout].getMultiplicateur())
+            if(this.couts[cout].getMultiplicateur()) {
                 total *= parseFloat(this.couts[cout].getValeur());
-            else   
+                totalTVA *= parseFloat(this.couts[cout].getValeur());
+            }
+            else {   
                 total += parseFloat(this.couts[cout].getValeur());
+                totalTVA += parseFloat(this.couts[cout].getValeur());
+            }
 
         document.getElementById("valeurTotal").innerHTML = total.toFixed(2) + "<span>€</span>";
-        document.getElementById("valeurTotalTTC").innerHTML = (total*1.2).toFixed(2) + "<span>€</span>";
-        document.getElementById("valeurTTCPortions").innerHTML =(total*1.1/this.getNbPortions()).toFixed(2) + "<span>€</span>";
+        document.getElementById("valeurTotalTTC").innerHTML = (totalTVA).toFixed(2) + "<span>€</span>";
+        document.getElementById("valeurTTCPortions").innerHTML =(totalTVA/this.getNbPortions()).toFixed(2) + "<span>€</span>";
     }
 
     //Renvoie un ID valide pour une nouvelle étape
@@ -418,6 +425,10 @@ class FicheRecette {
         for(let c in colonneVides)
             if(colonneVides[c].classList)
                 colonneVides[c].classList.add("hideRigthBorder");
+        let coutType = document.querySelectorAll(".coutType");
+        for(let c in coutType)
+            if(coutType[c].classList)
+                coutType[c].classList.add("hideTopBorder");
         
         if(!avecLesCout) {
             document.getElementById("thCout").classList.add("tempHide");
@@ -451,6 +462,10 @@ class FicheRecette {
         for(let element in listHideRigthBorder)
             if(listHideRigthBorder[element].classList)
                 listHideRigthBorder[element].classList.remove("hideRigthBorder");
+        let listHideTopBorder = document.querySelectorAll(".hideTopBorder");
+        for(let element in listHideTopBorder)
+            if(listHideTopBorder[element].classList)
+            listHideTopBorder[element].classList.remove("hideTopBorder");
         let listHideTextArea = document.querySelectorAll(".hideBorderTextArea");
         for(let area in listHideTextArea)
             if(listHideTextArea[area].classList)
