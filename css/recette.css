@@ -296,7 +296,7 @@ textarea {
 }
 
 #addCout .colonneType {
-    border-top: 2px solid black;
+    border-top: none;
 }
 .hideText {
     text-indent: -9999px; 
